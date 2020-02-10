@@ -1,0 +1,11 @@
+CREATE TABLE artists(
+  id SERIAL PRIMARY KEY,
+);
+
+CREATE TABLE albums(
+  id SERIAL PRIMARY KEY,
+);
+
+CREATE TABLE songs(
+  id SERIAL PRIMARY KEY,
+);
