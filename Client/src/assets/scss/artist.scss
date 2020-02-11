@@ -1,0 +1,53 @@
+.placeholder-album-art{
+  margin: 10px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  text-align: center;
+}
+
+body {
+  background-color: grey;
+}
+
+div{
+  border: 1px solid magenta;
+}
+ 
+.artist-page{
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: white;
+}
+.artist-profile-container{
+  margin: 100px;
+  display: flex;
+}
+/* .artist-profile-container > div{
+  flex: 1;
+}*/
+.artist-profile-portrait-container{
+  width: 320px;
+}
+.artist-profile-portrait-img{
+  margin: 10px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+}
+.artist-profile-name-container{
+  margin-left: 50px;
+  width: 500px;
+}
+.artist-profile-info-container{
+  text-align: right;
+  margin-left: 100px;
+  width: 500px;
+}
+
+.artist-album-container{
+  display: flex;
+}
+.album-info-container{
+  width: 1000px;
+}
