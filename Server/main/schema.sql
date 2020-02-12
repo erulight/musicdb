@@ -1,28 +1,27 @@
-CREATE TABLE artist(
+CREATE TABLE artists(
   id SERIAL PRIMARY KEY,
   artist_name VARCHAR(200) NOT NULL,
   real_name VARCHAR(200),
-  members artist.id[] DEFAULT ARRAY[]::artist.id[],
-  debut_song_id REFERENCES song(id),
+  member_of INT REFERENCES artist(id),
   birthdate DATE
 );
 
-CREATE TABLE album(
+CREATE TABLE albums(
   id SERIAL PRIMARY KEY,
-  artist_id REFERENCES artist(id) NOT NULL,
-  members artist.id[] DEFAULT ARRAY[]::artist.id[],
+  artist_id INT REFERENCES artist(id) NOT NULL,
+  members INT[] DEFAULT ARRAY[]::INT[],
   album_title VARCHAR(200) NOT NULL,
   release_date DATE,
-  released BOOLEAN,
+  released BOOLEAN
 );
 
-CREATE TABLE song(
+CREATE TABLE songs(
   id SERIAL PRIMARY KEY,
-  album_id REFERENCES album(id) NOT NULL,
+  album_id INT REFERENCES album(id) NOT NULL,
   song_title VARCHAR(200) NOT NULL,
   track_number INT,
-  ft_artist artist.id[] DEFAULT ARRAY[]::artist.id[],
-  lyrics artist.id[] DEFAULT ARRAY[]::artist.id[],
-  composer artist.id[] DEFAULT ARRAY[]::artist.id[],
-  arrangement artist.id[] DEFAULT ARRAY[]::artist.id[],
+  ft_artist INT[] DEFAULT ARRAY[]::INT[],
+  lyrics INT[] DEFAULT ARRAY[]::INT[],
+  composer INT[] DEFAULT ARRAY[]::INT[],
+  arrangement INT[] DEFAULT ARRAY[]::INT[]
 );

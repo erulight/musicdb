@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import image from './assets/images/artist_profile_pic.jpg'
 import './assets/scss/artist.scss'
+import axios from 'axios'
 
 const members = ['jim', 'bob', 'george']
 
 const ArtistProfile = () => {
+  const [artist,setArtist] = useState({})
+  useEffect(() => {
+    axios.get('/api/artists')
+    .then((res) => {
+      console.log(res)
+      setArtist(res.data[0])
+    })
+  })
+
+
   const RenderArtistProfile = (props) => {
     return (
       <div className="artist-page">
@@ -13,7 +24,7 @@ const ArtistProfile = () => {
             <img className="artist-profile-portrait-img" src={image}></img>
           </div>
           <div className="artist-profile-name-container">
-            <h1>Artist Name</h1>
+            <h1>{artist.artist_name}</h1>
             <p>Members</p>
             <ul>{members.map((member) => {
               return (
