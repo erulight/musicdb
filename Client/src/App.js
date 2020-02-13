@@ -1,5 +1,5 @@
 import React from 'react';
-import Artist from './artist';
+import Artist from './Artist';
 import logo from './logo.svg';
 import './App.css';
 

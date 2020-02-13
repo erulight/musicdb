@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react'
 import image from './assets/images/artist_profile_pic.jpg'
 import './assets/scss/artist.scss'
 import axios from 'axios'
-
-const members = ['jim', 'bob', 'george']
+import ArtistAlbum from './ArtistAlbum.jsx'
+import { prettyDate } from './utils/dateutils'
 
 const ArtistProfile = () => {
-  const [artist,setArtist] = useState({})
+  const artist_id = 1;
+  const [artist, setArtist] = useState({})
   useEffect(() => {
-    axios.get('/api/artists')
-    .then((res) => {
-      console.log(res)
-      setArtist(res.data[0])
-    })
-  })
+    axios.get('/api/get/artists/:artist_id', { params: { artist_id: artist_id } })
+      .then((res) => {
+        console.log(res)
+        setArtist(res.data[0])
+      })
+  }, []
+  )
+
+  //const date = moment(artist.birthdate).format('DD MMM, YYYY');
 
 
   const RenderArtistProfile = (props) => {
@@ -25,30 +29,20 @@ const ArtistProfile = () => {
           </div>
           <div className="artist-profile-name-container">
             <h1>{artist.artist_name}</h1>
-            <p>Members</p>
-            <ul>{members.map((member) => {
-              return (
-                <li>{member}</li>
-              )
-            })}</ul>
+            <p>Real Name: {artist.real_name}</p>
           </div>
           <div className="artist-profile-info-container">
-            <h2>Artist Info</h2>
-            <p>Active Date: DEBUT SONG DATE - PRESENT</p>
+            <h2>About</h2>
+            <p>Active: FIRST ALBUM RELEASE DATE - PRESENT</p>
             <p>Latest Release: ALBUM DATE</p>
-        </div>
+            <p>Birthday: {prettyDate(artist.birthdate)}</p>
+          </div>
         </div>
         <div className="artist-albums">
           <h2>
             Albums
           </h2>
-          <div className="artist-album-container">
-            <p className="placeholder-album-art">Album Art</p>
-            <div className="album-info-container">
-              <h3>Album Title (Year)</h3>
-              <p>track list</p>
-            </div>
-          </div>
+          <ArtistAlbum artist_id={artist_id}></ArtistAlbum>
         </div>
       </div>
     )

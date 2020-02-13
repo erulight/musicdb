@@ -11,17 +11,22 @@ body {
 }
 
 div{
-  border: 1px solid magenta;
+  //border: 1px solid magenta;
 }
  
 .artist-page{
-  margin-left: 100px;
-  margin-right: 100px;
+  padding: auto;
+  margin: auto;
+  width: 1500px;
   background-color: white;
+  border: 1px solid black;
 }
 .artist-profile-container{
-  margin: 100px;
+  padding: auto;
+  margin: auto;
+  margin-top: 100px;
   display: flex;
+  border: 1px solid black;
 }
 /* .artist-profile-container > div{
   flex: 1;
@@ -36,18 +41,58 @@ div{
   border: 1px solid black;
 }
 .artist-profile-name-container{
+  margin: auto;
+  padding: auto;
   margin-left: 50px;
-  width: 500px;
+  margin-top: 5px;
 }
 .artist-profile-info-container{
-  text-align: right;
-  margin-left: 100px;
-  width: 500px;
+  margin:auto;
+  padding: auto;
+  text-align: left;
+  margin-top: 5px;
 }
 
+//albums
 .artist-album-container{
   display: flex;
+  border: 1px solid black;
 }
 .album-info-container{
+  display: flexbox;
+}
+.album-info{
+  margin: auto;
+  padding: auto;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+//songs
+.song-container{
+  display: table;
   width: 1000px;
 }
+.song-container-headers-container{
+  display: table-header-group;
+}
+.song-container-headers{
+  display: table-cell;
+  border-bottom: 2px solid black;
+}
+.song-container-row{
+  display: table-row-group;
+}
+.song-cell1{
+  display: table-cell;
+  border-bottom: 1px solid black;
+}
+.song-cell2{
+  display: table-cell;
+  border-bottom: 1px solid black;
+}
+.song-cell3{
+  display: table-cell;
+  border-bottom: 1px solid black;
+}
+
