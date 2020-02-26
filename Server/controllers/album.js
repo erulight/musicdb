@@ -2,27 +2,11 @@ const express = require('express')
 var router = express.Router()
 const pool = require('../db/db')
 
-router.get('/artists/:artist_id', (req, res, next) => {
-  const artist_id = req.query.artist_id
-  pool.query(`SELECT * FROM artists
-              WHERE id=$1`,
-    [artist_id], (q_err, q_res = {}) => {
-      if (q_err) {
-        console.log(q_err)
-        res.status(500).end()
-        next()
-      }
-      res.json(q_res.rows)
-      next()
-    })
-})
-
-router.get('/albums/:artist_id', (req, res, next) => {
-  const artist_id = req.query.artist_id
+router.get('/albums/:album_id', (req, res, next) => {
+  const album_id = req.query.album_id
   pool.query(`SELECT * FROM albums
-              WHERE artist_id=$1
-              ORDER BY release_date DESC`,
-    [artist_id], (q_err, q_res) => {
+              WHERE id=$1`,
+    [album_id], (q_err, q_res = {}) => {
       if (q_err) {
         console.log(q_err)
         res.status(500).end()

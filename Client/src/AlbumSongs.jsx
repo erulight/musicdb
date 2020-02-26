@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { prettyYear } from './utils/dateutils'
 import { Link } from 'react-router-dom'
 
-const ArtistAlbumSongs = (props) => {
+const AlbumSongs = (props) => {
   const album_id = props.album_id
   const [songs, setSongs] = useState([])
   useEffect(() => {
-    axios.get('/api/artist/songs/:album_id', { params: { album_id: album_id } })
+    axios.get('/api/album/songs/:album_id', { params: { album_id: album_id } })
       .then((res) => {
         console.log(res)
         setSongs(res.data)
@@ -16,7 +17,7 @@ const ArtistAlbumSongs = (props) => {
 
   const [artists, setArtists] = useState([])
   useEffect(() => {
-    axios.get('/api/artist/artists')
+    axios.get('/api/album/artists')
       .then((res) => {
         console.log(res)
         setArtists(res.data)
@@ -55,4 +56,4 @@ const ArtistAlbumSongs = (props) => {
   )
 }
 
-export default ArtistAlbumSongs
+export default AlbumSongs

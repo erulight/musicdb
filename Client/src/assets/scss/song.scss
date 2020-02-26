@@ -1,3 +1,11 @@
+.placeholder-album-art{
+  margin: 10px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid black;
+  text-align: center;
+}
+
 body {
   background-color: grey;
 }
@@ -46,14 +54,6 @@ div{
 }
 
 //albums
-.placeholder-album-art{
-  margin: 10px;
-  width: 300px;
-  height: 300px;
-  border: 1px solid black;
-  text-align: center;
-  display: block;
-}
 .artist-album-container{
   display: flex;
   border: 1px solid black;

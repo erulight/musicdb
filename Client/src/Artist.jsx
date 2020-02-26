@@ -4,18 +4,20 @@ import './assets/scss/artist.scss'
 import axios from 'axios'
 import ArtistAlbum from './ArtistAlbum.jsx'
 import { prettyDate } from './utils/dateutils'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const ArtistProfile = () => {
-  const artist_id = 1;
+  const params = useParams()
+  console.log(params)
+  const artist_id = params.id;
   const [artist, setArtist] = useState({})
   useEffect(() => {
-    axios.get('/api/get/artists/:artist_id', { params: { artist_id: artist_id } })
+    axios.get('/api/artist/artists/:artist_id', { params: { artist_id: artist_id } })
       .then((res) => {
         console.log(res)
         setArtist(res.data[0])
       })
-  }, []
+  }, [artist_id]
   )
 
   const RenderArtistProfile = (props) => {
@@ -31,8 +33,8 @@ const ArtistProfile = () => {
           </div>
           <div className="artist-profile-info-container">
             <h2>About</h2>
-            <p>Active: FIRST ALBUM RELEASE DATE - PRESENT</p>
-            <p>Latest Release: ALBUM DATE</p>
+            <p>{/* First Release*/}</p>
+            <p>{/* Latest Release*/}</p>
             <p>Birthday: {prettyDate(artist.birthdate)}</p>
           </div>
         </div>
