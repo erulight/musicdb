@@ -4,6 +4,7 @@ import './assets/scss/artist.scss'
 import axios from 'axios'
 import ArtistAlbum from './ArtistAlbum.jsx'
 import { prettyDate } from './utils/dateutils'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const ArtistProfile = () => {
   const artist_id = 1;
@@ -16,9 +17,6 @@ const ArtistProfile = () => {
       })
   }, []
   )
-
-  //const date = moment(artist.birthdate).format('DD MMM, YYYY');
-
 
   const RenderArtistProfile = (props) => {
     return (

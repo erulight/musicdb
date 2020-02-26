@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ArtistAlbumSongs from './ArtistAlbumSongs'
 import { prettyYear } from './utils/dateutils'
+import { Link } from 'react-router-dom'
 
 const ArtistAlbum = (props) => {
   const artist_id = props.artist_id

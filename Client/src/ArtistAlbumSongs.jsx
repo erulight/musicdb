@@ -25,18 +25,19 @@ const ArtistAlbumSongs = (props) => {
 
   const findArtist = (artist_id) => {
     //console.log(artist_id)
-    return artists.find((artist) => {return artist.id===artist_id})
+    const artist = artists.find((artist) => { return artist.id === artist_id })
+    return artist || {}
   }
   console.log(artists)
-  if(!artists.length) return null
+  if (!artists.length) return null
 
   return (
     songs.map((song) => {
       return (
         <div key={song.id} className="song-container-row">
           <div className="song-cell1">{song.track_number}</div>
-          <div className="song-cell2">{song.song_title}</div>
-          <div className="song-cell3">{song.ft_artist} {song.lyrics} {song.composer} {song.arrangement}</div>
+          <div className="song-cell2">{song.song_title} {song.ft_artist ? 'ft. ' + findArtist(song.ft_artist).artist_name : null}</div>
+          <div className="song-cell3">Lyrics: {findArtist(song.lyrics).artist_name} Composer: {findArtist(song.composer).artist_name} Arrangement: {findArtist(song.arrangement).artist_name}</div>
         </div>
       )
     }
