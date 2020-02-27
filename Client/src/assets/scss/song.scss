@@ -14,14 +14,14 @@ div{
   //border: 1px solid magenta;
 }
  
-.artist-page{
+.song-page{
   padding: auto;
   margin: auto;
   width: 1500px;
   background-color: white;
   border: 1px solid black;
 }
-.artist-profile-container{
+.song-info-container{
   padding: auto;
   margin: auto;
   margin-top: 100px;
@@ -31,22 +31,22 @@ div{
 /* .artist-profile-container > div{
   flex: 1;
 }*/
-.artist-profile-portrait-container{
+.song-album-art-container{
   width: 320px;
 }
-.artist-profile-portrait-img{
+.album-art{
   margin: 10px;
   width: 300px;
   height: 300px;
   border: 1px solid black;
 }
-.artist-profile-name-container{
+.song-info{
   margin: auto;
   padding: auto;
   margin-left: 50px;
   margin-top: 5px;
 }
-.artist-profile-info-container{
+.song-about-container{
   margin:auto;
   padding: auto;
   text-align: left;
@@ -54,45 +54,7 @@ div{
 }
 
 //albums
-.artist-album-container{
+.lyrics-section{
   display: flex;
   border: 1px solid black;
 }
-.album-info-container{
-  display: flexbox;
-}
-.album-info{
-  margin: auto;
-  padding: auto;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-
-//songs
-.song-container{
-  display: table;
-  width: 1000px;
-}
-.song-container-headers-container{
-  display: table-header-group;
-}
-.song-container-headers{
-  display: table-cell;
-  border-bottom: 2px solid black;
-}
-.song-container-row{
-  display: table-row-group;
-}
-.song-cell1{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-.song-cell2{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-.song-cell3{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-

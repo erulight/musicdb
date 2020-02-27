@@ -41,7 +41,7 @@ const Album = () => {
   const RenderAlbum = (props) => {
     return (
       <div className="album-page">
-        <div className="album-info-container">
+        <div className="album-profile-container">
           <div className="album-art-container">
             <img className="album-art" src={image}></img>
           </div>

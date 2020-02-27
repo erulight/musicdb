@@ -21,11 +21,15 @@ div{
   background-color: white;
   border: 1px solid black;
 }
-.album-info-container{
+.album-profile-container{
   padding: auto;
   margin: auto;
   margin-top: 100px;
   display: flex;
+  border: 1px solid black;
+}
+.album-info-container{
+  padding: auto;
   border: 1px solid black;
 }
 /* .artist-profile-container > div{
@@ -57,9 +61,6 @@ div{
 .album-songs{
   display: flexbox;
   border: 1px solid black;
-}
-.album-info-container{
-  display: flexbox;
 }
 .album-info{
   margin: auto;

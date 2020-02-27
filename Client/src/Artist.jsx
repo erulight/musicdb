@@ -5,6 +5,10 @@ import axios from 'axios'
 import ArtistAlbum from './ArtistAlbum.jsx'
 import { prettyDate } from './utils/dateutils'
 import { useParams } from 'react-router-dom'
+import ArtistSongsFt from './ArtistSongsFt'
+import ArtistSongsLyrics from './ArtistSongsLyrics'
+import ArtistSongsComposer from './ArtistSongsComposer'
+import ArtistSongsArranger from './ArtistSongsArrangement'
 
 const ArtistProfile = () => {
   const params = useParams()
@@ -38,11 +42,35 @@ const ArtistProfile = () => {
             <p>Birthday: {prettyDate(artist.birthdate)}</p>
           </div>
         </div>
-        <div className="artist-albums">
+        <div className="artist-header">
           <h2>
             Albums
           </h2>
           <ArtistAlbum artist_id={artist_id}></ArtistAlbum>
+        </div>
+        <div className="artist-header">
+          <h2>
+            Songs As Featured Artist
+          </h2>
+          <ArtistSongsFt artist_id={artist.id}></ArtistSongsFt>
+        </div>
+        <div className="artist-header">
+          <h2>
+            Songs As Lyricist
+          </h2>
+          <ArtistSongsLyrics artist_id={artist.id}></ArtistSongsLyrics>
+        </div>
+        <div className="artist-header">
+          <h2>
+            Songs As Composer
+          </h2>
+          <ArtistSongsComposer artist_id={artist.id}></ArtistSongsComposer>
+        </div>
+        <div className="artist-header">
+          <h2>
+            Songs As Arranger
+          </h2>
+          <ArtistSongsArranger artist_id={artist.id}></ArtistSongsArranger>
         </div>
       </div>
     )

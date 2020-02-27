@@ -17,4 +17,30 @@ router.get('/songs/:song_id', (req, res, next) => {
     })
 })
 
+router.get('/albums', (req, res, next) => {
+  pool.query(`SELECT * FROM albums`,
+    [], (q_err, q_res = {}) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/artists', (req, res, next) => {
+  pool.query(`SELECT * FROM artists`,
+    [], (q_err, q_res = {}) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 module.exports = router
