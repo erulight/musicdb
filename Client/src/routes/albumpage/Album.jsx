@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import image from './assets/images/album_art.jpg'
-import './assets/scss/album.scss'
+import image from '../../assets/images/album_art.jpg'
+import '../../assets/scss/album.scss'
 import axios from 'axios'
 import AlbumSongs from './AlbumSongs'
-import { prettyDate } from './utils/dateutils'
+import { prettyDate } from '../../utils/dateutils'
 import { useParams, Link } from 'react-router-dom'
 
 const Album = () => {
@@ -46,8 +46,8 @@ const Album = () => {
             <img className="album-art" src={image}></img>
           </div>
           <div className="album-title-container">
-            <h1>{album.album_title}</h1>
-            <p>By: <Link to={`/artist/${album.artist_id}`}>{findArtist(album.artist_id).artist_name}</Link></p>
+            <h1>{album.title}</h1>
+            <p>By: <Link to={`/artist/${album.artist_id}`}>{findArtist(album.artist_id).name}</Link></p>
           </div>
           <div className="album-about-container">
             <h2>About</h2>

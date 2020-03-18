@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import image2 from './assets/images/album_art.jpg'
+import image2 from '../../assets/images/album_art.jpg'
 import ArtistAlbumSongs from './ArtistAlbumSongs'
-import { prettyYear } from './utils/dateutils'
+import { prettyYear } from '../../utils/dateutils'
 import { Link } from 'react-router-dom'
 
 const ArtistAlbum = (props) => {
@@ -27,7 +27,7 @@ const ArtistAlbum = (props) => {
             </div>
             <div className="album-info-container">
               <div className="album-info">
-                <h3><Link to={`/album/${album.id}`}>{album.album_title}</Link> ({prettyYear(album.release_date)})</h3>
+                <h3><Link to={`/album/${album.id}`}>{album.title}</Link> ({prettyYear(album.release_date)})</h3>
               </div>
               <div className="song-container">
                 <div className="song-container-headers-container">

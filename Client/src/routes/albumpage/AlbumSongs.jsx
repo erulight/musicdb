@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { prettyYear } from './utils/dateutils'
+import { prettyYear } from '../../utils/dateutils'
 import { Link } from 'react-router-dom'
 
 const AlbumSongs = (props) => {
@@ -39,15 +39,15 @@ const AlbumSongs = (props) => {
         <div key={song.id} className="song-container-row">
           <div className="song-cell1">{song.track_number}</div>
           <div className="song-cell2">
-            <span><Link to={`/song/${song.id}`}>{song.song_title}</Link></span>
-              {song.ft_artist 
-              ? <span> ft. <Link to={`/artist/${song.ft_artist}`}>{findArtist(song.ft_artist).artist_name}</Link></span>
+            <span><Link to={`/song/${song.id}`}>{song.title}</Link></span>
+              {song.ft_artist_id 
+              ? <span> ft. <Link to={`/artist/${song.ft_artist_id}`}>{findArtist(song.ft_artist_id).name}</Link></span>
               : null }
             </div>
           <div className="song-cell3">
-            <span>Lyrics: <Link to={`/artist/${song.lyrics}`}>{findArtist(song.lyrics).artist_name}</Link> </span> 
-            <span>Composer: <Link to={`/artist/${song.composer}`}>{findArtist(song.composer).artist_name}</Link> </span> 
-            <span>Arrangement: <Link to={`/artist/${song.arrangement}`}>{findArtist(song.arrangement).artist_name}</Link> </span>
+            <span>Lyrics: <Link to={`/artist/${song.lyrics_id}`}>{findArtist(song.lyrics_id).name}</Link> </span> 
+            <span>Composer: <Link to={`/artist/${song.composer_id}`}>{findArtist(song.composer_id).name}</Link> </span> 
+            <span>Arrangement: <Link to={`/artist/${song.arrangement_id}`}>{findArtist(song.arrangement_id).name}</Link> </span>
             </div>
         </div>
       )

@@ -2,19 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-const ArtistSongsComposer = (props) => {
+const ArtistSongsLyrics = (props) => {
   const artist_id = props.artist_id
   const [songs, setSongs] = useState([])
   // useEffect(() => {
-  //   axios.get('/api/artist/songs.ft_artist/:artist_id', { params: { artist_id: artist_id } })
-  //     .then((res) => {
-  //       console.log(res)
-  //       setSongs(res.data)
-  //     })
-  // }, []
-  // )
-  // useEffect(() => {
-  //   axios.get('/api/artist/songs.lyrics/:artist_id', { params: { artist_id: artist_id } })
+  //   axios.get('/api/artist/songs.ft_artist_id/:artist_id', { params: { artist_id: artist_id } })
   //     .then((res) => {
   //       console.log(res)
   //       setSongs(res.data)
@@ -22,7 +14,7 @@ const ArtistSongsComposer = (props) => {
   // }, []
   // )
   useEffect(() => {
-    axios.get('/api/artist/songs.composer/:artist_id', { params: { artist_id: artist_id } })
+    axios.get('/api/artist/songs.lyrics_id/:artist_id', { params: { artist_id: artist_id } })
       .then((res) => {
         console.log(res)
         setSongs(res.data)
@@ -30,7 +22,15 @@ const ArtistSongsComposer = (props) => {
   }, []
   )
   // useEffect(() => {
-  //   axios.get('/api/artist/songs.arrangement/:artist_id', { params: { artist_id: artist_id } })
+  //   axios.get('/api/artist/songs.composer_id/:artist_id', { params: { artist_id: artist_id } })
+  //     .then((res) => {
+  //       console.log(res)
+  //       setSongs(res.data)
+  //     })
+  // }, []
+  // )
+  // useEffect(() => {
+  //   axios.get('/api/artist/songs.arrangement_id/:artist_id', { params: { artist_id: artist_id } })
   //     .then((res) => {
   //       console.log(res)
   //       setSongs(res.data)
@@ -53,7 +53,7 @@ const ArtistSongsComposer = (props) => {
       return (
         <div key={song.id} className="song-container-row">
           <div className="song-cell2">
-            <span><Link to={`/song/${song.id}`}>{song.song_title}</Link></span>
+            <span><Link to={`/song/${song.id}`}>{song.title}</Link></span>
           </div>
         </div>
       )
@@ -62,4 +62,4 @@ const ArtistSongsComposer = (props) => {
   )
 }
 
-export default ArtistSongsComposer
+export default ArtistSongsLyrics

@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 
 const ArtistAlbumSongs = (props) => {
   const album_id = props.album_id
-  const [songs, setSongs] = useState([])
+  const [tracks, setTracks] = useState([])
   useEffect(() => {
-    axios.get('/api/artist/songs/:album_id', { params: { album_id: album_id } })
+    axios.get('/api/artist/tracks/:album_id', { params: { album_id: album_id } })
       .then((res) => {
         console.log(res)
-        setSongs(res.data)
+        setTracks(res.data)
       })
   }, []
   )
@@ -33,20 +33,20 @@ const ArtistAlbumSongs = (props) => {
   if (!artists.length) return null
 
   return (
-    songs.map((song) => {
+    tracks.map((track) => {
       return (
-        <div key={song.id} className="song-container-row">
-          <div className="song-cell1">{song.track_number}</div>
+        <div key={track.id} className="song-container-row">
+          <div className="song-cell1">{track.number}</div>
           <div className="song-cell2">
-            <span><Link to={`/song/${song.id}`}>{song.song_title}</Link></span>
-              {song.ft_artist 
-              ? <span> ft. <Link to={`/artist/${song.ft_artist}`}>{findArtist(song.ft_artist).artist_name}</Link></span>
-              : null }
+            <span><Link to={`/song/${track.song_id}`}>{track.title}</Link></span>
+              { /*song.ft_artist_id 
+              ? <span> ft. <Link to={`/artist/${song.ft_artist_id}`}>{findArtist(song.ft_artist_id).name}</Link></span>
+              : null */}
             </div>
           <div className="song-cell3">
-            <span>Lyrics: <Link to={`/artist/${song.lyrics}`}>{findArtist(song.lyrics).artist_name}</Link> </span> 
-            <span>Composer: <Link to={`/artist/${song.composer}`}>{findArtist(song.composer).artist_name}</Link> </span> 
-            <span>Arrangement: <Link to={`/artist/${song.arrangement}`}>{findArtist(song.arrangement).artist_name}</Link> </span>
+            <span>Lyrics: <Link to={`/artist/`}>{/*findArtist(song.lyrics_id).name*/}</Link> </span> 
+            <span>Composer: <Link to={`/artist/`}>{/*findArtist(song.composer_id).name*/}</Link> </span> 
+            <span>Arrangement: <Link to={`/artist/`}>{/*findArtist(song.arrangement_id).name*/}</Link> </span>
             </div>
         </div>
       )

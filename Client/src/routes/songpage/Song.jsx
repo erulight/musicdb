@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import image2 from './assets/images/album_art.jpg'
-import './assets/scss/song.scss'
+import image2 from '../../assets/images/album_art.jpg'
+import '../../assets/scss/song.scss'
 import axios from 'axios'
 //import ArtistAlbum from './ArtistAlbum.jsx'
-import { prettyDate } from './utils/dateutils'
+import { prettyDate } from '../../utils/dateutils'
 import { useParams, Link } from 'react-router-dom'
 
 const Song = () => {
@@ -64,15 +64,15 @@ const Song = () => {
             <img className="album-art" src={image2}></img>
           </div>
           <div className="song-info">
-            <h1>{song.song_title}</h1>
-            <p>Seen on Album: <Link to={`/album/${song.album_id}`}>{findAlbum(song.album_id).album_title}</Link> By: <Link to={`/artist/${artist.id}`}>{artist.artist_name}</Link></p>
+            <h1>{song.title}</h1>
+            <p>Seen on Album: <Link to={`/album/${song.album_id}`}>{findAlbum(song.album_id).title}</Link> By: <Link to={`/artist/${artist.id}`}>{artist.name}</Link></p>
             <p>Release Date: {prettyDate(findAlbum(song.album_id).release_date)}</p>
           </div>
           <div className="song-about-container">
             <h2>Credits</h2>
-            <p>Lyrics: <Link to={`/artist/${song.lyrics}`}>{findArtist(song.lyrics).artist_name}</Link></p>
-            <p>Composer: <Link to={`/artist/${song.composer}`}>{findArtist(song.composer).artist_name}</Link></p>
-            <p>Arrangement: <Link to={`/artist/${song.arrangement}`}>{findArtist(song.arrangement).artist_name}</Link></p>
+            <p>Lyrics: <Link to={`/artist/${song.lyrics_id}`}>{findArtist(song.lyrics_id).name}</Link></p>
+            <p>Composer: <Link to={`/artist/${song.composer_id}`}>{findArtist(song.composer_id).name}</Link></p>
+            <p>Arrangement: <Link to={`/artist/${song.arrangement_id}`}>{findArtist(song.arrangement_id).name}</Link></p>
           </div>
         </div>
         <div className="lyrics-section">

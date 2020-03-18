@@ -2,9 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import Artist from './Artist';
-import Album from './Album';
-import Song from './Song';
+import Artist from './routes/artistpage/Artist';
+import Album from './routes/albumpage/Album';
+import Song from './routes/songpage/Song';
 
 function App() {
   return (

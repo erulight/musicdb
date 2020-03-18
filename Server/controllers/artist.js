@@ -33,11 +33,11 @@ router.get('/albums/:artist_id', (req, res, next) => {
     })
 })
 
-router.get('/songs/:album_id', (req, res, next) => {
+router.get('/tracks/:album_id', (req, res, next) => {
   const album_id = req.query.album_id
-  pool.query(`SELECT * FROM songs
-              WHERE album_id =$1
-              ORDER BY track_number ASC`,
+  pool.query(`SELECT * FROM tracks
+              LEFT OUTER JOIN songs ON tracks.song_id
+              WHERE album_id = $1`,
     [album_id], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
@@ -62,10 +62,10 @@ router.get('/artists', (req, res, next) => {
     })
 })
 
-router.get('/songs.ft_artist/:artist_id', (req, res, next) => {
+router.get('/songs.ft_artist_id/:artist_id', (req, res, next) => {
   const artist_id = req.query.artist_id
   pool.query(`SELECT * FROM songs
-              WHERE ft_artist =$1
+              WHERE ft_artist_id =$1
               ORDER BY id ASC`,
     [artist_id], (q_err, q_res) => {
       if (q_err) {
@@ -78,10 +78,10 @@ router.get('/songs.ft_artist/:artist_id', (req, res, next) => {
     })
 })
 
-router.get('/songs.lyrics/:artist_id', (req, res, next) => {
+router.get('/songs.lyrics_id/:artist_id', (req, res, next) => {
   const artist_id = req.query.artist_id
   pool.query(`SELECT * FROM songs
-              WHERE lyrics =$1
+              WHERE lyrics_id =$1
               ORDER BY id ASC`,
     [artist_id], (q_err, q_res) => {
       if (q_err) {
@@ -94,10 +94,10 @@ router.get('/songs.lyrics/:artist_id', (req, res, next) => {
     })
 })
 
-router.get('/songs.composer/:artist_id', (req, res, next) => {
+router.get('/songs.composer_id/:artist_id', (req, res, next) => {
   const artist_id = req.query.artist_id
   pool.query(`SELECT * FROM songs
-              WHERE composer =$1
+              WHERE composer_id =$1
               ORDER BY id ASC`,
     [artist_id], (q_err, q_res) => {
       if (q_err) {
@@ -110,10 +110,10 @@ router.get('/songs.composer/:artist_id', (req, res, next) => {
     })
 })
 
-router.get('/songs.arrangement/:artist_id', (req, res, next) => {
+router.get('/songs.arrangement_id/:artist_id', (req, res, next) => {
   const artist_id = req.query.artist_id
   pool.query(`SELECT * FROM songs
-              WHERE arrangement =$1
+              WHERE arrangement_id =$1
               ORDER BY id ASC`,
     [artist_id], (q_err, q_res) => {
       if (q_err) {

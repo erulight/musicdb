@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import image from './assets/images/artist_profile_pic.jpg'
-import './assets/scss/artist.scss'
+import image from '../../assets/images/artist_profile_pic.jpg'
+import '../../assets/scss/artist.scss'
 import axios from 'axios'
 import ArtistAlbum from './ArtistAlbum.jsx'
-import { prettyDate } from './utils/dateutils'
+import { prettyDate } from '../../utils/dateutils'
 import { useParams } from 'react-router-dom'
 import ArtistSongsFt from './ArtistSongsFt'
 import ArtistSongsLyrics from './ArtistSongsLyrics'
@@ -32,7 +32,7 @@ const ArtistProfile = () => {
             <img className="artist-profile-portrait-img" src={image}></img>
           </div>
           <div className="artist-profile-name-container">
-            <h1>{artist.artist_name}</h1>
+            <h1>{artist.name}</h1>
             <p>Real Name: {artist.real_name}</p>
           </div>
           <div className="artist-profile-info-container">
