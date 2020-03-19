@@ -8,33 +8,33 @@ const artist1 = {
   id: 1,
   name: 'One',
   real_name: 'Member One',
-  birthdate: new Date('January 1, 2000'),
+  birthdate: new Date('January 1, 2000')
 }
 
 const artist2 = {
   id: 2,
   name: 'Two',
   real_name: 'Member Two',
-  birthdate: new Date('January 2, 2000'),
+  birthdate: new Date('January 2, 2000')
 }
 
 const artist3 = {
   id: 3,
   name: 'Three',
   real_name: 'Member Three',
-  birthdate: new Date('January 3, 2000'),
+  birthdate: new Date('January 3, 2000')
 }
 
 const artist4 = {
   id: 4,
   name: 'Four',
   real_name: 'Member Four',
-  birthdate: new Date('January 4, 2000'),
+  birthdate: new Date('January 4, 2000')
 }
 
 const artist5 = {
   id: 5,
-  name: 'Band One',
+  name: 'Band One'
 }
 
 

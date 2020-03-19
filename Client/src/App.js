@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Artist from './routes/artistpage/Artist';
 import Album from './routes/albumpage/Album';
 import Song from './routes/songpage/Song';
+import New from './routes/newpage/New';
+import Admin from './routes/adminpage/Admin';
 
 function App() {
   return (
@@ -22,6 +24,12 @@ function App() {
       </Route>
       <Route exact path="/song/:id">
         <Song />
+      </Route>
+      <Route exact path="/new">
+        <New />
+      </Route>
+      <Route exact path="/admin">
+        <Admin />
       </Route>
     </Router>
   );

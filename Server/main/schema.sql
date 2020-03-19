@@ -70,3 +70,11 @@ CREATE TABLE songs_credits(
   type VARCHAR(200),
   artist_id INT REFERENCES artists(id)
 );
+
+CREATE TABLE new_artists(
+  id INT PRIMARY KEY NOT NULL,
+  name VARCHAR(200),
+  real_name VARCHAR(200),
+  birthdate DATE,
+  is_group BOOLEAN
+);

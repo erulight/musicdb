@@ -19,9 +19,11 @@ app.all('*', (req, _res, next) => {
 const artistcontroller = require('./controllers/artist')
 const albumcontroller = require('./controllers/album')
 const songcontroller = require('./controllers/song')
+const newcontroller = require('./controllers/new')
 app.use('/api/artist', artistcontroller)
 app.use('/api/album', albumcontroller)
 app.use('/api/song', songcontroller)
+app.use('/api/new', newcontroller)
 
 app.get('/', (_req, res) => {
   res.json({
