@@ -56,7 +56,7 @@ const Song = () => {
   if (!artists.length) return null
 
   const RenderSong = (props) => {
-    const artist = findArtist(findAlbum(song.album_id).artist_id)
+    const artist = findArtist(song.artist_id)
     return (
       <div className="song-page">
         <div className="song-info-container">
@@ -65,8 +65,8 @@ const Song = () => {
           </div>
           <div className="song-info">
             <h1>{song.title}</h1>
-            <p>Seen on Album: <Link to={`/album/${song.album_id}`}>{findAlbum(song.album_id).title}</Link> By: <Link to={`/artist/${artist.id}`}>{artist.name}</Link></p>
-            <p>Release Date: {prettyDate(findAlbum(song.album_id).release_date)}</p>
+            <p>{/*Appears on: <Link to={`/album/${song.album_id}`}>{findAlbum(song.album_id).title}</Link>*/}By: <Link to={`/artist/${artist.id}`}>{artist.name}</Link></p>
+            <p>{/*Release Date: {prettyDate(findAlbum(song.album_id).release_date)}*/}</p>
           </div>
           <div className="song-about-container">
             <h2>Credits</h2>

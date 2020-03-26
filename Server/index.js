@@ -20,10 +20,12 @@ const artistcontroller = require('./controllers/artist')
 const albumcontroller = require('./controllers/album')
 const songcontroller = require('./controllers/song')
 const newcontroller = require('./controllers/new')
+const admincontroller = require('./controllers/admin')
 app.use('/api/artist', artistcontroller)
 app.use('/api/album', albumcontroller)
 app.use('/api/song', songcontroller)
 app.use('/api/new', newcontroller)
+app.use('/api/admin', admincontroller)
 
 app.get('/', (_req, res) => {
   res.json({

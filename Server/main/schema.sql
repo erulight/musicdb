@@ -78,3 +78,22 @@ CREATE TABLE new_artists(
   birthdate DATE,
   is_group BOOLEAN
 );
+
+CREATE TABLE new_members(
+  id INT PRIMARY KEY NOT NULL,
+  name VARCHAR(200),
+  member_of_id INT,
+  position VARCHAR(200)
+);
+
+CREATE TABLE new_albums(
+  id INT PRIMARY KEY NOT NULL,
+  title VARCHAR(200),
+  artist_id INT,
+  release_date DATE
+);
+
+CREATE TABLE new_tracks(
+  id INT PRIMARY KEY NOT NULL,
+
+);

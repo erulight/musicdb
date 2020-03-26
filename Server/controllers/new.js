@@ -3,7 +3,20 @@ var router = express.Router()
 const pool = require('../db/db')
 
 router.get('/new_artists', (req, res, next) => {
-  pool.query(`COUNT(*) FROM new_artists`,
+  pool.query(`SELECT * FROM new_artists`,
+    [], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/new_members', (req, res, next) => {
+  pool.query(`SELECT * FROM new_members`,
     [], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)

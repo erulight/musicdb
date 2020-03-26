@@ -2,6 +2,8 @@ const express = require('express')
 var router = express.Router()
 const pool = require('../db/db')
 
+
+//Artist.jsx
 router.get('/artists/:artist_id', (req, res, next) => {
   const artist_id = req.query.artist_id
   pool.query(`SELECT * FROM artists
@@ -17,6 +19,24 @@ router.get('/artists/:artist_id', (req, res, next) => {
     })
 })
 
+router.get('/members/:artist_id', (req, res, next) => {
+  const artist_id = req.query.artist_id
+  pool.query(`SELECT * FROM members
+              WHERE member_of_id=$1
+              ORDER BY id ASC`,
+    [artist_id], (q_err, q_res = {}) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+
+//ArtistAlbums.jsx
 router.get('/albums/:artist_id', (req, res, next) => {
   const artist_id = req.query.artist_id
   pool.query(`SELECT * FROM albums
@@ -36,8 +56,8 @@ router.get('/albums/:artist_id', (req, res, next) => {
 router.get('/tracks/:album_id', (req, res, next) => {
   const album_id = req.query.album_id
   pool.query(`SELECT * FROM tracks
-              LEFT OUTER JOIN songs ON tracks.song_id
-              WHERE album_id = $1`,
+              WHERE album_id=$1
+              ORDER BY tracks.disc, tracks.number ASC`,
     [album_id], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
@@ -49,6 +69,7 @@ router.get('/tracks/:album_id', (req, res, next) => {
     })
 })
 
+//ArtistAlbumSongs
 router.get('/artists', (req, res, next) => {
   pool.query(`SELECT * FROM artists`,
     [], (q_err, q_res = {}) => {
@@ -62,60 +83,15 @@ router.get('/artists', (req, res, next) => {
     })
 })
 
-router.get('/songs.ft_artist_id/:artist_id', (req, res, next) => {
+router.get('/songs_credits/:artist_id/:type', (req, res, next) => {
+  const type = req.query.type
   const artist_id = req.query.artist_id
-  pool.query(`SELECT * FROM songs
-              WHERE ft_artist_id =$1
-              ORDER BY id ASC`,
-    [artist_id], (q_err, q_res) => {
-      if (q_err) {
-        console.log(q_err)
-        res.status(505).end()
-        next()
-      }
-      res.json(q_res.rows)
-      next()
-    })
-})
-
-router.get('/songs.lyrics_id/:artist_id', (req, res, next) => {
-  const artist_id = req.query.artist_id
-  pool.query(`SELECT * FROM songs
-              WHERE lyrics_id =$1
-              ORDER BY id ASC`,
-    [artist_id], (q_err, q_res) => {
-      if (q_err) {
-        console.log(q_err)
-        res.status(505).end()
-        next()
-      }
-      res.json(q_res.rows)
-      next()
-    })
-})
-
-router.get('/songs.composer_id/:artist_id', (req, res, next) => {
-  const artist_id = req.query.artist_id
-  pool.query(`SELECT * FROM songs
-              WHERE composer_id =$1
-              ORDER BY id ASC`,
-    [artist_id], (q_err, q_res) => {
-      if (q_err) {
-        console.log(q_err)
-        res.status(505).end()
-        next()
-      }
-      res.json(q_res.rows)
-      next()
-    })
-})
-
-router.get('/songs.arrangement_id/:artist_id', (req, res, next) => {
-  const artist_id = req.query.artist_id
-  pool.query(`SELECT * FROM songs
-              WHERE arrangement_id =$1
-              ORDER BY id ASC`,
-    [artist_id], (q_err, q_res) => {
+  pool.query(`SELECT songs.id, songs.title, songs_credits.song_id, songs_credits.artist_id
+              FROM songs, songs_credits
+              WHERE songs_credits.song_id = songs.id
+              AND songs_credits.type=$1
+              AND songs_credits.artist_id=$2`,
+    [type,artist_id], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
         res.status(505).end()

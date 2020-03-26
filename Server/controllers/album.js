@@ -17,11 +17,11 @@ router.get('/albums/:album_id', (req, res, next) => {
     })
 })
 
-router.get('/songs/:album_id', (req, res, next) => {
+router.get('/tracks/:album_id', (req, res, next) => {
   const album_id = req.query.album_id
-  pool.query(`SELECT * FROM songs
-              WHERE album_id =$1
-              ORDER BY track_number ASC`,
+  pool.query(`SELECT * FROM tracks
+              WHERE album_id=$1
+              ORDER BY tracks.disc, tracks.number ASC`,
     [album_id], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)

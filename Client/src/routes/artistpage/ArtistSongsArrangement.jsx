@@ -5,32 +5,15 @@ import { Link } from 'react-router-dom'
 const ArtistSongsArranger = (props) => {
   const artist_id = props.artist_id
   const [songs, setSongs] = useState([])
-  // useEffect(() => {
-  //   axios.get('/api/artist/songs.ft_artist_id/:artist_id', { params: { artist_id: artist_id } })
-  //     .then((res) => {
-  //       console.log(res)
-  //       setSongs(res.data)
-  //     })
-  // }, []
-  // )
-  // useEffect(() => {
-  //   axios.get('/api/artist/songs.lyrics_id/:artist_id', { params: { artist_id: artist_id } })
-  //     .then((res) => {
-  //       console.log(res)
-  //       setSongs(res.data)
-  //     })
-  // }, []
-  // )
-  // useEffect(() => {
-  //   axios.get('/api/artist/songs.composer_id/:artist_id', { params: { artist_id: artist_id } })
-  //     .then((res) => {
-  //       console.log(res)
-  //       setSongs(res.data)
-  //     })
-  // }, []
-  // )
+
   useEffect(() => {
-    axios.get('/api/artist/songs.arrangement_id/:artist_id', { params: { artist_id: artist_id } })
+    axios.get('/api/artist/songs_credits/:artist_id/:type',
+      {
+        params: {
+          artist_id: artist_id,
+          type: 'arranger'
+        }
+      })
       .then((res) => {
         console.log(res)
         setSongs(res.data)

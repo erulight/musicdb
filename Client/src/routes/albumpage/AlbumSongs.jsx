@@ -6,14 +6,16 @@ import { Link } from 'react-router-dom'
 const AlbumSongs = (props) => {
   const album_id = props.album_id
   const [songs, setSongs] = useState([])
+  
   useEffect(() => {
-    axios.get('/api/album/songs/:album_id', { params: { album_id: album_id } })
+    axios.get('/api/album/tracks/:album_id', { params: { album_id: album_id } })
       .then((res) => {
         console.log(res)
         setSongs(res.data)
       })
   }, []
   )
+  
 
   const [artists, setArtists] = useState([])
   useEffect(() => {
@@ -37,18 +39,18 @@ const AlbumSongs = (props) => {
     songs.map((song) => {
       return (
         <div key={song.id} className="song-container-row">
-          <div className="song-cell1">{song.track_number}</div>
+          <div className="song-cell1">{song.number}</div>
           <div className="song-cell2">
-            <span><Link to={`/song/${song.id}`}>{song.title}</Link></span>
-              {song.ft_artist_id 
+            <span>{<Link to={`/song/${song.song_id}`}>{song.title}</Link>}</span>
+            {/* song.ft_artist_id
               ? <span> ft. <Link to={`/artist/${song.ft_artist_id}`}>{findArtist(song.ft_artist_id).name}</Link></span>
-              : null }
-            </div>
+            : null */}
+          </div>
           <div className="song-cell3">
-            <span>Lyrics: <Link to={`/artist/${song.lyrics_id}`}>{findArtist(song.lyrics_id).name}</Link> </span> 
-            <span>Composer: <Link to={`/artist/${song.composer_id}`}>{findArtist(song.composer_id).name}</Link> </span> 
-            <span>Arrangement: <Link to={`/artist/${song.arrangement_id}`}>{findArtist(song.arrangement_id).name}</Link> </span>
-            </div>
+            <span>Lyrics: {/*<Link to={`/artist/${song.lyrics_id}`}>{findArtist(song.lyrics_id).name}</Link> */}</span>
+            <span>Composer: {/*<Link to={`/artist/${song.composer_id}`}>{findArtist(song.composer_id).name}</Link> */}</span>
+            <span>Arrangement: {/*<Link to={`/artist/${song.arrangement_id}`}>{findArtist(song.arrangement_id).name}</Link> */}</span>
+          </div>
         </div>
       )
     }

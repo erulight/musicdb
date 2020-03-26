@@ -9,8 +9,10 @@ import ArtistSongsFt from './ArtistSongsFt'
 import ArtistSongsLyrics from './ArtistSongsLyrics'
 import ArtistSongsComposer from './ArtistSongsComposer'
 import ArtistSongsArranger from './ArtistSongsArrangement'
+import ArtistMembers from './ArtistMembers'
 
 const ArtistProfile = () => {
+  let isGroup = false
   const params = useParams()
   console.log(params)
   const artist_id = params.id;
@@ -24,6 +26,19 @@ const ArtistProfile = () => {
   }, [artist_id]
   )
 
+  const [members, setMembers] = useState([])
+  useEffect(() => {
+    axios.get('/api/artist/members/:artist_id', { params: { artist_id: artist_id } })
+      .then((res) => {
+        console.log(res)
+        setMembers(res.data)
+      })
+  }, [artist_id]
+  )
+  if(members[0] != null) {
+    isGroup = true
+  }
+
   const RenderArtistProfile = (props) => {
     return (
       <div className="artist-page">
@@ -33,13 +48,21 @@ const ArtistProfile = () => {
           </div>
           <div className="artist-profile-name-container">
             <h1>{artist.name}</h1>
-            <p>Real Name: {artist.real_name}</p>
+            <p>{artist.real_name
+              ? <span>Real Name: {artist.real_name}</span>
+              : null}
+            </p>
+            <p>{isGroup
+              ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers></span>
+              : null}</p>
           </div>
           <div className="artist-profile-info-container">
             <h2>About</h2>
             <p>{/* First Release*/}</p>
             <p>{/* Latest Release*/}</p>
-            <p>Birthday: {prettyDate(artist.birthdate)}</p>
+            <p>{artist.birthdate
+              ? <span>Birthday: {prettyDate(artist.birthdate)}</span>
+              : null}</p>
           </div>
         </div>
         <div className="artist-header">

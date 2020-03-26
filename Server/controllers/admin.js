@@ -3,7 +3,8 @@ var router = express.Router()
 const pool = require('../db/db')
 
 router.get('/new_artists', (req, res, next) => {
-  pool.query(`COUNT(*) FROM new_artists`,
+  pool.query(`SELECT * FROM new_artists
+              ORDER BY id DESC`,
     [], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
@@ -16,7 +17,7 @@ router.get('/new_artists', (req, res, next) => {
 })
 
 router.get('/artists', (req, res, next) => {
-  pool.query(`COUNT(*) FROM artists`,
+  pool.query(`SELECT * FROM artists`,
     [], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
@@ -48,9 +49,8 @@ router.post('/artists', (req, res, next) => {
   const name = req.body.name
   const real_name = req.body.real_name
   const birthdate = req.body.birthdate
-  const is_group = req.body.is_group
-  pool.query(`INSERT INTO new_artists (id, name, real_name, birthdate, is_group)
-            Values ($1, $2, $3, $4, $5)`, [id, name, real_name, birthdate, is_group], (q_err, q_res) => {
+  pool.query(`INSERT INTO artists (id, name, real_name, birthdate)
+            Values ($1, $2, $3, $4)`, [id, name, real_name, birthdate], (q_err, q_res) => {
     if (q_err) {
       console.log(q_err)
       res.status(505).end()
@@ -60,5 +60,19 @@ router.post('/artists', (req, res, next) => {
     next()
   })
 })
+
+router.delete('/new_artists/:new_artist_id', (req, res, next) => {
+  const new_artist_id = req.body.new_artist_id
+  /*
+  pool.query(`DELETE FROM new_artists WHERE id = $1`, [new_artist_id],
+    (q_err, q_res) => {
+      res.json(q_res.rows)
+      console.log(q_err)
+    })
+    */
+  pool.query('DELETE FROM new_artists WHERE id =$1', [new_artist_id], (q_err, q_res) => { if (q_err) { console.log(q_err) }
+})
+}
+)
 
 module.exports = router
