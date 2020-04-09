@@ -16,6 +16,34 @@ router.get('/new_artists', (req, res, next) => {
     })
 })
 
+router.get('/new_albums', (req, res, next) => {
+  pool.query(`SELECT * FROM new_albums
+              ORDER BY id DESC`,
+    [], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/new_songs', (req, res, next) => {
+  pool.query(`SELECT * FROM new_songs
+              ORDER BY id DESC`,
+    [], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 router.get('/artists', (req, res, next) => {
   pool.query(`SELECT * FROM artists`,
     [], (q_err, q_res) => {

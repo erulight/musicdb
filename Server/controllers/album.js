@@ -46,4 +46,21 @@ router.get('/artists', (req, res, next) => {
     })
 })
 
+router.get('/songs_credits/:song_id/:type', (req, res, next) => {
+  const song_id = req.query.song_id
+  const type = req.query.type
+  pool.query(`SELECT * FROM songs_credits
+              WHERE song_id = $1
+              AND type= $2`,
+    [song_id,type], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 module.exports = router

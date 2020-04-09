@@ -4,12 +4,16 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
+import AdminNewArtistEdit from './AdminNewArtistEdit'
 
 
 const AdminNewArtist = () => {
   const params = useParams()
   console.log(params)
-  const new_artist_id = params.id;
+  const new_artist_id = params.id
+  const [isediting, set_isediting] = useState({
+    editing: false
+  })
 
   const [new_artist, set_new_artist] = useState({})
   useEffect(() => {
@@ -64,7 +68,7 @@ const AdminNewArtist = () => {
   const handleDelete = React.useCallback(
     (event) => {
       console.log('clicked')
-      axios.delete('/api/admin/new_artists/:new_artist_id', { params : {new_artist_id: new_artist_id}})
+      axios.delete('/api/admin/new_artists/:new_artist_id', { params: { new_artist_id: new_artist_id } })
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -72,11 +76,9 @@ const AdminNewArtist = () => {
     }
   )
 
-  const handleEdit = React.useCallback(
-    (event) => {
+  const handleEdit = React.useCallback((event) => {set_isediting({editing: true})})
 
-    }
-  )
+  const handleCancelEdit = React.useCallback((event) => {set_isediting({editing: false})})
 
   const handleChange = React.useCallback(
     (event) => {
@@ -97,8 +99,8 @@ const AdminNewArtist = () => {
       <h2>New Artist</h2>
       <div>
         {new_artist.is_group
-        ? <span>Group</span>
-        : <span>Solo Artist</span>}
+          ? <span>Group</span>
+          : <span>Solo Artist</span>}
       </div>
       <div>
         <label>Name:  </label>
@@ -132,11 +134,38 @@ const AdminNewArtist = () => {
         </div>
         : null}
       <div>
-        <button type='button' onClick={handleSubmit}>Submit</button>
-        <button type='button' onClick={handleEdit}>Edit (NYI)</button>
-        <button type='button' onClick={handleDelete}>Delete</button>
+        {
+          isediting.editing
+            ? 
+            null
+            : 
+            <span>
+              <button type='button' onClick={handleSubmit}>Submit</button>
+              <button type='button' onClick={handleEdit}>Edit</button>
+              <button type='button' onClick={handleDelete}>Delete</button>
+            </span>
+        }
+      </div>
+      {
+        isediting.editing
+          ? <span><AdminNewArtistEdit is_group={new_artist.is_group} name={new_artist.name} real_name={new_artist.real_name} birthdate={new_artist.birthdate}></AdminNewArtistEdit></span>
+          : null
+      }
+      <div>
+      {
+          isediting.editing
+            ? 
+            <span>
+            <button type='button' onClick={handleSubmit}>Submit</button>
+            <button type='button' onClick={handleCancelEdit}>Cancel Editing</button>
+            <button type='button' onClick={handleDelete}>Delete</button>
+          </span>
+            : 
+            null
+        }
       </div>
     </div>
+
   )
 }
 

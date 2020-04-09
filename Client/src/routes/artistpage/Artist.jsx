@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import image from '../../assets/images/artist_profile_pic.jpg'
-import '../../assets/scss/artist.scss'
 import axios from 'axios'
 import ArtistAlbum from './ArtistAlbum.jsx'
-import { prettyDate } from '../../utils/dateutils'
+import { prettyDate, prettyYear } from '../../utils/dateutils'
 import { useParams } from 'react-router-dom'
 import ArtistSongsFt from './ArtistSongsFt'
 import ArtistSongsLyrics from './ArtistSongsLyrics'
@@ -13,9 +12,16 @@ import ArtistMembers from './ArtistMembers'
 
 const ArtistProfile = () => {
   let isGroup = false
+  let hasReleases = false
+  let amountAlbums = 0
+  let active_date_start = new Date()
+  let active_date_end = new Date()
+  let age = 0
+
   const params = useParams()
   console.log(params)
   const artist_id = params.id;
+
   const [artist, setArtist] = useState({})
   useEffect(() => {
     axios.get('/api/artist/artists/:artist_id', { params: { artist_id: artist_id } })
@@ -26,6 +32,8 @@ const ArtistProfile = () => {
   }, [artist_id]
   )
 
+  console.log(artist)
+
   const [members, setMembers] = useState([])
   useEffect(() => {
     axios.get('/api/artist/members/:artist_id', { params: { artist_id: artist_id } })
@@ -35,9 +43,39 @@ const ArtistProfile = () => {
       })
   }, [artist_id]
   )
+
+  const [albums, setAlbums] = useState([])
+  useEffect(() => {
+    axios.get('/api/artist/albums/:artist_id', { params: { artist_id: artist_id } })
+      .then((res) => {
+        console.log(res)
+        setAlbums(res.data)
+      })
+  }, [artist_id]
+  )
+
+  if(albums[0] != null){
+    hasReleases = true
+    amountAlbums = albums.length-1
+    active_date_end = albums[0].release_date
+    active_date_start = albums[amountAlbums].release_date
+  }
+
   if(members[0] != null) {
     isGroup = true
   }
+
+  function getAgeFromBirthday(birthday = new Date()) {
+    const birthdate = Date.parse(birthday)
+
+    if (!birthdate) {
+      throw new Error('Birthday is not a valid date.')
+      return
+    }
+
+    return parseInt((Date.now() - birthdate) / 1000 / 60 / 60 / 24 / 7 / 52)
+  }
+  // age = parseInt((Date.now() - dob) / 1000 / 60 / 60 / 24 / 7 / 52)
 
   const RenderArtistProfile = (props) => {
     return (
@@ -58,10 +96,15 @@ const ArtistProfile = () => {
           </div>
           <div className="artist-profile-info-container">
             <h2>About</h2>
-            <p>{/* First Release*/}</p>
+            <p>{hasReleases
+            ? <span>Years Active: {prettyYear(active_date_start)} - {artist.active_status 
+                                                                    ? <span>Present</span>
+                                                                    : <span>{prettyYear(active_date_end)}</span>}
+              </span>
+            : null}</p>
             <p>{/* Latest Release*/}</p>
             <p>{artist.birthdate
-              ? <span>Birthday: {prettyDate(artist.birthdate)}</span>
+              ? <span>Born: {prettyDate(artist.birthdate)} (age {getAgeFromBirthday(artist.birthdate)})</span>
               : null}</p>
           </div>
         </div>

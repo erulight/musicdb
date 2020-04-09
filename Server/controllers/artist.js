@@ -83,7 +83,20 @@ router.get('/artists', (req, res, next) => {
     })
 })
 
-router.get('/songs_credits/:artist_id/:type', (req, res, next) => {
+router.get('/songs', (req, res, next) => {
+  pool.query(`SELECT * FROM songs`,
+    [], (q_err, q_res = {}) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/songs_credits/artist/:artist_id/:type', (req, res, next) => {
   const type = req.query.type
   const artist_id = req.query.artist_id
   pool.query(`SELECT songs.id, songs.title, songs_credits.song_id, songs_credits.artist_id
@@ -94,12 +107,30 @@ router.get('/songs_credits/:artist_id/:type', (req, res, next) => {
     [type,artist_id], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
-        res.status(505).end()
+        res.status(500).end()
         next()
       }
       res.json(q_res.rows)
       next()
     })
 })
+
+router.get('/songs_credits/song/:song_id/:type', (req, res, next) => {
+  const type = req.query.type
+  const song_id = req.query.song_id
+  pool.query(`SELECT * FROM songs_credits
+              WHERE type = $1
+              AND song_id= $2`,
+    [type,song_id], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 
 module.exports = router

@@ -2,21 +2,27 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import Banner from'./routes/Banner';
 import Artist from './routes/artistpage/Artist';
 import Album from './routes/albumpage/Album';
 import Song from './routes/songpage/Song';
 import New from './routes/newpage/New';
 import NewArtist from './routes/newpage/NewArtist';
+import NewAlbum from './routes/newpage/NewAlbum';
+import NewSong from './routes/newpage/NewSong';
 import Admin from './routes/adminpage/Admin';
-import Banner from'./routes/Banner';
 import AdminNewArtist from './routes/adminpage/AdminNewArtist';
+import './assets/scss/artist.scss';
+import './assets/scss/album.scss';
+import './assets/scss/song.scss';
+import './assets/scss/banner.scss';
 
 function App() {
   return (
     <Router>
       <Banner />
       <Route exact path="/">
-        <div class='welcome-message'>
+        <div className='welcome-message'>
           This will be a real homepage someday, but please <Link to={'/artist/1'}>Click Here</Link>
         </div>
       </Route>
@@ -34,6 +40,12 @@ function App() {
       </Route>
       <Route exact path="/new/artist">
         <NewArtist />
+      </Route>
+      <Route exact path="/new/album">
+        <NewAlbum />
+      </Route>
+      <Route exact path="/new/song">
+        <NewSong />
       </Route>
       <Route exact path="/admin">
         <Admin />

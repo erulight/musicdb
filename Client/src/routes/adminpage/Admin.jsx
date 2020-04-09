@@ -14,6 +14,8 @@ const Admin = (props) => {
       </h1>
       <h2>New Artists Pending</h2>
       <AdminListNewArtist></AdminListNewArtist>
+      <h2>New Albums Pending</h2>
+      <h2>New Songs Pending</h2>
     </div>
   )
 }

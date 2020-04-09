@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import image from '../../assets/images/album_art.jpg'
-import '../../assets/scss/album.scss'
 import axios from 'axios'
 import AlbumSongs from './AlbumSongs'
 import { prettyDate } from '../../utils/dateutils'

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { prettyYear } from '../../utils/dateutils'
 import { Link } from 'react-router-dom'
+import AlbumSongCredit from './AlbumSongCredit'
 
 const AlbumSongs = (props) => {
   const album_id = props.album_id
@@ -41,15 +42,14 @@ const AlbumSongs = (props) => {
         <div key={song.id} className="song-container-row">
           <div className="song-cell1">{song.number}</div>
           <div className="song-cell2">
-            <span>{<Link to={`/song/${song.song_id}`}>{song.title}</Link>}</span>
-            {/* song.ft_artist_id
-              ? <span> ft. <Link to={`/artist/${song.ft_artist_id}`}>{findArtist(song.ft_artist_id).name}</Link></span>
-            : null */}
+            <span>{<Link to={`/song/${song.song_id}`}>{song.title}</Link>} 
+            <AlbumSongCredit song_id={song.id} type={'featured'}></AlbumSongCredit>
+            </span>
           </div>
           <div className="song-cell3">
-            <span>Lyrics: {/*<Link to={`/artist/${song.lyrics_id}`}>{findArtist(song.lyrics_id).name}</Link> */}</span>
-            <span>Composer: {/*<Link to={`/artist/${song.composer_id}`}>{findArtist(song.composer_id).name}</Link> */}</span>
-            <span>Arrangement: {/*<Link to={`/artist/${song.arrangement_id}`}>{findArtist(song.arrangement_id).name}</Link> */}</span>
+            <span>Lyrics: {<AlbumSongCredit song_id={song.id} type={'lyricist'}></AlbumSongCredit>}</span>
+            <span> Composer: {<AlbumSongCredit song_id={song.id} type={'composer'}></AlbumSongCredit>}</span>
+            <span> Arrangement: {<AlbumSongCredit song_id={song.id} type={'arranger'}></AlbumSongCredit>}</span>
           </div>
         </div>
       )

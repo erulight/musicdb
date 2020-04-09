@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import image2 from '../../assets/images/album_art.jpg'
-import '../../assets/scss/song.scss'
 import axios from 'axios'
-//import ArtistAlbum from './ArtistAlbum.jsx'
 import { prettyDate } from '../../utils/dateutils'
 import { useParams, Link } from 'react-router-dom'
+import SongAlbum from './SongAlbum'
+import SongCredit from './SongCredit'
 
 const Song = () => {
   const params = useParams()
@@ -20,16 +20,6 @@ const Song = () => {
   }, [song_id]
   )
 
-  const [albums, setAlbums] = useState([])
-  useEffect(() => {
-    axios.get('/api/song/albums')
-      .then((res) => {
-        console.log(res)
-        setAlbums(res.data)
-      })
-  }, []
-  )
-
   const [artists, setArtists] = useState([])
   useEffect(() => {
     axios.get('/api/song/artists')
@@ -39,13 +29,6 @@ const Song = () => {
       })
   }, []
   )
-
-  const findAlbum = (album_id) => {
-    //console.log(album_id)
-    const album = albums.find((album) => { return album.id === album_id })
-    return album || {}
-  }
-  if (!albums.length) return null
 
   const findArtist = (artist_id) => {
     //console.log(artist_id)
@@ -64,15 +47,19 @@ const Song = () => {
             <img className="album-art" src={image2}></img>
           </div>
           <div className="song-info">
-            <h1>{song.title}</h1>
-            <p>{/*Appears on: <Link to={`/album/${song.album_id}`}>{findAlbum(song.album_id).title}</Link>*/}By: <Link to={`/artist/${artist.id}`}>{artist.name}</Link></p>
-            <p>{/*Release Date: {prettyDate(findAlbum(song.album_id).release_date)}*/}</p>
+            <span>
+              <h1>{song.title}</h1>
+              </span>
+            <p>By: <Link to={`/artist/${artist.id}`}>{artist.name}</Link> <SongCredit song_id={song.id} type={'featured'}></SongCredit></p>
+            <p>Release Date: {prettyDate(song.release_date)}</p>
+            <p>On Album:</p>
+            <SongAlbum song_id = {song.id}></SongAlbum>
           </div>
           <div className="song-about-container">
             <h2>Credits</h2>
-            <p>Lyrics: <Link to={`/artist/${song.lyrics_id}`}>{findArtist(song.lyrics_id).name}</Link></p>
-            <p>Composer: <Link to={`/artist/${song.composer_id}`}>{findArtist(song.composer_id).name}</Link></p>
-            <p>Arrangement: <Link to={`/artist/${song.arrangement_id}`}>{findArtist(song.arrangement_id).name}</Link></p>
+            <p>Lyrics: <SongCredit song_id={song.id} type={'lyricist'}></SongCredit></p>
+            <p>Composer: <SongCredit song_id={song.id} type={'composer'}></SongCredit></p>
+            <p>Arrangement: <SongCredit song_id={song.id} type={'arranger'}></SongCredit></p>
           </div>
         </div>
         <div className="lyrics-section">

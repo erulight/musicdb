@@ -11,27 +11,6 @@ const AdminListNewArtist = (props) => {
       .then((res) => {
         console.log(res)
         set_new_artists(res.data)
-        console.log(new_artist)
-      })
-  }, []
-  )
-
-  const [artists, set_artists] = useState([])
-  useEffect(() => {
-    axios.get('/api/admin/artists')
-      .then((res) => {
-        console.log(res)
-        set_artists(res.data)
-      })
-  }, []
-  )
-
-  const [new_artist, set_new_artist] = useState({})
-  useEffect(() => {
-    axios.get('/api/admin/new_artists/:new_artist_id', { params: { new_artist_id: new_artists } })
-      .then((res) => {
-        console.log(res)
-        set_new_artist(res.data[0])
       })
   }, []
   )
@@ -40,7 +19,7 @@ const AdminListNewArtist = (props) => {
     new_artists.map((new_artist) => {
       return (
         <div key={new_artist.id}>
-          <Link to={`/admin/new_artist/${new_artist.id}`}>{new_artist.id} {new_artist.name}</Link>
+          <Link to={`/admin/new_artist/${new_artist.id}`}>{new_artist.name}</Link>
         </div>
       )
     })

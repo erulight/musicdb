@@ -6,26 +6,6 @@ import { Link } from 'react-router-dom'
 
 const NewArtist = (props) => {
 
-  const [new_artists, set_new_artists] = useState([])
-  useEffect(() => {
-    axios.get('/api/new/new_artists')
-      .then((res) => {
-        console.log(res)
-        set_new_artists(res.data)
-      })
-  }, []
-  )
-
-  const [new_members, set_new_members] = useState([])
-  useEffect(() => {
-    axios.get('/api/new/new_members')
-      .then((res) => {
-        console.log(res)
-        set_new_members(res.data)
-      })
-  }, []
-  )
-
   const [formValues, setFormValues] = useState({
     is_group: 'false',
     name: 'Name',
@@ -37,14 +17,12 @@ const NewArtist = (props) => {
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const id = new_artists.length
       const name = formValues.name
       const real_name = formValues.real_name
       const birthdate = formValues.birthdate
       const is_group = formValues.is_group === 'true'
 
       const params = {
-        id: id,
         name: name,
         real_name: real_name,
         birthdate: birthdate,
@@ -55,7 +33,21 @@ const NewArtist = (props) => {
         .catch(function (error) {
           console.log(error);
         })
-      console.log(id + name + real_name + birthdate + is_group)
+      console.log(name + real_name + birthdate + is_group)
+      if(is_group){
+        for(var i=0; i > amount_members ; i++)
+        {
+          const member_params = {
+            name: `membername-${i}`,
+            position: `memberpos-${i}`
+          }
+          axios.post('/api/new/new_members', member_params)
+          .then(response => console.log(response))
+          .catch(function (error) {
+            console.log(error);
+          })
+        }
+      }
     }
   )
 

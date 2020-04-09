@@ -8,33 +8,38 @@ const artist1 = {
   id: 1,
   name: 'One',
   real_name: 'Member One',
-  birthdate: new Date('January 1, 2000')
+  birthdate: new Date('January 1, 2000'),
+  active_status: true
 }
 
 const artist2 = {
   id: 2,
   name: 'Two',
   real_name: 'Member Two',
-  birthdate: new Date('January 2, 2000')
+  birthdate: new Date('January 2, 2000'),
+  active_status: true
 }
 
 const artist3 = {
   id: 3,
   name: 'Three',
   real_name: 'Member Three',
-  birthdate: new Date('January 3, 2000')
+  birthdate: new Date('January 3, 2000'),
+  active_status: true
 }
 
 const artist4 = {
   id: 4,
   name: 'Four',
   real_name: 'Member Four',
-  birthdate: new Date('January 4, 2000')
+  birthdate: new Date('January 4, 2000'),
+  active_status: true
 }
 
 const artist5 = {
   id: 5,
-  name: 'Band One'
+  name: 'Band One',
+  active_status: true
 }
 
 
@@ -71,40 +76,40 @@ const clearArtists = () => {
   pool.query('DELETE FROM artists WHERE id>0', (q_err, q_res) => { if (q_err) { console.log(q_err) } console.log('2'); insertArtists() })
 }
 const insertArtists = () => {
-  pool.query(`INSERT INTO artists (id, name, real_name, birthdate)
-            Values ($1, $2, $3, $4)`, [artist1.id, artist1.name, artist1.real_name, artist1.birthdate],
+  pool.query(`INSERT INTO artists (id, name, real_name, birthdate, active_status)
+            Values ($1, $2, $3, $4, $5)`, [artist1.id, artist1.name, artist1.real_name, artist1.birthdate, artist1.active_status],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
       }
     })
 
-  pool.query(`INSERT INTO artists (id, name, real_name, birthdate)
-            Values ($1, $2, $3, $4)`, [artist2.id, artist2.name, artist2.real_name, artist2.birthdate],
+  pool.query(`INSERT INTO artists (id, name, real_name, birthdate, active_status)
+            Values ($1, $2, $3, $4, $5)`, [artist2.id, artist2.name, artist2.real_name, artist2.birthdate, artist2.active_status],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
       }
     })
 
-  pool.query(`INSERT INTO artists (id, name, real_name, birthdate)
-            Values ($1, $2, $3, $4)`, [artist3.id, artist3.name, artist3.real_name, artist3.birthdate],
+  pool.query(`INSERT INTO artists (id, name, real_name, birthdate, active_status)
+            Values ($1, $2, $3, $4, $5)`, [artist3.id, artist3.name, artist3.real_name, artist3.birthdate, artist3.active_status],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
       }
     })
 
-  pool.query(`INSERT INTO artists (id, name, real_name, birthdate)
-            Values ($1, $2, $3, $4)`, [artist4.id, artist4.name, artist4.real_name, artist4.birthdate],
+  pool.query(`INSERT INTO artists (id, name, real_name, birthdate, active_status)
+            Values ($1, $2, $3, $4, $5)`, [artist4.id, artist4.name, artist4.real_name, artist4.birthdate, artist4.active_status],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
       }
     })
 
-  pool.query(`INSERT INTO artists (id, name)
-            Values ($1, $2)`, [artist5.id, artist5.name],
+  pool.query(`INSERT INTO artists (id, name, active_status)
+            Values ($1, $2, $3)`, [artist5.id, artist5.name, artist5.active_status],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
