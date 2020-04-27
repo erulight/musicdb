@@ -10,6 +10,7 @@ const pool = require('../db')
 const album1 = {
   id: 1,
   artist_id: 5,
+  artist_name: 'Band One',
   title: 'The First Album',
   release_date: 'January 1, 2020',
 }
@@ -17,6 +18,7 @@ const album1 = {
 const album2 = {
   id: 2,
   artist_id: 5,
+  artist_name: 'Band One',
   title: 'The Second Album',
   release_date: 'February 1, 2020',
 }
@@ -49,16 +51,16 @@ const clearAlbums = () => {
 }
 
 const insertAlbums = () => {
-  pool.query(`INSERT INTO albums (id, artist_id, title, release_date)
-            Values ($1, $2, $3, $4)`, [album1.id, album1.artist_id, album1.title, album1.release_date],
+  pool.query(`INSERT INTO albums (id, artist_id, title, release_date, artist_name)
+            Values ($1, $2, $3, $4, $5)`, [album1.id, album1.artist_id, album1.title, album1.release_date, album1.artist_name],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
       }
     })
 
-  pool.query(`INSERT INTO albums (id, artist_id, title, release_date)
-            Values ($1, $2, $3, $4)`, [album2.id, album2.artist_id, album2.title, album2.release_date],
+  pool.query(`INSERT INTO albums (id, artist_id, title, release_date, artist_name)
+            Values ($1, $2, $3, $4, $5)`, [album2.id, album2.artist_id, album2.title, album2.release_date, album2.artist_name],
     (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)

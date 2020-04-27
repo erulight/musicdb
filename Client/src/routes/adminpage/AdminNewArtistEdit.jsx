@@ -41,17 +41,6 @@ const AdminNewArtistEdit = (props) => {
 
   const [amount_members, setAmountMembers] = useState(0)
 
-  const handleDelete = React.useCallback(
-    (event) => {
-      console.log('clicked')
-      axios.delete('/api/admin/new_artists/:new_artist_id', { params: { new_artist_id: new_artist_id } })
-        .then(response => console.log(response))
-        .catch(function (error) {
-          console.log(error);
-        })
-    }
-  )
-
   const handleChange = React.useCallback(
     (event) => {
       const { name, value, type } = event.target

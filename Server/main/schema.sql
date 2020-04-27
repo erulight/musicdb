@@ -23,6 +23,7 @@ CREATE TABLE albums(
   id INT PRIMARY KEY NOT NULL,
   title VARCHAR(200) NOT NULL,
   artist_id INT REFERENCES artists(id),
+  artist_name VARCHAR(200),
   release_date DATE
 );
 
@@ -30,6 +31,7 @@ CREATE TABLE songs(
   id INT PRIMARY KEY NOT NULL,
   title VARCHAR(200) NOT NULL,
   artist_id INT REFERENCES artists(id),
+  artist_name VARCHAR(200),
   release_date DATE
 );
 
@@ -96,6 +98,7 @@ CREATE TABLE new_albums(
   id SERIAL PRIMARY KEY,
   title VARCHAR(200),
   artist_id INT,
+  artist_name VARCHAR(200),
   release_date DATE,
   date_created TIMESTAMP
 );
@@ -114,5 +117,6 @@ CREATE TABLE new_songs_credits(
   song_id INT,
   type VARCHAR(200),
   name VARCHAR(200),
-  artist_id INT
+  artist_id INT,
+  artist_name VARCHAR(200)
 );
