@@ -17,6 +17,69 @@
   padding-right: 50px;
 }
 
+.search-stuff{
+  float: right;
+  position: relative;
+  //border: 1px solid magenta;
+  display: flex;
+  &:focus-within{
+    .search-results-container{
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+.search-bar{
+  padding-top: 10px;
+  padding-right: 50px;
+}
+
+.search-drop-down{
+  padding-top: 10px;
+}
+
+.search-results-container{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  height: 60px;
+  background: yellow;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.artist-search-stuff{
+  position: relative;
+  //border: 1px solid magenta;
+  display: flex;
+  &:focus-within{
+    .artist-results-container{
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+}
+
+.artist-search-bar{
+  //padding-top: 10px;
+  //padding-right: 50px;
+}
+
+.artist-results-container{
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: 0;
+  height: 60px;
+  background: yellow;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+
 a:link, a:visited{
   text-decoration: none;
   color: lawngreen;

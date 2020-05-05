@@ -7,3 +7,7 @@ export const prettyDate = (date) => {
 export const prettyYear = (date) => {
   return moment(date).format('YYYY')
 }
+
+export const inputDate = (date) => {
+  return moment(date).format('YYYY-MM-DD')
+}

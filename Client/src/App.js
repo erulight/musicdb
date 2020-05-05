@@ -12,19 +12,20 @@ import NewAlbum from './routes/newpage/NewAlbum';
 import NewSong from './routes/newpage/NewSong';
 import Admin from './routes/adminpage/Admin';
 import AdminNewArtist from './routes/adminpage/AdminNewArtist';
+import EditArtist from './routes/editpage/EditArtist';
 import './assets/scss/artist.scss';
 import './assets/scss/album.scss';
 import './assets/scss/song.scss';
 import './assets/scss/banner.scss';
+import IndexPage from './routes/IndexPage';
+import AdminEditArtist from './routes/adminpage/AdminEditArtist';
 
 function App() {
   return (
     <Router>
       <Banner />
       <Route exact path="/">
-        <div className='welcome-message'>
-          This will be a real homepage someday, but please <Link to={'/artist/1'}>Click Here</Link>
-        </div>
+        <IndexPage />
       </Route>
       <Route exact path="/artist/:id">
         <Artist />
@@ -41,6 +42,9 @@ function App() {
       <Route exact path="/new/artist">
         <NewArtist />
       </Route>
+      <Route exact path="/edit/artist/:id">
+        <EditArtist />
+      </Route>
       <Route exact path="/new/album">
         <NewAlbum />
       </Route>
@@ -52,6 +56,9 @@ function App() {
       </Route>
       <Route exact path="/admin/new_artist/:id">
         <AdminNewArtist />
+      </Route>
+      <Route exact path="/admin/edit/artist/:id">
+        <AdminEditArtist />
       </Route>
     </Router>
   );

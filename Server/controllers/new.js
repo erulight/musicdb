@@ -33,8 +33,9 @@ router.post('/new_artists', (req, res, next) => {
   const real_name = req.body.real_name
   const birthdate = req.body.birthdate
   const is_group = req.body.is_group
-  pool.query(`INSERT INTO new_artists (name, real_name, birthdate, is_group)
-            Values ($1, $2, $3, $4)`, [name, real_name, birthdate, is_group], (q_err, q_res) => {
+  const active_status = req.body.active_status
+  pool.query(`INSERT INTO new_artists (name, real_name, birthdate, is_group, active_status)
+            Values ($1, $2, $3, $4, $5)`, [name, real_name, birthdate, is_group, active_status], (q_err, q_res) => {
     if (q_err) {
       console.log(q_err)
       res.status(505).end()
@@ -46,8 +47,11 @@ router.post('/new_artists', (req, res, next) => {
 })
 
 router.post('/new_members', (req, res, next) => {
-  const name = req.body.name
-  const position = req.body.position
+  const members = req.body.members
+  // const name = req.body.name
+  // const position = req.body.position
+  //Look up insert multiple
+
   pool.query(`INSERT INTO new_members (name, position)
             Values ($1, $2)`, [name, position], (q_err, q_res) => {
     if (q_err) {
@@ -58,6 +62,7 @@ router.post('/new_members', (req, res, next) => {
     res.json(q_res.rows)
     next()
   })
+  console.log(members)
 })
 
 router.post('/new_albums', (req, res, next) => {
@@ -88,6 +93,21 @@ router.post('/new_songs', (req, res, next) => {
     res.json(q_res.rows)
     next()
   })
+})
+
+router.get('/artists/:search', (req, res, next) => {
+  const search = req.query.search
+  pool.query(`SELECT * FROM artists
+              WHERE name ILIKE $1`,
+    ['%'+search+'%'], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
 })
 
 module.exports = router

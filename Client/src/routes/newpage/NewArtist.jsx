@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
-import NewMember from './NewMember'
 import { Link } from 'react-router-dom'
 
 const NewArtist = (props) => {
@@ -10,10 +9,15 @@ const NewArtist = (props) => {
     is_group: 'false',
     name: 'Name',
     real_name: 'Real Name',
-    birthdate: new Date
+    birthdate: new Date,
+    active_status: 'true'
   })
 
-  const [amount_members, setAmountMembers] = useState(0)
+  const [isSubmitted, setIsSubmitted] = useState({
+    submitted: false
+  })
+
+  //const [amount_members, setAmountMembers] = useState(0)
 
   const handleSubmit = React.useCallback(
     (event) => {
@@ -21,33 +25,39 @@ const NewArtist = (props) => {
       const real_name = formValues.real_name
       const birthdate = formValues.birthdate
       const is_group = formValues.is_group === 'true'
+      const active_status = formValues.active_status === 'true'
+
+      setIsSubmitted({ submitted: true })
 
       const params = {
         name: name,
         real_name: real_name,
         birthdate: birthdate,
-        is_group: is_group
+        is_group: is_group,
+        active_status: active_status
       }
       axios.post('/api/new/new_artists', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      console.log(name + real_name + birthdate + is_group)
-      if(is_group){
-        for(var i=0; i > amount_members ; i++)
-        {
-          const member_params = {
-            name: `membername-${i}`,
-            position: `memberpos-${i}`
-          }
-          axios.post('/api/new/new_members', member_params)
+      console.log(name + real_name + birthdate + is_group + active_status)
+      /*
+      if (is_group) {
+        const member_as_array = new Array(amount_members).fill(undefined)
+          .map((_, i) => ({
+            name: formValues[`membername-${i}`],
+            position: formValues[`memberpos-${i}`]
+          }))
+        const member_params = { members: member_as_array }
+        axios.post('/api/new/new_members', member_params)
           .then(response => console.log(response))
           .catch(function (error) {
             console.log(error);
           })
-        }
+
       }
+      */
     }
   )
 
@@ -59,10 +69,11 @@ const NewArtist = (props) => {
         ...formValues,
         [name]: value
       })
-      console.log(formValues)
     }
   )
+  console.log(formValues)
 
+  /*
   const handleChangeMembers = React.useCallback(
     (event) => {
       const { name, value, type } = event.target
@@ -70,6 +81,7 @@ const NewArtist = (props) => {
       setAmountMembers(parseInt(value) || 1)
     }
   )
+  */
 
   const isDisabled = formValues.is_group === 'true'
   return (
@@ -79,8 +91,17 @@ const NewArtist = (props) => {
       <div>
         <input type='radio' name='is_group' onChange={handleChange} value='true' />
         <label>Group</label>
-        <input type='radio' name='is_group' onChange={handleChange} value='false' />
+        <input type='radio' name='is_group' onChange={handleChange} value='false' defaultChecked />
         <label>Solo</label>
+      </div>
+      <div>
+      <select
+        name='active_status'
+        onChange={handleChange}
+        value={formValues.active_status}>
+        <option value='true'>Active</option>
+        <option value='false'>Inactive</option>
+      </select>
       </div>
       <div>
         <label>Name</label>
@@ -104,19 +125,8 @@ const NewArtist = (props) => {
           : null
         }
       </div>
-      {isDisabled ?
-
-        <div>
-          <h1>Members</h1>
-          <div>
-          <label>Amount of Members:</label>
-          <input name='amount_members' value={amount_members} onChange={handleChangeMembers} type='number' max={25} min={0} step={1}></input>
-          </div>
-          <NewMember amount_members={amount_members} handleChange={handleChange} formValues={formValues}></NewMember>
-          </div>
-        : null}
       <div>
-        <button type='button' onClick={handleSubmit}>Submit</button>
+        {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
       </div>
     </form>
   )

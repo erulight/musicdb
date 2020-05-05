@@ -9,6 +9,7 @@ import ArtistSongsLyrics from './ArtistSongsLyrics'
 import ArtistSongsComposer from './ArtistSongsComposer'
 import ArtistSongsArranger from './ArtistSongsArrangement'
 import ArtistMembers from './ArtistMembers'
+import { Link } from 'react-router-dom'
 
 const ArtistProfile = () => {
   let isGroup = false
@@ -91,7 +92,7 @@ const ArtistProfile = () => {
               : null}
             </p>
             <p>{isGroup
-              ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers></span>
+              ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers><p><Link to={`/edit/artist/${artist.id}`}>Edit</Link></p></span>
               : null}</p>
           </div>
           <div className="artist-profile-info-container">
@@ -106,6 +107,7 @@ const ArtistProfile = () => {
             <p>{artist.birthdate
               ? <span>Born: {prettyDate(artist.birthdate)} (age {getAgeFromBirthday(artist.birthdate)})</span>
               : null}</p>
+              <p><Link to={`/edit/artist/${artist.id}`}>Edit</Link></p>
           </div>
         </div>
         <div className="artist-header">

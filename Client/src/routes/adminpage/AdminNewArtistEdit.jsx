@@ -3,7 +3,7 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { prettyDate } from '../../utils/dateutils'
+import { prettyDate, inputDate } from '../../utils/dateutils'
 
 
 const AdminNewArtistEdit = (props) => {
@@ -36,10 +36,21 @@ const AdminNewArtistEdit = (props) => {
     is_group: props.is_group,
     name: props.name,
     real_name: props.real_name,
-    birthdate: props.birthdate
+    birthdate: props.birthdate,
+    active_status: props.active_status
   })
+  
+  React.useEffect(() => {
+    setFormValues({
+      is_group: props.is_group,
+      name: props.name,
+      real_name: props.real_name,
+      birthdate: props.birthdate,
+      active_status: props.active_status
+    })
+  }, [props.is_group, props.name, props.real_name, props.birthdate, props.active_status])
 
-  const [amount_members, setAmountMembers] = useState(0)
+  //const [amount_members, setAmountMembers] = useState(0)
 
   const handleChange = React.useCallback(
     (event) => {
@@ -51,8 +62,9 @@ const AdminNewArtistEdit = (props) => {
       })
     }
   )
+  console.log(formValues)
 
-  
+  /*
   const handleChangeMembers = React.useCallback(
     (event) => {
       const { name, value, type } = event.target
@@ -60,17 +72,25 @@ const AdminNewArtistEdit = (props) => {
       setAmountMembers(parseInt(value) || 1)
     }
   )
+  */
 
-  const isDisabled = new_artist.is_group === true
+  const isDisabled = formValues.is_group === 'true'
   return (
     <div>
       <h2>Editing...</h2>
       <div>
-        <input type='radio' name='is_group' onChange={handleChange} value='true' checked={formValues.is_group}/>
+        <input type='radio' name='is_group' onChange={handleChange} value='true' checked={isDisabled}/>
         <label>Group</label>
-        <input type='radio' name='is_group' onChange={handleChange} value='false' checked={!formValues.is_group}/>
+        <input type='radio' name='is_group' onChange={handleChange} value='false' checked={!isDisabled}/>
         <label>Solo</label>
       </div>
+      <select
+        name='active_status'
+        onChange={handleChange}
+        value={formValues.active_status}>
+        <option value='true'>Active</option>
+        <option vakue='false'>Inactive</option>
+      </select>
       <div>
         <label>Name</label>
         <input name='name' value={formValues.name} onChange={handleChange} />
@@ -88,22 +108,11 @@ const AdminNewArtistEdit = (props) => {
         {!isDisabled
           ? <span>
             <label>Birthday</label>
-            <input type='date' name='birthdate' value={formValues.birthdate} onChange={handleChange} disabled={isDisabled} />
+            <input type='date' name='birthdate' value={inputDate(formValues.birthdate)} onChange={handleChange} disabled={isDisabled} />
           </span>
           : null
         }
       </div>
-      {isDisabled ?
-
-        <div>
-          <h1>Members</h1>
-          <div>
-            <label>Amount of Members:</label>
-            <input name='amount_members' value={amount_members} onChange={handleChangeMembers} type='number' max={25} min={0} step={1}></input>
-          </div>
-          Members
-        </div>
-        : null}
     </div>
   )
 }
