@@ -68,8 +68,10 @@ router.post('/new_members', (req, res, next) => {
 router.post('/new_albums', (req, res, next) => {
   const title = req.body.title
   const release_date = req.body.release_date
-  pool.query(`INSERT INTO new_albums (title, release_date)
-            Values ($1, $2)`, [title, release_date], (q_err, q_res) => {
+  const artist_name = req.body.artist_name
+  const artist_id = req.body.artist_id
+  pool.query(`INSERT INTO new_albums (title, release_date, artist_name, artist_id)
+            Values ($1, $2, $3, $4)`, [title, release_date, artist_name, artist_id], (q_err, q_res) => {
     if (q_err) {
       console.log(q_err)
       res.status(505).end()
@@ -83,8 +85,10 @@ router.post('/new_albums', (req, res, next) => {
 router.post('/new_songs', (req, res, next) => {
   const title = req.body.title
   const release_date = req.body.release_date
-  pool.query(`INSERT INTO new_songs (title, release_date)
-            Values ($1, $2)`, [title, release_date], (q_err, q_res) => {
+  const artist_id = req.body.artist_id
+  const artist_name = req.body.artist_name
+  pool.query(`INSERT INTO new_songs (title, release_date, artist_id, artist_name)
+            Values ($1, $2, $3, $4)`, [title, release_date, artist_id, artist_name], (q_err, q_res) => {
     if (q_err) {
       console.log(q_err)
       res.status(505).end()
@@ -109,5 +113,36 @@ router.get('/artists/:search', (req, res, next) => {
       next()
     })
 })
+
+router.get('/albums/:search', (req, res, next) => {
+  const search = req.query.search
+  pool.query(`SELECT * FROM albums
+              WHERE title ILIKE $1`,
+    ['%'+search+'%'], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/songs/:search', (req, res, next) => {
+  const search = req.query.search
+  pool.query(`SELECT * FROM songs
+              WHERE title ILIKE $1`,
+    ['%'+search+'%'], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 
 module.exports = router

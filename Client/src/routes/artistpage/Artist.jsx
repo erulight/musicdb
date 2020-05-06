@@ -62,7 +62,7 @@ const ArtistProfile = () => {
     active_date_start = albums[amountAlbums].release_date
   }
 
-  if(members[0] != null) {
+  if(artist.is_group) {
     isGroup = true
   }
 
@@ -87,12 +87,12 @@ const ArtistProfile = () => {
           </div>
           <div className="artist-profile-name-container">
             <h1>{artist.name}</h1>
-            <p>{artist.real_name
+            <p>{!isGroup
               ? <span>Real Name: {artist.real_name}</span>
               : null}
             </p>
             <p>{isGroup
-              ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers><p><Link to={`/edit/artist/${artist.id}`}>Edit</Link></p></span>
+              ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers><p><Link to={`/edit/members/${artist.id}`}>Edit</Link></p></span>
               : null}</p>
           </div>
           <div className="artist-profile-info-container">
@@ -104,7 +104,7 @@ const ArtistProfile = () => {
               </span>
             : null}</p>
             <p>{/* Latest Release*/}</p>
-            <p>{artist.birthdate
+            <p>{!isGroup
               ? <span>Born: {prettyDate(artist.birthdate)} (age {getAgeFromBirthday(artist.birthdate)})</span>
               : null}</p>
               <p><Link to={`/edit/artist/${artist.id}`}>Edit</Link></p>

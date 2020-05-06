@@ -3,20 +3,31 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
+import EditExistingMember from './EditExistingMember'
 
-const NewAlbum = (props) => {
+const EditArtistExistingMemberList = (props) => {
 
+  const artist_id = props.artist_id
+
+  const [members, setMembers] = useState([])
+  useEffect(() => {
+    axios.get('/api/edit/members/:artist_id', { params: { artist_id: artist_id } })
+      .then((res) => {
+        console.log(res)
+        setMembers(res.data)
+      })
+  }, [artist_id]
+  )
+
+  /*
   const searchRef = React.useRef(null)
 
-  const [artistValues, setArtistValues] = useState({
-    artist_name: '',
-    artist_id: null
-  })
-
   const [formValues, setFormValues] = useState({
-    title: 'Title',
+    name: 'Name',
     release_date: new Date,
-    search: ''
+    search: '',
+    artist_id: null,
+    artist_name: ''
   })
 
   const [isSubmitted, setIsSubmitted] = useState({
@@ -31,10 +42,10 @@ const NewAlbum = (props) => {
     (event) => {
       const title = formValues.title
       const release_date = formValues.release_date
-      let artist_name = artistValues.artist_name
-      const artist_id = artistValues.artist_id
+      const artist_name = formValues.artist_name
+      const artist_id = formValues.artist_id
       if (hasID.id) {
-        artist_name = artistValues.artist_name
+        artist_name = formValues.artist_name
       }
       else {
         artist_name = formValues.search
@@ -61,7 +72,7 @@ const NewAlbum = (props) => {
     (result) => {
       const { id, name } = result
       setHasID({ id: true })
-      setArtistValues({
+      setFormValues({
         artist_id: id,
         artist_name: name
       })
@@ -79,46 +90,31 @@ const NewAlbum = (props) => {
         ...formValues,
         [name]: value
       })
-    }
+    }, []
   )
 
   const handleClear = React.useCallback(
     (event) => {
       setHasID({ id: false })
-      setArtistValues({
-        artist_name: '',
+      setFormValues({
         artist_id: null,
+        artist_name: null
       })
     }
   )
+  */
 
 
   return (
-    <form>
-      <p><Link to={`/new`}>Back</Link></p>
-      <h1>New Album</h1>
-      <div>
-        <label>Title</label>
-        <input name='title' value={formValues.title} onChange={handleChange} autoComplete='off' />
-      </div>
-      <div>
-        {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
-          <div className='artist-search-stuff'>
-            <label>Artist</label>
-            <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-            <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
-          </div>
-        }
-      </div>
-      <div>
-        <label>Release Date</label>
-        <input type='date' name='release_date' value={formValues.release_date} onChange={handleChange} />
-      </div>
-      <div>
-        {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
-      </div>
-    </form>
+    members.map((member) => {
+      return (
+        <div key={member.id}>
+          {member.name} ({member.position})
+          <EditExistingMember member={member}></EditExistingMember>
+        </div>
+      )
+    })
   )
 }
 
-export default NewAlbum
+export default EditArtistExistingMemberList

@@ -2,18 +2,22 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import DropDownArtist from './DropDownArtist'
+import DropDownArtist from '../../utils/DropDownArtist'
+import DropDownAlbum from '../../utils/DropDownAlbum'
 
 const NewSong = (props) => {
 
   const searchRef = React.useRef(null)
 
+  const [artistValues, setArtistValues] = useState({
+    artist_name: '',
+    artist_id: null
+  })
   const [formValues, setFormValues] = useState({
     title: 'Title',
     release_date: new Date,
     search: '',
-    artist_id: null,
-    artist_name: ''
+    search2: ''
   })
 
   const [isSubmitted, setIsSubmitted] = useState({
@@ -28,12 +32,12 @@ const NewSong = (props) => {
     (event) => {
       const title = formValues.title
       const release_date = formValues.release_date
-      const artist_name = formValues.artist_name
+      let artist_name = artistValues.artist_name
       const artist_id = formValues.artist_id
-      if(hasID.id){
-        artist_name = formValues.artist_name
+      if (hasID.id) {
+        artist_name = artistValues.artist_name
       }
-      else{
+      else {
         artist_name = formValues.search
       }
 
@@ -43,7 +47,7 @@ const NewSong = (props) => {
         title: title,
         release_date: release_date,
         artist_name: artist_name,
-        artist_id: artist_id
+        artist_id: artist_id,
       }
       axios.post('/api/new/new_songs', params)
         .then(response => console.log(response))
@@ -56,9 +60,9 @@ const NewSong = (props) => {
 
   const handleClick = React.useCallback(
     (result) => {
-      const {id, name} = result
+      const { id, name } = result
       setHasID({ id: true })
-      setFormValues({
+      setArtistValues({
         artist_id: id,
         artist_name: name
       })
@@ -76,15 +80,15 @@ const NewSong = (props) => {
         ...formValues,
         [name]: value
       })
-    }, []
+    }
   )
 
   const handleClear = React.useCallback(
     (event) => {
-      setHasID({ id: false})
-      setFormValues({
+      setHasID({ id: false })
+      setArtistValues({
         artist_id: null,
-        artist_name: null
+        artist_name: ''
       })
     }
   )
@@ -96,16 +100,16 @@ const NewSong = (props) => {
       <h1>New Song</h1>
       <div>
         <label>Title</label>
-        <input name='title' value={formValues.title} onChange={handleChange} />
+        <input name='title' value={formValues.title} onChange={handleChange} autoComplete='off'/>
       </div>
       <div>
-        {hasID.id ? <div>{formValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
-        <div className='artist-search-stuff'>
-          <label>Artist</label>
-          <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-          <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
-        </div>
-}
+        {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
+          <div className='artist-search-stuff'>
+            <label>Artist</label>
+            <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
+            <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
+          </div>
+        }
       </div>
       <div>
         <label>Release Date</label>

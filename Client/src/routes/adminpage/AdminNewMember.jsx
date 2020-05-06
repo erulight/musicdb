@@ -4,87 +4,97 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
-import AdminNewArtistEdit from './AdminNewArtistEdit'
+//import AdminNewAlbumEdit from './AdminNewAlbumEdit'
 
 
-const AdminEditArtist = () => {
+const AdminNewMember = () => {
   const params = useParams()
   console.log(params)
-  const edit_artist_id = params.id
+  const new_member_id = params.id
 
-  const [isediting, set_isediting] = useState({editing: false})
+  const [isediting, set_isediting] = useState({
+    editing: false
+  })
 
-  const [isSubmitted, setIsSubmitted] = useState({submitted: false})
+  const [isSubmitted, setIsSubmitted] = useState({
+    submitted: false
+  })
 
-  const [isDeleted, setIsDeleted] = useState({deleted: false})
+  const [isDeleted, setIsDeleted] = useState({
+    deleted: false
+  })
 
-  const [edit_artist, set_edit_artist] = useState({})
+  const [new_member, set_new_member] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/edit_artists/:edit_artist_id', { params: { edit_artist_id: edit_artist_id } })
+    axios.get('/api/admin/new_members/:new_member_id', { params: { new_member_id: new_member_id } })
       .then((res) => {
         console.log(res)
-        set_edit_artist(res.data[0])
+        set_new_member(res.data[0])
       })
   }, []
   )
 
-  const [artists, set_artists] = useState([])
+  const [artist, setArtist] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/artists')
+    axios.get('/api/admin/artists/:artist_id', { params: { artist_id: new_member.member_of_id } })
       .then((res) => {
         console.log(res)
-        set_artists(res.data)
-        console.log(artists.length)
+        setArtist(res.data[0])
+      })
+  }, []
+  )
+
+  const [members, setMembers] = useState([])
+  useEffect(() => {
+    axios.get('/api/admin/members/:artist_id', { params: { artist_id: new_member.member_of_id } })
+      .then((res) => {
+        console.log(res)
+        setMembers(res.data)
       })
   }, []
   )
 
   const [formValues, setFormValues] = useState({
-    is_group: edit_artist.is_group,
-    name: edit_artist.name,
-    real_name: edit_artist.real_name,
-    birthdate: edit_artist.birthdate,
-    active_status: edit_artist.active_status
+    name: '',
+    position: 'name',
   })
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const id = edit_artist.artist_id
-      const name = edit_artist.name
-      const real_name = edit_artist.real_name
-      const birthdate = edit_artist.birthdate
-      const active_status = edit_artist.active_status
-      const is_group = edit_artist.is_group
+      //const id = artists.length
+      const name = new_member.name
+      const position = new_member.position
+      const member_of_id = new_member.member_of_id
+      const artist_id = new_member.artist_id
 
       setIsSubmitted({ submitted: true })
 
       const params = {
-        artist_id: id,
+        //id: id,
         name: name,
-        real_name: real_name,
-        birthdate: birthdate,
-        active_status: active_status,
-        is_group: is_group
+        position: position,
+        member_of_id: member_of_id,
+        artist_id: artist_id
       }
-      axios.put('/api/admin/artists/artist_id', params)
+      axios.post('/api/admin/members', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      axios.delete(`/api/admin/edit_artists/${edit_artist_id}`)
+      axios.delete(`/api/admin/new_members/${new_member_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      console.log(id + name + real_name + birthdate + active_status)
+      console.log(name + position + artist_id + member_of_id)
     }
   )
 
   const handleDelete = React.useCallback(
     (event) => {
-      console.log('clicked' + edit_artist_id)
+      console.log('clicked' + new_member_id)
       setIsDeleted({ deleted: true })
-      axios.delete(`/api/admin/edit_artists/${edit_artist_id}`)
+      axios.delete(`/api/admin/new_members/${new_member_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -92,18 +102,6 @@ const AdminEditArtist = () => {
     }
   )
 
-  React.useEffect(() => {
-    setFormValues({
-      is_group: edit_artist.is_group,
-      name: edit_artist.name,
-      real_name: edit_artist.real_name,
-      birthdate: edit_artist.birthdate,
-      active_status: edit_artist.active_status
-    })
-  }, [edit_artist.is_group, edit_artist.name, edit_artist.real_name, edit_artist.birthdate, edit_artist.active_status])
-
-
-  console.log(edit_artist)
   const handleEdit = React.useCallback((event) => { set_isediting({ editing: true }) })
 
   const handleCancelEdit = React.useCallback((event) => { set_isediting({ editing: false }) })
@@ -119,38 +117,20 @@ const AdminEditArtist = () => {
     }
   )
 
-  const isDisabled = edit_artist.is_group === true
   return (
     <div>
       <p><Link to={`/admin`}>Back</Link></p>
       <h1>Admin</h1>
-      <h2>Edit Artist</h2>
-      <div>
-        {edit_artist.active_status
-          ? <span>Active</span>
-          : <span>Inactive</span>}
-      </div>
+      <h2>New Member</h2>
       <div>
         <label>Name:  </label>
-        <span>{edit_artist.name}</span>
+        <span>{new_member.name}</span>
       </div>
       <div>
-        {!isDisabled
-          ? <span>
-            <label>Real Name:  </label>
-            <span>{edit_artist.real_name}</span>
-          </span>
-          : null
-        }
-      </div>
-      <div>
-        {!isDisabled
-          ? <span>
-            <label>Birthday: </label>
-            <span>{prettyDate(edit_artist.birthdate)}</span>
-          </span>
-          : null
-        }
+        <span>
+          <label>Position:  </label>
+          <span> {new_member.position}</span>
+        </span>
       </div>
       <div>
         {isediting.editing
@@ -182,20 +162,22 @@ const AdminEditArtist = () => {
           </span>
         }
       </div>
-      {/*
+      {
         isediting.editing
           ? <span>
+            {/*
             <AdminNewArtistEdit
-              is_group={edit_artist.is_group}
-              name={edit_artist.name}
-              real_name={edit_artist.real_name}
-              birthdate={edit_artist.birthdate}
-              active_status={edit_artist.active_status}
+              is_group={new_member.is_group}
+              name={new_member.name}
+              real_name={new_member.real_name}
+              birthdate={new_member.birthdate}
+              active_status={new_member.active_status}
             >
             </AdminNewArtistEdit>
+            */}
           </span>
           : null
-      */}
+      }
       <div>
         {
           isediting.editing
@@ -234,4 +216,4 @@ const AdminEditArtist = () => {
   )
 }
 
-export default AdminEditArtist
+export default AdminNewMember

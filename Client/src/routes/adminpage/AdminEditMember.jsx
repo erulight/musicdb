@@ -10,20 +10,20 @@ import AdminNewArtistEdit from './AdminNewArtistEdit'
 const AdminEditArtist = () => {
   const params = useParams()
   console.log(params)
-  const edit_artist_id = params.id
+  const edit_member_id = params.id
 
-  const [isediting, set_isediting] = useState({editing: false})
+  const [isediting, set_isediting] = useState({ editing: false })
 
-  const [isSubmitted, setIsSubmitted] = useState({submitted: false})
+  const [isSubmitted, setIsSubmitted] = useState({ submitted: false })
 
-  const [isDeleted, setIsDeleted] = useState({deleted: false})
+  const [isDeleted, setIsDeleted] = useState({ deleted: false })
 
-  const [edit_artist, set_edit_artist] = useState({})
+  const [edit_member, set_edit_member] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/edit_artists/:edit_artist_id', { params: { edit_artist_id: edit_artist_id } })
+    axios.get('/api/admin/edit_members/:edit_member_id', { params: { edit_member_id: edit_member_id } })
       .then((res) => {
         console.log(res)
-        set_edit_artist(res.data[0])
+        set_edit_member(res.data[0])
       })
   }, []
   )
@@ -40,51 +40,46 @@ const AdminEditArtist = () => {
   )
 
   const [formValues, setFormValues] = useState({
-    is_group: edit_artist.is_group,
-    name: edit_artist.name,
-    real_name: edit_artist.real_name,
-    birthdate: edit_artist.birthdate,
-    active_status: edit_artist.active_status
+    name: edit_member.name,
+    position: edit_member.position
   })
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const id = edit_artist.artist_id
-      const name = edit_artist.name
-      const real_name = edit_artist.real_name
-      const birthdate = edit_artist.birthdate
-      const active_status = edit_artist.active_status
-      const is_group = edit_artist.is_group
+      const id = edit_member.member_id
+      const member_of_id = edit_member.member_of_id
+      const artist_id = edit_member.artist_id
+      const name = edit_member.name
+      const position = edit_member.position
 
       setIsSubmitted({ submitted: true })
 
       const params = {
-        artist_id: id,
+        id: id,
         name: name,
-        real_name: real_name,
-        birthdate: birthdate,
-        active_status: active_status,
-        is_group: is_group
+        position: position,
+        artist_id: artist_id,
+        member_of_id: member_of_id,
       }
-      axios.put('/api/admin/artists/artist_id', params)
+      axios.put('/api/admin/members/member_id', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      axios.delete(`/api/admin/edit_artists/${edit_artist_id}`)
+      axios.delete(`/api/admin/edit_members/${edit_member_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      console.log(id + name + real_name + birthdate + active_status)
+      console.log()
     }
   )
 
   const handleDelete = React.useCallback(
     (event) => {
-      console.log('clicked' + edit_artist_id)
+      console.log('clicked' + edit_member_id)
       setIsDeleted({ deleted: true })
-      axios.delete(`/api/admin/edit_artists/${edit_artist_id}`)
+      axios.delete(`/api/admin/edit_members/${edit_member_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -94,16 +89,16 @@ const AdminEditArtist = () => {
 
   React.useEffect(() => {
     setFormValues({
-      is_group: edit_artist.is_group,
-      name: edit_artist.name,
-      real_name: edit_artist.real_name,
-      birthdate: edit_artist.birthdate,
-      active_status: edit_artist.active_status
+      is_group: edit_member.is_group,
+      name: edit_member.name,
+      real_name: edit_member.real_name,
+      birthdate: edit_member.birthdate,
+      active_status: edit_member.active_status
     })
-  }, [edit_artist.is_group, edit_artist.name, edit_artist.real_name, edit_artist.birthdate, edit_artist.active_status])
+  }, [edit_member.is_group, edit_member.name, edit_member.real_name, edit_member.birthdate, edit_member.active_status])
 
 
-  console.log(edit_artist)
+  console.log(edit_member)
   const handleEdit = React.useCallback((event) => { set_isediting({ editing: true }) })
 
   const handleCancelEdit = React.useCallback((event) => { set_isediting({ editing: false }) })
@@ -119,38 +114,20 @@ const AdminEditArtist = () => {
     }
   )
 
-  const isDisabled = edit_artist.is_group === true
   return (
     <div>
       <p><Link to={`/admin`}>Back</Link></p>
       <h1>Admin</h1>
-      <h2>Edit Artist</h2>
-      <div>
-        {edit_artist.active_status
-          ? <span>Active</span>
-          : <span>Inactive</span>}
-      </div>
+      <h2>Edit Member</h2>
       <div>
         <label>Name:  </label>
-        <span>{edit_artist.name}</span>
+        <span>{edit_member.name}</span>
       </div>
       <div>
-        {!isDisabled
-          ? <span>
-            <label>Real Name:  </label>
-            <span>{edit_artist.real_name}</span>
-          </span>
-          : null
-        }
-      </div>
-      <div>
-        {!isDisabled
-          ? <span>
-            <label>Birthday: </label>
-            <span>{prettyDate(edit_artist.birthdate)}</span>
-          </span>
-          : null
-        }
+        <span>
+          <label>Position:  </label>
+          <span>{edit_member.position}</span>
+        </span>
       </div>
       <div>
         {isediting.editing
@@ -186,11 +163,11 @@ const AdminEditArtist = () => {
         isediting.editing
           ? <span>
             <AdminNewArtistEdit
-              is_group={edit_artist.is_group}
-              name={edit_artist.name}
-              real_name={edit_artist.real_name}
-              birthdate={edit_artist.birthdate}
-              active_status={edit_artist.active_status}
+              is_group={edit_member.is_group}
+              name={edit_member.name}
+              real_name={edit_member.real_name}
+              birthdate={edit_member.birthdate}
+              active_status={edit_member.active_status}
             >
             </AdminNewArtistEdit>
           </span>

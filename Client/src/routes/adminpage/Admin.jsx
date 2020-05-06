@@ -4,6 +4,10 @@ import PropTypes from 'prop-types'
 import AdminListNewArtist from './AdminListNewArtists'
 import { Link } from 'react-router-dom'
 import AdminListArtistEdits from './AdminListArtistEdits'
+import AdminListNewAlbum from './AdminListNewAlbum'
+import AdminListNewSong from './AdminListNewSong'
+import AdminListNewMembers from './AdminListNewMembers'
+import AdminListMemberEdits from './AdminListMembersEdits'
 
 const Admin = (props) => {
 
@@ -16,9 +20,21 @@ const Admin = (props) => {
       <h2>New Artists Pending</h2>
       <AdminListNewArtist></AdminListNewArtist>
       <h2>New Albums Pending</h2>
+      <AdminListNewAlbum></AdminListNewAlbum>
       <h2>New Songs Pending</h2>
+      <AdminListNewSong></AdminListNewSong>
       <h2>Artist Edits Pending</h2>
       <AdminListArtistEdits></AdminListArtistEdits>
+      <h2>Artist New Members Pending</h2>
+      <AdminListNewMembers></AdminListNewMembers>
+      <h2>Artist Member Edits Pending</h2>
+      <AdminListMemberEdits></AdminListMemberEdits>
+      <h2>Album Edits Pending</h2>
+      <h2>Album New Tracks Pending</h2>
+      <h2>Album Track Edits Pending</h2>
+      <h2>Song Edits Pending</h2>
+      <h2>Song New Credits Pending</h2>
+      <h2>Song Credit Edits Pending</h2>
     </div>
   )
 }

@@ -4,19 +4,18 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
 
-const NewAlbum = (props) => {
+const NewMember = (props) => {
 
   const searchRef = React.useRef(null)
 
   const [artistValues, setArtistValues] = useState({
-    artist_name: '',
+    name: '',
     artist_id: null
   })
 
   const [formValues, setFormValues] = useState({
-    title: 'Title',
-    release_date: new Date,
-    search: ''
+    search: 'Name',
+    position: 'Position'
   })
 
   const [isSubmitted, setIsSubmitted] = useState({
@@ -29,31 +28,31 @@ const NewAlbum = (props) => {
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const title = formValues.title
-      const release_date = formValues.release_date
-      let artist_name = artistValues.artist_name
+      const position = formValues.position
+      let name = artistValues.name
       const artist_id = artistValues.artist_id
+      const member_of_id = props.artist_id
       if (hasID.id) {
-        artist_name = artistValues.artist_name
+        name = artistValues.name
       }
       else {
-        artist_name = formValues.search
+        name = formValues.search
       }
 
       setIsSubmitted({ submitted: true })
 
       const params = {
-        title: title,
-        release_date: release_date,
-        artist_name: artist_name,
-        artist_id: artist_id
+        position: position,
+        name: name,
+        artist_id: artist_id,
+        member_of_id: member_of_id
       }
-      axios.post('/api/new/new_albums', params)
+      axios.post('/api/edit/new_members', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      console.log(title + release_date)
+      console.log(position + name)
     }
   )
 
@@ -63,7 +62,7 @@ const NewAlbum = (props) => {
       setHasID({ id: true })
       setArtistValues({
         artist_id: id,
-        artist_name: name
+        name: name
       })
       searchRef.current.focus()
       console.log('clicked')
@@ -86,8 +85,8 @@ const NewAlbum = (props) => {
     (event) => {
       setHasID({ id: false })
       setArtistValues({
-        artist_name: '',
         artist_id: null,
+        name: ''
       })
     }
   )
@@ -95,24 +94,16 @@ const NewAlbum = (props) => {
 
   return (
     <form>
-      <p><Link to={`/new`}>Back</Link></p>
-      <h1>New Album</h1>
       <div>
-        <label>Title</label>
-        <input name='title' value={formValues.title} onChange={handleChange} autoComplete='off' />
-      </div>
-      <div>
-        {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
+        {hasID.id ? <div>{artistValues.name}<button type='button' onClick={handleClear}>Clear</button></div> :
           <div className='artist-search-stuff'>
-            <label>Artist</label>
+            <label>Name</label>
             <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
             <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
           </div>
         }
-      </div>
-      <div>
-        <label>Release Date</label>
-        <input type='date' name='release_date' value={formValues.release_date} onChange={handleChange} />
+        <label>Position</label>
+        <input name='position' value={formValues.position} onChange={handleChange} autoComplete='off' />
       </div>
       <div>
         {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
@@ -121,4 +112,4 @@ const NewAlbum = (props) => {
   )
 }
 
-export default NewAlbum
+export default NewMember

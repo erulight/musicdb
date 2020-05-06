@@ -92,7 +92,8 @@ CREATE TABLE new_members(
   name VARCHAR(200),
   member_of_id INT REFERENCES artists(id),
   position VARCHAR(200),
-  date_created TIMESTAMP
+  date_created TIMESTAMP,
+  artist_id INT REFERENCES artists(id)
 );
 
 CREATE TABLE new_albums(
@@ -111,6 +112,16 @@ CREATE TABLE new_tracks(
   disc INT,
   number INT,
   song_id INT REFERENCES songs(id)
+);
+
+CREATE TABLE new_songs(
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(200) NOT NULL,
+  artist_id INT REFERENCES artists(id),
+  artist_name VARCHAR(200),
+  release_date DATE,
+  album_id INT REFERENCES albums(id),
+  album_title VARCHAR(200)
 );
 
 CREATE TABLE new_songs_credits(
@@ -136,6 +147,8 @@ CREATE TABLE edit_artists(
 CREATE TABLE edit_members(
   id SERIAL PRIMARY KEY,
   member_of_id INT REFERENCES artists(id),
+  member_id INT REFERENCES members(id),
+  artist_id INT REFERENCES artists(id),
   name VARCHAR(200),
   position VARCHAR(200),
   date_created TIMESTAMP

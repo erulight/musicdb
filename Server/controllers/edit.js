@@ -52,4 +52,39 @@ router.post('/edit_artists', (req, res, next) => {
   })
 })
 
+router.post('/new_members', (req, res, next) => {
+  const position = req.body.position
+  const member_of_id = req.body.member_of_id
+  const name = req.body.name
+  const artist_id = req.body.artist_id
+  pool.query(`INSERT INTO new_members (member_of_id, name, artist_id, position)
+            Values ($1, $2, $3, $4)`, [member_of_id, name, artist_id, position], (q_err, q_res) => {
+    if (q_err) {
+      console.log(q_err)
+      res.status(505).end()
+      next()
+    }
+    res.json(q_res.rows)
+    next()
+  })
+})
+
+router.post('/edit_members', (req, res, next) => {
+  const position = req.body.position
+  const name = req.body.name
+  const artist_id = req.body.artist_id
+  const member_id = req.body.member_id
+  const member_of_id = req.body.member_of_id
+  pool.query(`INSERT INTO edit_members (position, name, artist_id, member_id, member_of_id)
+            Values ($1, $2, $3, $4, $5)`, [position, name, artist_id, member_id, member_of_id], (q_err, q_res) => {
+    if (q_err) {
+      console.log(q_err)
+      res.status(505).end()
+      next()
+    }
+    res.json(q_res.rows)
+    next()
+  })
+})
+
 module.exports = router

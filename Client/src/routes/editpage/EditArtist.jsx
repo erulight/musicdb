@@ -21,17 +21,8 @@ const EditArtist = () => {
       })
   }, [artist_id]
   )
-  const [members, setMembers] = useState([])
-  useEffect(() => {
-    axios.get('/api/edit/members/:artist_id', { params: { artist_id: artist_id } })
-      .then((res) => {
-        console.log(res)
-        setMembers(res.data)
-      })
-  }, [artist_id]
-  )
 
-  if (members[0] != null) {
+  if (artist.is_group) {
     isGroup = true
   }
 

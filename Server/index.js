@@ -23,6 +23,7 @@ const newcontroller = require('./controllers/new')
 const admincontroller = require('./controllers/admin')
 const bannercontroller = require('./controllers/banner')
 const editcontroller = require('./controllers/edit')
+const indexcontroller = require('./controllers/index')
 app.use('/api/artist', artistcontroller)
 app.use('/api/album', albumcontroller)
 app.use('/api/song', songcontroller)
@@ -30,6 +31,7 @@ app.use('/api/new', newcontroller)
 app.use('/api/admin', admincontroller)
 app.use('/api/banner', bannercontroller)
 app.use('/api/edit', editcontroller)
+app.use('/api/index', indexcontroller)
 
 app.get('/', (_req, res) => {
   res.json({
