@@ -27,6 +27,8 @@ import AdminEditAlbum from './routes/adminpage/AdminEditAlbum';
 import AdminEditSong from './routes/adminpage/AdminEditSong';
 import AdminNewTrack from './routes/adminpage/AdminNewTrack';
 import AdminNewCredit from './routes/adminpage/AdminNewCredit';
+import AdminEditCredit from './routes/adminpage/AdminEditCredit';
+import AdminEditTrack from './routes/adminpage/AdminEditTrack';
 //Edit Pages
 import EditArtist from './routes/editpage/EditArtist';
 import EditMembers from './routes/editpage/EditMembers';
@@ -115,6 +117,12 @@ function App() {
       </Route>
       <Route exact path="/admin/edit/song/:id">
         <AdminEditSong />
+      </Route>
+      <Route exact path="/admin/edit/track/:id">
+        <AdminEditTrack />
+      </Route>
+      <Route exact path="/admin/edit/credit/:id">
+        <AdminEditCredit />
       </Route>
     </Router>
   );

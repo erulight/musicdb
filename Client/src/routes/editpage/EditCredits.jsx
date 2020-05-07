@@ -6,6 +6,7 @@ import NewMember from './EditArtistAddNewMember'
 import EditArtistExistingMemberList from './EditArtistExistingMemberList'
 import NewTrack from './NewTrack'
 import NewCredit from './NewCredit'
+import EditSongExistingCreditList from './EditSongExistingCreditList'
 
 const EditCredits = () => {
 
@@ -52,7 +53,7 @@ const EditCredits = () => {
       <h1>Edit Credits</h1>
       <h2>{song.title}</h2>
       <h1>Existing Credits</h1>
-      <EditArtistExistingMemberList song_id={song_id}></EditArtistExistingMemberList>
+      <EditSongExistingCreditList song_id={song_id}/>
       <h1>New Credit</h1>
       <NewCredit song_id={song_id}/>
     </div>

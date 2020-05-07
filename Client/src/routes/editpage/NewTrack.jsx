@@ -103,7 +103,7 @@ const NewTrack = (props) => {
           </div>
         }
         <label>Track Number</label>
-        <input name='number' type='number' min='1' value={formValues.number} onChange={handleChange} autoComplete='off' />
+        <input name='number' type='number' min='1' step='1' value={formValues.number} onChange={handleChange} autoComplete='off' />
       </div>
       <div>
         {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}

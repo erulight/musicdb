@@ -3,8 +3,8 @@ import axios from 'axios'
 import PropTypes, { array } from 'prop-types'
 import { useParams } from 'react-router-dom'
 import NewMember from './EditArtistAddNewMember'
-import EditArtistExistingMemberList from './EditArtistExistingMemberList'
 import NewTrack from './NewTrack'
+import EditAlbumExistingTrackList from './EditAlbumExistingTrackList'
 
 const EditTracks = () => {
 
@@ -51,7 +51,7 @@ const EditTracks = () => {
       <h1>Edit Tracks</h1>
       <h2>{album.title}</h2>
       <h1>Existing Tracks</h1>
-      <EditArtistExistingMemberList album_id={album_id}></EditArtistExistingMemberList>
+      <EditAlbumExistingTrackList album_id={album_id}/>
       <h1>New Track</h1>
       <NewTrack album_id={album_id}/>
     </div>

@@ -4,69 +4,86 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
-import AdminNewArtistEdit from './AdminNewArtistEdit'
+//import AdminNewAlbumEdit from './AdminNewAlbumEdit'
 
 
-const AdminEditMember = () => {
+const AdminEditTrack = () => {
   const params = useParams()
   console.log(params)
-  const edit_member_id = params.id
+  const edit_track_id = params.id
 
-  const [isediting, set_isediting] = useState({ editing: false })
+  const [isediting, set_isediting] = useState({
+    editing: false
+  })
 
-  const [isSubmitted, setIsSubmitted] = useState({ submitted: false })
+  const [isSubmitted, setIsSubmitted] = useState({
+    submitted: false
+  })
 
-  const [isDeleted, setIsDeleted] = useState({ deleted: false })
+  const [isDeleted, setIsDeleted] = useState({
+    deleted: false
+  })
 
-  const [edit_member, set_edit_member] = useState({})
+  const [edit_track, set_edit_track] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/edit_members/:edit_member_id', { params: { edit_member_id: edit_member_id } })
+    axios.get('/api/admin/edit_tracks/:edit_track_id', { params: { edit_track_id: edit_track_id } })
       .then((res) => {
         console.log(res)
-        set_edit_member(res.data[0])
+        set_edit_track(res.data[0])
       })
   }, []
   )
 
-  const [artists, set_artists] = useState([])
+  /*
+  const [artist, setArtist] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/artists')
+    axios.get('/api/admin/artists/:artist_id', { params: { artist_id: edit_track.member_of_id } })
       .then((res) => {
         console.log(res)
-        set_artists(res.data)
-        console.log(artists.length)
+        setArtist(res.data[0])
       })
   }, []
   )
+
+  const [members, setMembers] = useState([])
+  useEffect(() => {
+    axios.get('/api/admin/members/:artist_id', { params: { artist_id: edit_track.member_of_id } })
+      .then((res) => {
+        console.log(res)
+        setMembers(res.data)
+      })
+  }, []
+  )
+  */
 
   const [formValues, setFormValues] = useState({
-    name: edit_member.name,
-    position: edit_member.position
+    title: '',
+    number: 'name',
   })
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const id = edit_member.member_id
-      const member_of_id = edit_member.member_of_id
-      const artist_id = edit_member.artist_id
-      const name = edit_member.name
-      const position = edit_member.position
+      const id = edit_track.track_id
+      const title = edit_track.title
+      const number = edit_track.number
+      const song_id = edit_track.song_id
+      const album_id = edit_track.album_id
 
       setIsSubmitted({ submitted: true })
 
       const params = {
         id: id,
-        name: name,
-        position: position,
-        artist_id: artist_id,
-        member_of_id: member_of_id,
+        title: title,
+        number: number,
+        song_id: song_id,
+        album_id: album_id
       }
-      axios.put('/api/admin/members/member_id', params)
+      axios.put('/api/admin/tracks/track_id', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      axios.delete(`/api/admin/edit_members/${edit_member_id}`)
+      axios.delete(`/api/admin/edit_tracks/${edit_track_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -77,9 +94,9 @@ const AdminEditMember = () => {
 
   const handleDelete = React.useCallback(
     (event) => {
-      console.log('clicked' + edit_member_id)
+      console.log('clicked' + edit_track_id)
       setIsDeleted({ deleted: true })
-      axios.delete(`/api/admin/edit_members/${edit_member_id}`)
+      axios.delete(`/api/admin/edit_tracks/${edit_track_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -87,18 +104,6 @@ const AdminEditMember = () => {
     }
   )
 
-  React.useEffect(() => {
-    setFormValues({
-      is_group: edit_member.is_group,
-      name: edit_member.name,
-      real_name: edit_member.real_name,
-      birthdate: edit_member.birthdate,
-      active_status: edit_member.active_status
-    })
-  }, [edit_member.is_group, edit_member.name, edit_member.real_name, edit_member.birthdate, edit_member.active_status])
-
-
-  console.log(edit_member)
   const handleEdit = React.useCallback((event) => { set_isediting({ editing: true }) })
 
   const handleCancelEdit = React.useCallback((event) => { set_isediting({ editing: false }) })
@@ -118,15 +123,15 @@ const AdminEditMember = () => {
     <div>
       <p><Link to={`/admin`}>Back</Link></p>
       <h1>Admin</h1>
-      <h2>Edit Member</h2>
+      <h2>New Member</h2>
       <div>
-        <label>Name:  </label>
-        <span>{edit_member.name}</span>
+        <label>Title:  </label>
+        <span>{edit_track.title}</span>
       </div>
       <div>
         <span>
-          <label>Position:  </label>
-          <span>{edit_member.position}</span>
+          <label>Track Number:  </label>
+          <span> {edit_track.number}</span>
         </span>
       </div>
       <div>
@@ -159,20 +164,22 @@ const AdminEditMember = () => {
           </span>
         }
       </div>
-      {/*
+      {
         isediting.editing
           ? <span>
+            {/*
             <AdminNewArtistEdit
-              is_group={edit_member.is_group}
-              name={edit_member.name}
-              real_name={edit_member.real_name}
-              birthdate={edit_member.birthdate}
-              active_status={edit_member.active_status}
+              is_group={edit_track.is_group}
+              name={edit_track.name}
+              real_name={edit_track.real_name}
+              birthdate={edit_track.birthdate}
+              active_status={edit_track.active_status}
             >
             </AdminNewArtistEdit>
+            */}
           </span>
           : null
-      */}
+      }
       <div>
         {
           isediting.editing
@@ -211,4 +218,4 @@ const AdminEditMember = () => {
   )
 }
 
-export default AdminEditMember
+export default AdminEditTrack

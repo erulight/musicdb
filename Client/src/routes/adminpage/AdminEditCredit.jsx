@@ -7,10 +7,10 @@ import { prettyDate } from '../../utils/dateutils'
 import AdminNewArtistEdit from './AdminNewArtistEdit'
 
 
-const AdminEditMember = () => {
+const AdminEditCredit = () => {
   const params = useParams()
   console.log(params)
-  const edit_member_id = params.id
+  const edit_credit_id = params.id
 
   const [isediting, set_isediting] = useState({ editing: false })
 
@@ -18,12 +18,12 @@ const AdminEditMember = () => {
 
   const [isDeleted, setIsDeleted] = useState({ deleted: false })
 
-  const [edit_member, set_edit_member] = useState({})
+  const [edit_credit, set_edit_credit] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/edit_members/:edit_member_id', { params: { edit_member_id: edit_member_id } })
+    axios.get('/api/admin/edit_credits/:edit_credit_id', { params: { edit_credit_id: edit_credit_id } })
       .then((res) => {
         console.log(res)
-        set_edit_member(res.data[0])
+        set_edit_credit(res.data[0])
       })
   }, []
   )
@@ -40,33 +40,33 @@ const AdminEditMember = () => {
   )
 
   const [formValues, setFormValues] = useState({
-    name: edit_member.name,
-    position: edit_member.position
+    name: edit_credit.name,
+    type: edit_credit.type
   })
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const id = edit_member.member_id
-      const member_of_id = edit_member.member_of_id
-      const artist_id = edit_member.artist_id
-      const name = edit_member.name
-      const position = edit_member.position
+      const id = edit_credit.credit_id
+      const song_id = edit_credit.song_id
+      const artist_id = edit_credit.artist_id
+      const name = edit_credit.name
+      const type = edit_credit.type
 
       setIsSubmitted({ submitted: true })
 
       const params = {
         id: id,
         name: name,
-        position: position,
+        type: type,
         artist_id: artist_id,
-        member_of_id: member_of_id,
+        song_id: song_id,
       }
-      axios.put('/api/admin/members/member_id', params)
+      axios.put('/api/admin/songs_credits/credit_id', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      axios.delete(`/api/admin/edit_members/${edit_member_id}`)
+      axios.delete(`/api/admin/edit_credits/${edit_credit_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -77,9 +77,9 @@ const AdminEditMember = () => {
 
   const handleDelete = React.useCallback(
     (event) => {
-      console.log('clicked' + edit_member_id)
+      console.log('clicked' + edit_credit_id)
       setIsDeleted({ deleted: true })
-      axios.delete(`/api/admin/edit_members/${edit_member_id}`)
+      axios.delete(`/api/admin/edit_credits/${edit_credit_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -89,16 +89,16 @@ const AdminEditMember = () => {
 
   React.useEffect(() => {
     setFormValues({
-      is_group: edit_member.is_group,
-      name: edit_member.name,
-      real_name: edit_member.real_name,
-      birthdate: edit_member.birthdate,
-      active_status: edit_member.active_status
+      is_group: edit_credit.is_group,
+      name: edit_credit.name,
+      real_name: edit_credit.real_name,
+      birthdate: edit_credit.birthdate,
+      active_status: edit_credit.active_status
     })
-  }, [edit_member.is_group, edit_member.name, edit_member.real_name, edit_member.birthdate, edit_member.active_status])
+  }, [edit_credit.is_group, edit_credit.name, edit_credit.real_name, edit_credit.birthdate, edit_credit.active_status])
 
 
-  console.log(edit_member)
+  console.log(edit_credit)
   const handleEdit = React.useCallback((event) => { set_isediting({ editing: true }) })
 
   const handleCancelEdit = React.useCallback((event) => { set_isediting({ editing: false }) })
@@ -118,15 +118,15 @@ const AdminEditMember = () => {
     <div>
       <p><Link to={`/admin`}>Back</Link></p>
       <h1>Admin</h1>
-      <h2>Edit Member</h2>
+      <h2>Edit Credit</h2>
       <div>
         <label>Name:  </label>
-        <span>{edit_member.name}</span>
+        <span>{edit_credit.name}</span>
       </div>
       <div>
         <span>
-          <label>Position:  </label>
-          <span>{edit_member.position}</span>
+          <label>Type:  </label>
+          <span>{edit_credit.type}</span>
         </span>
       </div>
       <div>
@@ -163,11 +163,11 @@ const AdminEditMember = () => {
         isediting.editing
           ? <span>
             <AdminNewArtistEdit
-              is_group={edit_member.is_group}
-              name={edit_member.name}
-              real_name={edit_member.real_name}
-              birthdate={edit_member.birthdate}
-              active_status={edit_member.active_status}
+              is_group={edit_credit.is_group}
+              name={edit_credit.name}
+              real_name={edit_credit.real_name}
+              birthdate={edit_credit.birthdate}
+              active_status={edit_credit.active_status}
             >
             </AdminNewArtistEdit>
           </span>
@@ -211,4 +211,4 @@ const AdminEditMember = () => {
   )
 }
 
-export default AdminEditMember
+export default AdminEditCredit

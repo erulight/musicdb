@@ -78,6 +78,21 @@ router.get('/songs/:song_id', (req, res, next) => {
     })
 })
 
+router.get('/songs_credits/:song_id', (req, res, next) => {
+  const song_id = req.query.song_id
+  pool.query(`SELECT * FROM songs_credits
+              WHERE id=$1`,
+    [song_id], (q_err, q_res = {}) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(500).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 router.post('/edit_artists', (req, res, next) => {
   const name = req.body.name
   const real_name = req.body.real_name
@@ -192,6 +207,42 @@ router.post('/new_songs_credits', (req, res, next) => {
   const type = req.body.type
   pool.query(`INSERT INTO new_songs_credits (name, song_id, type, artist_id)
             Values ($1, $2, $3, $4)`, [name, song_id, type, artist_id], (q_err, q_res) => {
+    if (q_err) {
+      console.log(q_err)
+      res.status(505).end()
+      next()
+    }
+    res.json(q_res.rows)
+    next()
+  })
+})
+
+router.post('/edit_tracks', (req, res, next) => {
+  const title = req.body.title
+  const number = req.body.number
+  const track_id = req.body.track_id
+  const album_id = req.body.album_id
+  const song_id = req.body.song_id
+  pool.query(`INSERT INTO edit_tracks (title, number, track_id, album_id, song_id)
+            Values ($1, $2, $3, $4, $5)`, [title, number, track_id, album_id, song_id], (q_err, q_res) => {
+    if (q_err) {
+      console.log(q_err)
+      res.status(505).end()
+      next()
+    }
+    res.json(q_res.rows)
+    next()
+  })
+})
+
+router.post('/edit_credits', (req, res, next) => {
+  const type = req.body.type
+  const name = req.body.name
+  const credit_id = req.body.credit_id
+  const artist_id = req.body.artist_id
+  const song_id = req.body.song_id
+  pool.query(`INSERT INTO edit_credits (type, name, credit_id, artist_id, song_id)
+            Values ($1, $2, $3, $4, $5)`, [type, name, credit_id, artist_id, song_id], (q_err, q_res) => {
     if (q_err) {
       console.log(q_err)
       res.status(505).end()

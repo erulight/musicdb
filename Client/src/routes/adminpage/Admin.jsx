@@ -12,6 +12,8 @@ import AdminListAlbumEdits from './AdminListAlbumEdits'
 import AdminListSongEdits from './AdminListSongEdits'
 import AdminListNewTracks from './AdminListNewTracks'
 import AdminListNewCredits from './AdminListNewCredits'
+import AdminListCreditEdits from './AdminListCreditEdits'
+import AdminListTrackEdits from './AdminListTrackEdits'
 
 const Admin = (props) => {
 
@@ -40,11 +42,13 @@ const Admin = (props) => {
       <h2>Album New Tracks Pending</h2>
       <AdminListNewTracks />
       <h2>Album Track Edits Pending</h2>
+      <AdminListTrackEdits />
       <h2>Song Edits Pending</h2>
       <AdminListSongEdits />
       <h2>Song New Credits Pending</h2>
       <AdminListNewCredits />
       <h2>Song Credit Edits Pending</h2>
+      <AdminListCreditEdits />
     </div>
   )
 }

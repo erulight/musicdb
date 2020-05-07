@@ -86,6 +86,34 @@ router.get('/new_songs_credits', (req, res, next) => {
     })
 })
 
+router.get('/edit_tracks', (req, res, next) => {
+  pool.query(`SELECT * FROM edit_tracks
+              ORDER BY id DESC`,
+    [], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/edit_credits', (req, res, next) => {
+  pool.query(`SELECT * FROM edit_credits
+              ORDER BY id DESC`,
+    [], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
 router.get('/artists', (req, res, next) => {
   pool.query(`SELECT * FROM artists`,
     [], (q_err, q_res) => {
@@ -209,6 +237,36 @@ router.get('/new_songs_credits/:new_credit_id', (req, res, next) => {
   pool.query(`SELECT * FROM new_songs_credits
               WHERE id = $1`,
     [new_credit_id], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/edit_tracks/:edit_track_id', (req, res, next) => {
+  edit_track_id = req.query.edit_track_id
+  pool.query(`SELECT * FROM edit_tracks
+              WHERE id = $1`,
+    [edit_track_id], (q_err, q_res) => {
+      if (q_err) {
+        console.log(q_err)
+        res.status(505).end()
+        next()
+      }
+      res.json(q_res.rows)
+      next()
+    })
+})
+
+router.get('/edit_credits/:edit_credit_id', (req, res, next) => {
+  edit_credit_id = req.query.edit_credit_id
+  pool.query(`SELECT * FROM edit_credits
+              WHERE id = $1`,
+    [edit_credit_id], (q_err, q_res) => {
       if (q_err) {
         console.log(q_err)
         res.status(505).end()
@@ -411,6 +469,24 @@ router.delete('/new_songs_credits/:new_credit_id', (req, res, next) => {
     })
 })
 
+router.delete('/edit_tracks/:edit_track_id', (req, res, next) => {
+  const edit_track_id = req.params.edit_track_id
+  pool.query(`DELETE FROM edit_tracks WHERE id = $1`, [edit_track_id],
+    (q_err, q_res) => {
+      res.json(q_res.rows)
+      console.log(q_err)
+    })
+})
+
+router.delete('/edit_credits/:edit_credit_id', (req, res, next) => {
+  const edit_credit_id = req.params.edit_credit_id
+  pool.query(`DELETE FROM edit_credits WHERE id = $1`, [edit_credit_id],
+    (q_err, q_res) => {
+      res.json(q_res.rows)
+      console.log(q_err)
+    })
+})
+
 router.get('/edit_artists', (req, res, next) => {
   pool.query(`SELECT * FROM edit_artists
               ORDER BY id DESC`,
@@ -601,6 +677,36 @@ router.put('/songs/:song_id', (req, res, next) => {
             title = $1, artist_name = $2, artist_id = $3, release_date = $4
             WHERE id = $5`,
     [title, artist_name, artist_id, release_date, id], (q_err, q_res) => {
+      res.json(q_res.rows)
+      console.log(q_err)
+    })
+})
+
+router.put('/songs_credits/:credit_id', (req, res, next) => {
+  const id = req.body.id
+  const name = req.body.name
+  const type = req.body.type
+  const artist_id = req.body.artist_id
+  const song_id = req.body.song_id
+  pool.query(`UPDATE songs_credits SET
+            name = $1, type = $2, artist_id = $3, song_id = $4
+            WHERE id = $5`,
+    [name, type, artist_id, song_id, id], (q_err, q_res) => {
+      res.json(q_res.rows)
+      console.log(q_err)
+    })
+})
+
+router.put('/tracks/:track_id', (req, res, next) => {
+  const id = req.body.id
+  const title = req.body.title
+  const number = req.body.number
+  const album_id = req.body.album_id
+  const song_id = req.body.song_id
+  pool.query(`UPDATE tracks SET
+            title = $1, number = $2, album_id = $3, song_id = $4
+            WHERE id = $5`,
+    [title, number, album_id, song_id, id], (q_err, q_res) => {
       res.json(q_res.rows)
       console.log(q_err)
     })

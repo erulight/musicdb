@@ -166,6 +166,7 @@ CREATE TABLE edit_albums(
 
 CREATE TABLE edit_tracks(
   id SERIAL PRIMARY KEY,
+  track_id INT REFERENCES tracks(id),
   album_id INT REFERENCES albums(id),
   title VARCHAR(200) NOT NULL,
   disc INT,
@@ -189,5 +190,6 @@ CREATE TABLE edit_credits(
   type VARCHAR(200),
   name VARCHAR(200),
   artist_id INT REFERENCES artists(id),
-  artist_name VARCHAR(200)
+  artist_name VARCHAR(200),
+  credit_id INT REFERENCES songs_Credits(id)
 );
