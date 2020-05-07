@@ -18,7 +18,7 @@ const IndexArtists = (props) => {
   return (
     artists.map((artist) => {
       return (
-        <div key={artist.id}>
+        <div key={artist.id} className='index-list-item'>
           <Link to={`/artist/${artist.id}`}>{artist.name}</Link>
         </div>
       )

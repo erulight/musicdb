@@ -3,7 +3,7 @@ import axios from 'axios'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const AdminListNewArtist = (props) => {
+const AdminListArtistEdits= (props) => {
 
   const [artist_edits, set_artist_edits] = useState([])
   useEffect(() => {
@@ -26,4 +26,4 @@ const AdminListNewArtist = (props) => {
   )
 }
 
-export default AdminListNewArtist
+export default AdminListArtistEdits

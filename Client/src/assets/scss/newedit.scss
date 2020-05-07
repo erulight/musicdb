@@ -1,0 +1,44 @@
+.add-new-button{
+  border-radius: 5px;
+  &:hover{
+    background: linear-gradient(to right, purple, purple, lightgrey);
+    a{  }
+  }
+}
+
+.input-container{
+  margin: 3px 5px;
+  input{
+    margin: 2px 8px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 2px 4px;
+    outline: none;
+    &:focus{
+      border-color: purple;
+    }
+  }
+
+  &:focus-within{
+    .input-label{
+      color: purple;
+    }
+  }
+}
+
+.input-label{
+  display: block;
+  font-size: 12px;
+}
+
+.button{
+  border-radius: 5px;
+  color: green;
+  border-color: green;
+  background-color: transparent;
+  outline: none;
+  &:hover{
+    background-color: green;
+    color: white;
+  }
+}

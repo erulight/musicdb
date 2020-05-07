@@ -42,19 +42,16 @@ const SearchDropMenu = (props) => {
   }, [search, type]
   )
 
+  console.log(results)
+  const containerClassNames = 'search-results-container'.concat(
+    results.length > 0 ? '' : ' search-results-container-hidden'
+  )
+
   return (
-    <div className='search-results-container'>
+    <div className={containerClassNames}>
       {results.map((result) => (
-        <div>
-          <span>
-            {
-              type === 'artist'
-                ? <Link to={`/artist/${result.id}`}>{result.name}</Link>
-                : type === 'album'
-                  ? <Link to={`/album/${result.id}`}>{result.title}</Link>
-                  : <Link to={`/song/${result.id}`}>{result.title}</Link>
-            }
-          </span>
+        <div className='search-results-container-item'>
+            <Link to={`/${type}/${result.id}`}>{result.name || result.title}</Link>
         </div>
       ))}
     </div>

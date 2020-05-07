@@ -85,50 +85,56 @@ const NewArtist = (props) => {
 
   const isDisabled = formValues.is_group === 'true'
   return (
-    <form>
-      <p><Link to={`/new`}>Back</Link></p>
-      <h1>New Artist</h1>
-      <div>
-        <input type='radio' name='is_group' onChange={handleChange} value='true' />
-        <label>Group</label>
-        <input type='radio' name='is_group' onChange={handleChange} value='false' defaultChecked />
-        <label>Solo</label>
-      </div>
-      <div>
-      <select
-        name='active_status'
-        onChange={handleChange}
-        value={formValues.active_status}>
-        <option value='true'>Active</option>
-        <option value='false'>Inactive</option>
-      </select>
-      </div>
-      <div>
-        <label>Name</label>
-        <input name='name' value={formValues.name} onChange={handleChange} />
-      </div>
-      <div>
-        {!isDisabled
-          ? <span>
-            <label>Real Name</label>
-            <input name='real_name' value={formValues.real_name} onChange={handleChange} />
-          </span>
-          : null
-        }
-      </div>
-      <div>
-        {!isDisabled
-          ? <span>
-            <label>Birthday</label>
-            <input type='date' name='birthdate' value={formValues.birthdate} onChange={handleChange} disabled={isDisabled} />
-          </span>
-          : null
-        }
-      </div>
-      <div>
-        {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
-      </div>
-    </form>
+    <div className='page-container'>
+      <form>
+        <p><Link to={`/new`}>Back</Link></p>
+        <div className='title-container'>
+          <h1 className='title-text'>New Artist</h1>
+        </div>
+        <div className='list-container'>
+          <div className='input-container'>
+            <input type='radio' name='is_group' onChange={handleChange} value='true' />
+            <label>Group</label>
+            <input type='radio' name='is_group' onChange={handleChange} value='false' defaultChecked />
+            <label>Solo</label>
+          </div>
+          <div className='input-container'>
+            <select
+              name='active_status'
+              onChange={handleChange}
+              value={formValues.active_status}>
+              <option value='true'>Active</option>
+              <option value='false'>Inactive</option>
+            </select>
+          </div>
+          <div className='input-container'>
+            <label className='input-label'>Name</label>
+            <input name='name' value={formValues.name} onChange={handleChange} />
+          </div>
+          <div className='input-container'>
+            {!isDisabled
+              ? <span>
+                <label className='input-label'>Real Name</label>
+                <input name='real_name' value={formValues.real_name} onChange={handleChange} />
+              </span>
+              : null
+            }
+          </div>
+          <div className='input-container'>
+            {!isDisabled
+              ? <span>
+                <label className='input-label'>Birthday</label>
+                <input type='date' name='birthdate' value={formValues.birthdate} onChange={handleChange} disabled={isDisabled} />
+              </span>
+              : null
+            }
+          </div>
+          <div className='input-container'>
+            {isSubmitted.submitted ? <span>Submitted.</span> : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+          </div>
+        </div>
+      </form>
+    </div>
   )
 }
 

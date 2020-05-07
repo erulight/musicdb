@@ -1,12 +1,3 @@
-body {
-  margin-top: 35px;
-  background-color: grey;
-}
-
-.welcome-message{
-  margin-top: 50px;
-}
-
 div{
   //border: 1px solid magenta;
 }
@@ -68,33 +59,5 @@ div{
   padding: auto;
   margin-top: 5px;
   margin-left: 5px;
-}
-
-//songs
-.song-container{
-  display: table;
-  width: 1000px;
-}
-.song-container-headers-container{
-  display: table-header-group;
-}
-.song-container-headers{
-  display: table-cell;
-  border-bottom: 2px solid black;
-}
-.song-container-row{
-  display: table-row-group;
-}
-.song-cell1{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-.song-cell2{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-.song-cell3{
-  display: table-cell;
-  border-bottom: 1px solid black;
 }
 

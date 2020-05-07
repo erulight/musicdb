@@ -1,0 +1,54 @@
+@import 'colors';
+@import 'album';
+@import 'artist';
+@import 'banner';
+@import 'newedit';
+@import 'song';
+@import 'admin';
+
+body{
+  margin-top: 35px;
+  background-color: $background-color;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Roboto', sans-serif;
+}
+
+.title-container {
+  width: 300px;
+  background: linear-gradient(to right, black, black, black, black, $background-color);
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.title-text{
+  color: white;
+  font-size: 18px;
+}
+
+.list-container{
+  margin: 5px 5px 10px 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: lightgrey;
+  width: 300px;
+  overflow: hidden;
+  box-shadow: 1px 1px 5px black;
+}
+
+.index-list-item{
+  padding: 3px;
+  &:hover{
+    background: linear-gradient(to right, purple, purple, lightgrey);
+    a{
+      color: white;
+    }
+  }
+}
+
+.page-container{
+  padding: 10px 20px;
+}

@@ -51,12 +51,14 @@ const Album = () => {
           <div className="album-about-container">
             <h2>About</h2>
             <p>Release Date: {prettyDate(album.release_date)}</p>
+            <p><Link to={`/edit/album/${album.id}`}>Edit</Link></p>
           </div>
         </div>
         <div className="album-songs">
           <h2>
             Tracklist
           </h2>
+          <p><Link to={`/edit/tracks/${album.id}`}>Edit</Link></p>
         </div>
         <div className="song-container">
           <div className="song-container-headers-container">

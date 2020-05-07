@@ -18,7 +18,7 @@ const Banner = () => {
         ...formValues,
         [name]: value
       })
-    }
+    }, [formValues]
   )
   console.log(formValues)
 
@@ -37,8 +37,10 @@ const Banner = () => {
             <option value='song'>Song</option>
           </select>
         </div>
-        <div className='search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off'></input></div>
-        <SearchDropMenu search={formValues.search} type={formValues.type}></SearchDropMenu>
+        <div className='search-bar'>
+          <input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' />
+          <SearchDropMenu search={formValues.search} type={formValues.type} />
+        </div>
       </div>
       <div className='new-button'><Link to={`/new`}>New</Link></div>
       <div className='admin-button'><Link to={`/admin`}>Admin</Link></div>

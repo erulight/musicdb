@@ -6,10 +6,6 @@
   text-align: center;
 }
 
-body {
-  background-color: grey;
-}
-
 div{
   //border: 1px solid magenta;
 }
@@ -57,4 +53,32 @@ div{
 .lyrics-section{
   display: flex;
   border: 1px solid black;
+}
+
+//songs
+.song-container{
+  display: table;
+  width: 100%;
+}
+.song-container-headers-container{
+  display: table-header-group;
+}
+.song-container-headers{
+  display: table-cell;
+  border-bottom: 2px solid black;
+}
+.song-container-row{
+  display: table-row-group;
+}
+.song-cell1{
+  display: table-cell;
+  border-bottom: 1px solid black;
+}
+.song-cell2{
+  display: table-cell;
+  border-bottom: 1px solid black;
+}
+.song-cell3{
+  display: table-cell;
+  border-bottom: 1px solid black;
 }

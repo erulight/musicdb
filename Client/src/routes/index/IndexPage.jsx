@@ -8,21 +8,24 @@ import IndexSongs from './IndexSongs'
 const IndexPage = () => {
 
   return (
-    <div>
-      <div className='welcome-message'>
-        Music DataBase
-    </div>
-      <div>
-        <h1>Artists</h1>
-        <IndexArtists></IndexArtists>
+    <div className='page-container'>
+      <div className='title-container'>
+        <h1 className='title-text'>Artists</h1>
       </div>
-      <div>
-        <h1>Albums</h1>
-        <IndexAlbums></IndexAlbums>
+      <div className='list-container'>
+        <IndexArtists />
       </div>
-      <div>
-        <h1>Songs</h1>
-        <IndexSongs></IndexSongs>
+      <div className='title-container'>
+        <h1 className='title-text'>Albums</h1>
+      </div>
+      <div className='list-container'>
+        <IndexAlbums />
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>Songs</h1>
+      </div>
+      <div className='list-container'>
+        <IndexSongs />
       </div>
     </div>
   )

@@ -6,10 +6,6 @@
   text-align: center;
 }
 
-body {
-  background-color: grey;
-}
-
 div{
   //border: 1px solid magenta;
 }
@@ -31,6 +27,8 @@ div{
 .album-info-container{
   padding: auto;
   border: 1px solid black;
+  width: 100%;
+  border-color: black transparent black black;
 }
 /* .artist-profile-container > div{
   flex: 1;
@@ -67,33 +65,5 @@ div{
   padding: auto;
   margin-top: 5px;
   margin-left: 5px;
-}
-
-//songs
-.song-container{
-  display: table;
-  width: 1000px;
-}
-.song-container-headers-container{
-  display: table-header-group;
-}
-.song-container-headers{
-  display: table-cell;
-  border-bottom: 2px solid black;
-}
-.song-container-row{
-  display: table-row-group;
-}
-.song-cell1{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-.song-cell2{
-  display: table-cell;
-  border-bottom: 1px solid black;
-}
-.song-cell3{
-  display: table-cell;
-  border-bottom: 1px solid black;
 }
 

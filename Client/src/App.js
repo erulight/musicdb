@@ -23,14 +23,16 @@ import AdminNewAlbum from './routes/adminpage/AdminNewAlbum';
 import AdminNewSong from './routes/adminpage/AdminNewSong';
 import AdminNewMember from './routes/adminpage/AdminNewMember';
 import AdminEditMember from './routes/adminpage/AdminEditMember';
+import AdminEditAlbum from './routes/adminpage/AdminEditAlbum';
 //Edit Pages
 import EditArtist from './routes/editpage/EditArtist';
 import EditMembers from './routes/editpage/EditMembers';
+import EditAlbum from './routes/editpage/EditAlbum';
+import EditTracks from './routes/editpage/EditTracks';
+import EditSong from './routes/editpage/EditSong';
 //CSS
-import './assets/scss/artist.scss';
-import './assets/scss/album.scss';
-import './assets/scss/song.scss';
-import './assets/scss/banner.scss';
+import './assets/scss/index.scss';
+import AdminEditSong from './routes/adminpage/AdminEditSong';
 
 function App() {
   return (
@@ -66,6 +68,15 @@ function App() {
       <Route exact path="/edit/members/:id">
         <EditMembers />
       </Route>
+      <Route exact path="/edit/album/:id">
+        <EditAlbum />
+      </Route>
+      <Route exact path="/edit/tracks/:id">
+        <EditTracks />
+      </Route>
+      <Route exact path="/edit/song/:id">
+        <EditSong />
+      </Route>
       <Route exact path="/admin">
         <Admin />
       </Route>
@@ -86,6 +97,12 @@ function App() {
       </Route>
       <Route exact path="/admin/edit/member/:id">
         <AdminEditMember />
+      </Route>
+      <Route exact path="/admin/edit/album/:id">
+        <AdminEditAlbum />
+      </Route>
+      <Route exact path="/admin/edit/song/:id">
+        <AdminEditSong />
       </Route>
     </Router>
   );

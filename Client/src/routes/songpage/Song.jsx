@@ -49,11 +49,12 @@ const Song = () => {
           <div className="song-info">
             <span>
               <h1>{song.title}</h1>
-              </span>
-            <p>By: <Link to={`/artist/${artist.id}`}>{artist.name}</Link> <SongCredit song_id={song.id} type={'featured'}></SongCredit></p>
+            </span>
+            <p>By: <Link to={`/artist/${song.artist_id}`}>{song.artist_name}</Link> <SongCredit song_id={song.id} type={'featured'}></SongCredit></p>
             <p>Release Date: {prettyDate(song.release_date)}</p>
             <p>On Album:</p>
-            <SongAlbum song_id = {song.id}></SongAlbum>
+            <SongAlbum song_id={song.id}></SongAlbum>
+            <p><Link to={`/edit/song/${song.id}`}>Edit</Link></p>
           </div>
           <div className="song-about-container">
             <h2>Credits</h2>
@@ -62,14 +63,7 @@ const Song = () => {
             <p>Arrangement: <SongCredit song_id={song.id} type={'arranger'}></SongCredit></p>
           </div>
         </div>
-        <div className="lyrics-section">
-          <h2>
-            Lyrics
-          </h2>
-        </div>
-        You thought there would be lyrics here, but there aren't any. (Intentional)
       </div>
-
     )
   }
   return (
