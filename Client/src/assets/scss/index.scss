@@ -23,10 +23,56 @@ h1, h2, h3, h4, h5, h6{
   margin-left: 5px;
   border-radius: 5px 0px 0px 5px;
 }
+.title-container2{
+  width: 100%;
+  background: linear-gradient(to right, black, black, black, black, $background-color);
+  padding: 5px;
+  margin-left: 5px;
+  border-radius: 5px 0px 0px 5px;
+}
 
 .title-text{
   color: white;
   font-size: 18px;
+}
+
+.header-container {
+  width: 280px;
+  background: linear-gradient(to right, white, white, white, white, $background-color);
+  padding: 5px;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.header-container2 {
+  width: 100%;
+  background: linear-gradient(to right, white, white, white, white, $background-color);
+  padding: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.header-text{
+  color: black;
+  font-size: 16px;
+}
+
+.name-container {
+  width: 280px;
+  background: linear-gradient(to right, black, black, black, black, lightgrey);
+  padding: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px 0px 0px 5px;
+}
+.name-text{
+  color: white;
+  font-size: 20px;
 }
 
 .list-container{
@@ -37,6 +83,38 @@ h1, h2, h3, h4, h5, h6{
   width: 300px;
   overflow: hidden;
   box-shadow: 1px 1px 5px black;
+}
+
+.list-container{
+  margin: 5px 5px 10px 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  width: 300px;
+  overflow: hidden;
+  box-shadow: 1px 1px 5px black;
+  padding: 5px;
+}
+.list-container2{
+  margin: 5px 5px 10px 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  width: 500px;
+  overflow: hidden;
+  box-shadow: 1px 1px 5px black;
+  padding: 5px;
+}
+
+.list-container3{
+  margin: 5px 5px 10px 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: white;
+  width: 500px;
+  overflow: hidden;
+  box-shadow: 1px 1px 5px black;
+  padding: 5px;
 }
 
 .index-list-item{

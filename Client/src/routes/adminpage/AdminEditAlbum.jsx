@@ -116,70 +116,30 @@ const AdminEditAlbum = () => {
   const isDisabled = edit_album.is_group === true
   return (
     <div>
-      <p><Link to={`/admin`}>Back</Link></p>
-      <h1>Admin</h1>
-      <h2>Edit Album</h2>
-      <div>
-        <label>Title:  </label>
-        <span>{edit_album.title}</span>
+      <p className='back'><Link to={`/admin`}>Back</Link></p>
+      <div className='title-container'>
+        <h1 className='title-text'>Admin</h1>
       </div>
-      <div>
-        <label>Artist:  </label>
-        <span>{edit_album.artist_name}</span>
+      <div className='header-container'>
+        <h2 className='header-text'>Edit Album</h2>
       </div>
-      <div>
-        <label>Release Date: </label>
-        <span>{prettyDate(edit_album.release_date)}</span>
-      </div>
-      <div>
-        {isediting.editing
-          ? null
-          : <span>
-            {isSubmitted.submitted
-              ?
-              <span>Submitted.</span>
-              :
-              <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button type='button' onClick={handleSubmit}>Submit</button>}
-              </span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? <span>Deleted.</span>
-                  : <button type='button' onClick={handleDelete}>Delete</button>
-                }
-              </span>}
-          </span>
-        }
-      </div>
-      {/*
-        isediting.editing
-          ? <span>
-            <AdminNewArtistEdit
-              is_group={edit_album.is_group}
-              name={edit_album.name}
-              real_name={edit_album.real_name}
-              birthdate={edit_album.birthdate}
-              active_status={edit_album.active_status}
-            >
-            </AdminNewArtistEdit>
-          </span>
-          : null
-      */}
-      <div>
-        {
-          isediting.editing
-            ?
-            <span>
+      <div className='list-container'>
+        <div className='input-container'>
+          <label className='input-label'>Title:  </label>
+          <span>{edit_album.title}</span>
+        </div>
+        <div className='input-container'>
+          <label className='input-label'>Artist:  </label>
+          <span>{edit_album.artist_name}</span>
+        </div>
+        <div>
+          <label className='input-label'>Release Date: </label>
+          <span>{prettyDate(edit_album.release_date)}</span>
+        </div>
+        <div className='input-container'>
+          {isediting.editing
+            ? null
+            : <span>
               {isSubmitted.submitted
                 ?
                 <span>Submitted.</span>
@@ -187,26 +147,72 @@ const AdminEditAlbum = () => {
                 <span>
                   {isDeleted.deleted
                     ? null
-                    : <button type='button' onClick={handleSubmit}>Submit</button>}
+                    : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
                 </span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
                   {isDeleted.deleted
                     ? null
-                    : <button type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                    : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
                   {isDeleted.deleted
                     ? <span>Deleted.</span>
-                    : <button type='button' onClick={handleDelete}>Delete</button>
+                    : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
                   }
                 </span>}
             </span>
-            :
-            null
-        }
+          }
+        </div>
+        {/*
+        isediting.editing
+        ? <span>
+            <AdminNewArtistEdit
+            is_group={edit_album.is_group}
+            name={edit_album.name}
+            real_name={edit_album.real_name}
+            birthdate={edit_album.birthdate}
+            active_status={edit_album.active_status}
+            >
+            </AdminNewArtistEdit>
+            </span>
+            : null
+          */}
+        <div className='input-container'>
+          {
+            isediting.editing
+              ?
+              <span>
+                {isSubmitted.submitted
+                  ?
+                  <span>Submitted.</span>
+                  :
+                  <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+                  </span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? <span>Deleted.</span>
+                      : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
+                    }
+                  </span>}
+              </span>
+              :
+              null
+          }
+        </div>
       </div>
     </div>
 

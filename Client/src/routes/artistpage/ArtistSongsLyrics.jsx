@@ -59,7 +59,7 @@ const ArtistSongsLyrics = (props) => {
     songs_c.map((song_c) => {
       return (
         <div key={song_c.id} className="song-container-row">
-          <div className="song-cell2">
+          <div>
             <span>
               <Link to={`/song/${song_c.id}`}>{song_c.title} </Link>
               By: <Link to={`/artist/${findArtist(findSong(song_c.song_id).artist_id).id}`}>{findArtist(findSong(song_c.song_id).artist_id).name} </Link>

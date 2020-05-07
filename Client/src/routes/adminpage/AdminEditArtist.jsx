@@ -12,11 +12,11 @@ const AdminEditArtist = () => {
   console.log(params)
   const edit_artist_id = params.id
 
-  const [isediting, set_isediting] = useState({editing: false})
+  const [isediting, set_isediting] = useState({ editing: false })
 
-  const [isSubmitted, setIsSubmitted] = useState({submitted: false})
+  const [isSubmitted, setIsSubmitted] = useState({ submitted: false })
 
-  const [isDeleted, setIsDeleted] = useState({deleted: false})
+  const [isDeleted, setIsDeleted] = useState({ deleted: false })
 
   const [edit_artist, set_edit_artist] = useState({})
   useEffect(() => {
@@ -122,37 +122,41 @@ const AdminEditArtist = () => {
   const isDisabled = edit_artist.is_group === true
   return (
     <div>
-      <p><Link to={`/admin`}>Back</Link></p>
-      <h1>Admin</h1>
-      <h2>Edit Artist</h2>
-      <div>
+      <p className='back'><Link to={`/admin`}>Back</Link></p>
+      <div className='title-container'>
+        <h1 className='title-text'>Admin</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Edit Artist</h2>
+      </div>
+      <div className='input-container'>
         {edit_artist.active_status
           ? <span>Active</span>
           : <span>Inactive</span>}
       </div>
-      <div>
-        <label>Name:  </label>
+      <div className='input-container'>
+        <label className='input-label'>Name:  </label>
         <span>{edit_artist.name}</span>
       </div>
-      <div>
+      <div className='input-container'>
         {!isDisabled
           ? <span>
-            <label>Real Name:  </label>
+            <label className='input-label'>Real Name:  </label>
             <span>{edit_artist.real_name}</span>
           </span>
           : null
         }
       </div>
-      <div>
+      <div className='input-container'>
         {!isDisabled
           ? <span>
-            <label>Birthday: </label>
+            <label className='input-label'>Birthday: </label>
             <span>{prettyDate(edit_artist.birthdate)}</span>
           </span>
           : null
         }
       </div>
-      <div>
+      <div className='input-container'>
         {isediting.editing
           ? null
           : <span>
@@ -163,20 +167,20 @@ const AdminEditArtist = () => {
               <span>
                 {isDeleted.deleted
                   ? null
-                  : <button type='button' onClick={handleSubmit}>Submit</button>}
+                  : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
               </span>}
             {isSubmitted.submitted
               ? null
               : <span>
                 {isDeleted.deleted
                   ? null
-                  : <button type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
+                  : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
             {isSubmitted.submitted
               ? null
               : <span>
                 {isDeleted.deleted
                   ? <span>Deleted.</span>
-                  : <button type='button' onClick={handleDelete}>Delete</button>
+                  : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
                 }
               </span>}
           </span>
@@ -196,7 +200,7 @@ const AdminEditArtist = () => {
           </span>
           : null
       */}
-      <div>
+      <div className='input-container'>
         {
           isediting.editing
             ?
@@ -208,20 +212,20 @@ const AdminEditArtist = () => {
                 <span>
                   {isDeleted.deleted
                     ? null
-                    : <button type='button' onClick={handleSubmit}>Submit</button>}
+                    : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
                 </span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
                   {isDeleted.deleted
                     ? null
-                    : <button type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                    : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
                   {isDeleted.deleted
                     ? <span>Deleted.</span>
-                    : <button type='button' onClick={handleDelete}>Delete</button>
+                    : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
                   }
                 </span>}
             </span>

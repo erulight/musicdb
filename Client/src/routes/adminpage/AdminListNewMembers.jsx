@@ -18,7 +18,7 @@ const AdminListNewMembers = (props) => {
   return (
     new_members.map((new_member) => {
       return (
-        <div key={new_member.id}>
+        <div className='index-list-item' key={new_member.id}>
           <Link to={`/admin/new_member/${new_member.id}`}>{new_member.name}</Link>
         </div>
       )

@@ -106,39 +106,49 @@ const EditExistingCredit = (props) => {
 
   return (
     <form>
-      {isSubmitted.submitted ? <span>Submitted.</span> : <span>
-      {isediting.editing ?
-        <div>
-          {hasID.id ? <div>{artistValues.name}<button type='button' onClick={handleClear}>Clear</button></div> :
-            <div className='artist-search-stuff'>
-              <label>Name</label>
-              <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-              <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
+      <div>
+        {isSubmitted.submitted ? <span>Submitted.</span> : <span>
+          {isediting.editing ?
+            <div>
+              <div className='input-container'>
+                {hasID.id ? <div>{artistValues.name}<button type='button' onClick={handleClear}>Clear</button></div> :
+                  <div className='artist-search-stuff'>
+                    <label className='input-label'>Name</label>
+                    <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
+                    <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
+                  </div>
+                }
+              </div>
+              <div className='input-container'>
+                <label className='input-label'>Type</label>
+                <select
+                  name='type'
+                  onChange={handleChange}
+                  value={formValues.type}>
+                  <option value='featured'>Featured</option>
+                  <option value='lyricist'>Lyricist</option>
+                  <option value='composer'>Composer</option>
+                  <option value='arranger'>Arranger</option>
+                </select>
+                <div>
+                </div>
+                {isSubmitted.submitted ? <span>Submitted.</span>
+                  :
+                  <div className='input-container'>
+                    <button className='button' type='button' onClick={handleSubmit}>Submit</button>
+                    <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>
+                  </div>
+                }
+              </div>
+            </div>
+            :
+            <div className='input-container'>
+              <button className='button-edit' type='button' onClick={handleEdit}>Edit</button>
             </div>
           }
-          <label>Type</label>
-          <select
-          name='type'
-          onChange={handleChange}
-          value={formValues.type}>
-            <option value='featured'>Featured</option>
-            <option value='lyricist'>Lyricist</option>
-            <option value='composer'>Composer</option>
-            <option value='arranger'>Arranger</option>
-          </select>          <div>
-            {isSubmitted.submitted ? <span>Submitted.</span> 
-            : <span>
-            <button type='button' onClick={handleSubmit}>Submit</button>
-            <button type='button' onClick={handleCancelEdit}>Cancel Editing</button>
-            </span>
-            }
-          </div>
-        </div>
-        :
-        <button type='button' onClick={handleEdit}>Edit</button>
-      }
-      </span> 
-      }
+        </span>
+        }
+      </div>
     </form>
   )
 }

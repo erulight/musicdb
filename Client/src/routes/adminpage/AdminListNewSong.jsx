@@ -18,7 +18,7 @@ const AdminListNewSong = (props) => {
   return (
     new_songs.map((new_song) => {
       return (
-        <div key={new_song.id}>
+        <div className='index-list-item' key={new_song.id}>
           <Link to={`/admin/new_song/${new_song.id}`}>{new_song.title}</Link>
         </div>
       )

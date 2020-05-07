@@ -40,25 +40,36 @@ const Album = () => {
   const RenderAlbum = (props) => {
     return (
       <div className="album-page">
+        <div className='title-container2'>
+          <h1 className='title-text'>Album</h1>
+        </div>
         <div className="album-profile-container">
           <div className="album-art-container">
             <img className="album-art" src={image}></img>
           </div>
           <div className="album-title-container">
-            <h1>{album.title}</h1>
-            <p>By: <Link to={`/artist/${album.artist_id}`}>{findArtist(album.artist_id).name}</Link></p>
+            <div className='name-container'>
+              <h1 className='name-text'>{album.title}</h1>
+            </div>
+            <div className='list-container2'>
+              <p>By: <Link to={`/artist/${album.artist_id}`}>{findArtist(album.artist_id).name}</Link></p>
+            </div>
           </div>
-          <div className="album-about-container">
-            <h2>About</h2>
-            <p>Release Date: {prettyDate(album.release_date)}</p>
-            <p><Link to={`/edit/album/${album.id}`}>Edit</Link></p>
+          <div className='list-container2'>
+            <div className="artist-about-container">
+              <h2>About</h2>
+              <p>Release Date: {prettyDate(album.release_date)}</p>
+              <p><Link to={`/edit/album/${album.id}`}>Edit</Link></p>
+            </div>
           </div>
         </div>
         <div className="album-songs">
-          <h2>
-            Tracklist
-          </h2>
           <p><Link to={`/edit/tracks/${album.id}`}>Edit</Link></p>
+          <div className='header-container2'>
+            <h2 className='header-text'>
+              Tracklist
+          </h2>
+          </div>
         </div>
         <div className="song-container">
           <div className="song-container-headers-container">

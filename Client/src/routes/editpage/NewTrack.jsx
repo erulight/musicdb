@@ -95,18 +95,22 @@ const NewTrack = (props) => {
   return (
     <form>
       <div>
-        {hasID.id ? <div>{songValues.title}<button type='button' onClick={handleClear}>Clear</button></div> :
-          <div className='artist-search-stuff'>
-            <label>Title</label>
-            <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-            <DropDownSong search={formValues.search} handleClick={handleClick}></DropDownSong>
-          </div>
-        }
-        <label>Track Number</label>
-        <input name='number' type='number' min='1' step='1' value={formValues.number} onChange={handleChange} autoComplete='off' />
-      </div>
-      <div>
-        {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
+        <div className='input-container'>
+          {hasID.id ? <div>{songValues.title}<button type='button' onClick={handleClear}>Clear</button></div> :
+            <div className='artist-search-stuff'>
+              <label className='input-label'>Title</label>
+              <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
+              <DropDownSong search={formValues.search} handleClick={handleClick}></DropDownSong>
+            </div>
+          }
+        </div>
+        <div className='input-container'>
+          <label className='input-label'>Track Number</label>
+          <input name='number' type='number' min='1' step='1' value={formValues.number} onChange={handleChange} autoComplete='off' />
+        </div>
+        <div className='input-container'>
+          {isSubmitted.submitted ? <span>Submitted.</span> : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+        </div>
       </div>
     </form>
   )

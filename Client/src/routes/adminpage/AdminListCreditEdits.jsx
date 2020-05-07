@@ -18,7 +18,7 @@ const AdminListCreditEdits = (props) => {
   return (
     edit_credits.map((edit_credit) => {
       return (
-        <div key={edit_credit.id}>
+        <div className='index-list-item' key={edit_credit.id}>
           <Link to={`/admin/edit/credit/${edit_credit.id}`}>{edit_credit.name}</Link>
         </div>
       )

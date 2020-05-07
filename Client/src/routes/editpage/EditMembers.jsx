@@ -36,9 +36,9 @@ const EditMembers = () => {
       members_array.map((member, i) => {
       return(
         <div key={i}>
-          <label>Name:</label>
+          <label className='input-label'>Name:</label>
           <input name={`membername-${i}`} onChange={props.handleChange} value={props.formValues[`membername-${i}`]} autoComplete='off'></input>
-          <label>Position:</label>
+          <label className='input-label'>Position:</label>
           <input name={`memberpos-${i}`} onChange={props.handleChange} value={props.formValues[`memberpos-${i}`]} autoComplete='off'></input>
         </div>
       )
@@ -46,13 +46,25 @@ const EditMembers = () => {
     */
 
   return (
-    <div>
-      <h1>Edit Members</h1>
-      <h2>{artist.name}</h2>
-      <h1>Existing Members</h1>
-      <EditArtistExistingMemberList artist_id={artist_id}></EditArtistExistingMemberList>
-      <h1>New Members</h1>
-      <NewMember artist_id={artist_id}></NewMember>
+    <div className='page-container'>
+      <div className='title-container'>
+        <h1 className='title-text'>Edit Members</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>{artist.name}</h2>
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>Existing Members</h1>
+      </div>
+      <div className='list-container'>
+        <EditArtistExistingMemberList artist_id={artist_id}></EditArtistExistingMemberList>
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>New Members</h1>
+      </div>
+      <div className='list-container'>
+        <NewMember artist_id={artist_id}></NewMember>
+      </div>
     </div>
   )
 }

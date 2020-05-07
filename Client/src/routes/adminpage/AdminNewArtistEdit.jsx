@@ -39,7 +39,7 @@ const AdminNewArtistEdit = (props) => {
     birthdate: props.birthdate,
     active_status: props.active_status
   })
-  
+
   React.useEffect(() => {
     setFormValues({
       is_group: props.is_group,
@@ -78,36 +78,38 @@ const AdminNewArtistEdit = (props) => {
   return (
     <div>
       <h2>Editing...</h2>
-      <div>
-        <input type='radio' name='is_group' onChange={handleChange} value='true' checked={isDisabled}/>
-        <label>Group</label>
-        <input type='radio' name='is_group' onChange={handleChange} value='false' checked={!isDisabled}/>
-        <label>Solo</label>
+      <div className='input-container'>
+        <input type='radio' name='is_group' onChange={handleChange} value='true' checked={isDisabled} />
+        <label className='input-label'>Group</label>
+        <input type='radio' name='is_group' onChange={handleChange} value='false' checked={!isDisabled} />
+        <label className='input-label'>Solo</label>
       </div>
-      <select
-        name='active_status'
-        onChange={handleChange}
-        value={formValues.active_status}>
-        <option value='true'>Active</option>
-        <option vakue='false'>Inactive</option>
-      </select>
-      <div>
-        <label>Name</label>
+      <div className='input-container'>
+        <select
+          name='active_status'
+          onChange={handleChange}
+          value={formValues.active_status}>
+          <option value='true'>Active</option>
+          <option vakue='false'>Inactive</option>
+        </select>
+      </div>
+      <div className='input-container'>
+        <label className='input-label'>Name</label>
         <input name='name' value={formValues.name} onChange={handleChange} />
       </div>
-      <div>
+      <div className='input-container'>
         {!isDisabled
           ? <span>
-            <label>Real Name</label>
+            <label className='input-label'>Real Name</label>
             <input name='real_name' value={formValues.real_name} onChange={handleChange} />
           </span>
           : null
         }
       </div>
-      <div>
+      <div className='input-container'>
         {!isDisabled
           ? <span>
-            <label>Birthday</label>
+            <label className='input-label'>Birthday</label>
             <input type='date' name='birthdate' value={inputDate(formValues.birthdate)} onChange={handleChange} disabled={isDisabled} />
           </span>
           : null

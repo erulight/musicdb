@@ -135,34 +135,40 @@ const EditSong = () => {
 
 
   return (
-    <form>
-      <h1>Edit Song</h1>
-      <div>Title: {song.title}</div>
-      <div>Artist: {song.artist_name}</div>
-      <div>Release Date: {prettyDate(song.release_date)}</div>
-      <div>
-        <div>
-          <label>Title:</label>
-          <input name='name' value={formValues.title} onChange={handleChange} autoComplete='off'></input>
+    <div className='page-container'>
+      <form>
+        <div className='title-container'>
+          <h1 className='title-text'>Edit Song</h1>
         </div>
-        <div>
-          {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
-            <div className='artist-search-stuff'>
-              <label>Artist</label>
-              <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-              <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
-            </div>
-          }
+        <div className='list-container'>
+        <div className='existing-info'>Title: {song.title}</div>
+        <div className='existing-info'>Artist: {song.artist_name}</div>
+        <div className='existing-info'>Release Date: {prettyDate(song.release_date)}</div>
         </div>
-        <div>
-          <label>Release Date:</label>
-          <input type='date' name='release_date' value={inputDate(formValues.release_date)} onChange={handleChange} ></input>
+        <div className='list-container'>
+          <div className='input-container'>
+            <label className='input-label'>Title:</label>
+            <input name='name' value={formValues.title} onChange={handleChange} autoComplete='off'></input>
+          </div>
+          <div className='input-container'>
+            {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
+              <div className='artist-search-stuff'>
+                <label className='input-label'>Artist</label>
+                <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
+                <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
+              </div>
+            }
+          </div>
+          <div className='input-container'>
+            <label className='input-label'>Release Date:</label>
+            <input type='date' name='release_date' value={inputDate(formValues.release_date)} onChange={handleChange} ></input>
+          </div>
+          <div className='input-container'>
+            {isSubmitted.submitted ? <span>Submitted.</span> : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+          </div>
         </div>
-        <div>
-          {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
 

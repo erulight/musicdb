@@ -23,32 +23,90 @@ const Admin = (props) => {
       <div className='title-container'>
         <h1 className='title-text'>Admin</h1>
       </div>
-      <h2>New Artists Pending</h2>
-      <div className=''>
+      <div className='title-container'>
+        <h1 className='title-text'>New</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>New Artists Pending</h2>
+      </div>
+      <div className='list-container'>
         <AdminListNewArtist />
       </div>
-      <h2>New Albums Pending</h2>
-      <AdminListNewAlbum />
-      <h2>New Songs Pending</h2>
-      <AdminListNewSong />
-      <h2>Artist Edits Pending</h2>
-      <AdminListArtistEdits />
-      <h2>Artist New Members Pending</h2>
-      <AdminListNewMembers />
-      <h2>Artist Member Edits Pending</h2>
-      <AdminListMemberEdits />
-      <h2>Album Edits Pending</h2>
-      <AdminListAlbumEdits />
-      <h2>Album New Tracks Pending</h2>
-      <AdminListNewTracks />
-      <h2>Album Track Edits Pending</h2>
-      <AdminListTrackEdits />
-      <h2>Song Edits Pending</h2>
-      <AdminListSongEdits />
-      <h2>Song New Credits Pending</h2>
-      <AdminListNewCredits />
-      <h2>Song Credit Edits Pending</h2>
-      <AdminListCreditEdits />
+      <div className='header-container'>
+        <h2 className='header-text'>New Albums Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListNewAlbum />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>New Songs Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListNewSong />
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>Edit Artist</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Artist Edits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListArtistEdits />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Artist New Members Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListNewMembers />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Artist Member Edits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListMemberEdits />
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>Edit Album</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Album Edits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListAlbumEdits />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Album New Tracks Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListNewTracks />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Album Track Edits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListTrackEdits />
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>Edit Song</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Song Edits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListSongEdits />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Song New Credits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListNewCredits />
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>Song Credit Edits Pending</h2>
+      </div>
+      <div className='list-container'>
+        <AdminListCreditEdits />
+      </div>
     </div>
   )
 }

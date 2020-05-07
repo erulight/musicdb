@@ -109,7 +109,7 @@ const EditSongExistingCreditList = (props) => {
   return (
     credits.map((credit) => {
       return (
-        <div key={credit.id}>
+        <div className='existing-info' key={credit.id}>
           {credit.name} ({credit.type})
           <EditExistingCredit credit={credit}/>
         </div>

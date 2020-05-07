@@ -108,7 +108,7 @@ const EditArtistExistingMemberList = (props) => {
   return (
     members.map((member) => {
       return (
-        <div key={member.id}>
+        <div className='existing-info' key={member.id}>
           {member.name} ({member.position})
           <EditExistingMember member={member}></EditExistingMember>
         </div>

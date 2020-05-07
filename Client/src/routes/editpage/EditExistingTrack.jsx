@@ -106,32 +106,38 @@ const EditExistingTrack = (props) => {
 
   return (
     <form>
-      {isSubmitted.submitted ? <span>Submitted.</span> : <span>
-      {isediting.editing ?
-        <div>
-          {hasID.id ? <div>{songValues.title}<button type='button' onClick={handleClear}>Clear</button></div> :
-            <div className='artist-search-stuff'>
-              <label>title</label>
-              <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-              <DropDownSong search={formValues.search} handleClick={handleClick}></DropDownSong>
+      <div>
+        {isSubmitted.submitted ? <span>Submitted.</span> : <span>
+          {isediting.editing ?
+            <div>
+              <div className='input-container'>
+                {hasID.id ? <div>{songValues.title}<button type='button' onClick={handleClear}>Clear</button></div> :
+                  <div className='artist-search-stuff'>
+                    <label className='input-label'>title</label>
+                    <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
+                    <DropDownSong search={formValues.search} handleClick={handleClick}></DropDownSong>
+                  </div>
+                }
+              </div>
+              <label className='input-label'>Track Number</label>
+              <input name='number' type='number' min='1' step='1' value={formValues.number} onChange={handleChange} autoComplete='off' />
+              <div className='input-container'>
+                {isSubmitted.submitted ? <span>Submitted.</span>
+                  : <span>
+                    <button className='button' type='button' onClick={handleSubmit}>Submit</button>
+                    <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>
+                  </span>
+                }
+              </div>
+            </div>
+            :
+            <div className='input-container'>
+              <button className='button-edit' type='button' onClick={handleEdit}>Edit</button>
             </div>
           }
-          <label>Track Number</label>
-          <input name='number' type='number' min='1' step='1' value={formValues.number} onChange={handleChange} autoComplete='off' />
-          <div>
-            {isSubmitted.submitted ? <span>Submitted.</span> 
-            : <span>
-            <button type='button' onClick={handleSubmit}>Submit</button>
-            <button type='button' onClick={handleCancelEdit}>Cancel Editing</button>
-            </span>
-            }
-          </div>
-        </div>
-        :
-        <button type='button' onClick={handleEdit}>Edit</button>
-      }
-      </span> 
-      }
+        </span>
+        }
+      </div>
     </form>
   )
 }

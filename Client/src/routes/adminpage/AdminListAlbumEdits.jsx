@@ -18,7 +18,7 @@ const AdminListAlbumEdits = (props) => {
   return (
     album_edits.map((album_edit) => {
       return (
-        <div key={album_edit.id}>
+        <div className='index-list-item' key={album_edit.id}>
           <Link to={`/admin/edit/album/${album_edit.id}`}>{album_edit.title}</Link>
         </div>
       )

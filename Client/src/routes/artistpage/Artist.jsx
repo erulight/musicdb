@@ -55,14 +55,14 @@ const ArtistProfile = () => {
   }, [artist_id]
   )
 
-  if(albums[0] != null){
+  if (albums[0] != null) {
     hasReleases = true
-    amountAlbums = albums.length-1
+    amountAlbums = albums.length - 1
     active_date_end = albums[0].release_date
     active_date_start = albums[amountAlbums].release_date
   }
 
-  if(artist.is_group) {
+  if (artist.is_group) {
     isGroup = true
   }
 
@@ -81,64 +81,91 @@ const ArtistProfile = () => {
   const RenderArtistProfile = (props) => {
     return (
       <div className="artist-page">
+        <div className='title-container2'>
+          <h1 className='title-text'>Artist</h1>
+        </div>
         <div className="artist-profile-container">
           <div className="artist-profile-portrait-container">
             <img className="artist-profile-portrait-img" src={image}></img>
           </div>
           <div className="artist-profile-name-container">
-            <h1>{artist.name}</h1>
-            <p>{!isGroup
-              ? <span>Real Name: {artist.real_name}</span>
-              : null}
-            </p>
-            <p>{isGroup
-              ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers><p><Link to={`/edit/members/${artist.id}`}>Edit</Link></p></span>
-              : null}</p>
+            <div className='name-container'>
+              <h1 className='name-text'>{artist.name}</h1>
+            </div>
+            <div className='list-container2'>
+              <p>{!isGroup
+                ? <span>Real Name: {artist.real_name}</span>
+                : null}
+              </p>
+              <p>{isGroup
+                ? <span><h2>Members:</h2><ArtistMembers artist_id={artist.id}></ArtistMembers><p><Link to={`/edit/members/${artist.id}`}>Edit</Link></p></span>
+                : null}</p>
+            </div>
           </div>
-          <div className="artist-profile-info-container">
-            <h2>About</h2>
-            <p>{hasReleases
-            ? <span>Years Active: {prettyYear(active_date_start)} - {artist.active_status 
-                                                                    ? <span>Present</span>
-                                                                    : <span>{prettyYear(active_date_end)}</span>}
-              </span>
-            : null}</p>
-            <p>{/* Latest Release*/}</p>
-            <p>{!isGroup
-              ? <span>Born: {prettyDate(artist.birthdate)} (age {getAgeFromBirthday(artist.birthdate)})</span>
-              : null}</p>
+          <div className='list-container2'>
+            <div className="artist-profile-info-container">
+              <h2>About</h2>
+              <p>{hasReleases
+                ? <span>Years Active: {prettyYear(active_date_start)} - {artist.active_status
+                  ? <span>Present</span>
+                  : <span>{prettyYear(active_date_end)}</span>}
+                </span>
+                : null}</p>
+              <p>{/* Latest Release*/}</p>
+              <p>{!isGroup
+                ? <span>Born: {prettyDate(artist.birthdate)} (age {getAgeFromBirthday(artist.birthdate)})</span>
+                : null}</p>
               <p><Link to={`/edit/artist/${artist.id}`}>Edit</Link></p>
+            </div>
           </div>
         </div>
         <div className="artist-header">
-          <h2>
-            Albums
+          <div className='header-container2'>
+            <h2 className='header-text'>
+              Albums
           </h2>
+          </div>
           <ArtistAlbum artist_id={artist_id}></ArtistAlbum>
         </div>
         <div className="artist-header">
-          <h2>
-            Songs As Featured Artist
+          <div className='header-container'>
+            <h2 className='header-text'>
+              Songs As Featured Artist
           </h2>
+          </div>
+          <div className='list-container3'>
           <ArtistSongsFt artist_id={artist.id}></ArtistSongsFt>
+          </div>
         </div>
         <div className="artist-header">
-          <h2>
-            Songs As Lyricist
+          <div className='header-container'>
+            <h2 className='header-text'>
+              Songs As Lyricist
           </h2>
-          <ArtistSongsLyrics artist_id={artist.id}></ArtistSongsLyrics>
+          </div>
+          <div className='list-container3'>
+            <ArtistSongsLyrics artist_id={artist.id}></ArtistSongsLyrics>
+          </div>
         </div>
         <div className="artist-header">
-          <h2>
-            Songs As Composer
+          <div className='header-container'>
+            <h2 className='header-text'>
+              Songs As Composer
           </h2>
-          <ArtistSongsComposer artist_id={artist.id}></ArtistSongsComposer>
+          </div>
+          <div className='list-container3'>
+            <ArtistSongsComposer artist_id={artist.id}></ArtistSongsComposer>
+          </div>
         </div>
         <div className="artist-header">
-          <h2>
-            Songs As Arranger
+          <div className='header-container'>
+            <h2 className='header-text'>
+              Songs As Arranger
           </h2>
-          <ArtistSongsArranger artist_id={artist.id}></ArtistSongsArranger>
+          </div>
+          <div className='list-container3'>
+            <ArtistSongsArranger artist_id={artist.id}></ArtistSongsArranger>
+          </div>
         </div>
       </div>
     )

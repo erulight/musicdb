@@ -87,16 +87,16 @@ const NewArtist = (props) => {
   return (
     <div className='page-container'>
       <form>
-        <p><Link to={`/new`}>Back</Link></p>
+        <p className='back'><Link to={`/new`}>Back</Link></p>
         <div className='title-container'>
           <h1 className='title-text'>New Artist</h1>
         </div>
         <div className='list-container'>
           <div className='input-container'>
             <input type='radio' name='is_group' onChange={handleChange} value='true' />
-            <label>Group</label>
+            <label className='input-label'>Group</label>
             <input type='radio' name='is_group' onChange={handleChange} value='false' defaultChecked />
-            <label>Solo</label>
+            <label className='input-label'>Solo</label>
           </div>
           <div className='input-container'>
             <select

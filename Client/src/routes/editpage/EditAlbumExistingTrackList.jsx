@@ -109,7 +109,7 @@ const EditAlbumExistingTrackList = (props) => {
   return (
     tracks.map((track) => {
       return (
-        <div key={track.id}>
+        <div className='existing-info' key={track.id}>
           {track.number} {track.title}
           <EditExistingTrack track={track}/>
         </div>

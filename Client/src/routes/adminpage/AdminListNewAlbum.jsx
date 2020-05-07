@@ -18,7 +18,7 @@ const AdminListNewAlbum = (props) => {
   return (
     new_albums.map((new_album) => {
       return (
-        <div key={new_album.id}>
+        <div className='index-list-item' key={new_album.id}>
           <Link to={`/admin/new_album/${new_album.id}`}>{new_album.title}</Link>
         </div>
       )

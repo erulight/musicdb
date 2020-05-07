@@ -39,9 +39,9 @@ const EditCredits = () => {
       members_array.map((member, i) => {
       return(
         <div key={i}>
-          <label>Name:</label>
+          <label className='input-label'>Name:</label>
           <input name={`membername-${i}`} onChange={props.handleChange} value={props.formValues[`membername-${i}`]} autoComplete='off'></input>
-          <label>Position:</label>
+          <label className='input-label'>Position:</label>
           <input name={`memberpos-${i}`} onChange={props.handleChange} value={props.formValues[`memberpos-${i}`]} autoComplete='off'></input>
         </div>
       )
@@ -49,13 +49,25 @@ const EditCredits = () => {
     */
 
   return (
-    <div>
-      <h1>Edit Credits</h1>
-      <h2>{song.title}</h2>
-      <h1>Existing Credits</h1>
-      <EditSongExistingCreditList song_id={song_id}/>
-      <h1>New Credit</h1>
-      <NewCredit song_id={song_id}/>
+    <div className='page-container'>
+      <div className='title-container'>
+        <h1 className='title-text'>Edit Credits</h1>
+      </div>
+      <div className='header-container'>
+        <h2 className='header-text'>{song.title}</h2>
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>Existing Credits</h1>
+      </div>
+      <div className='list-container'>
+        <EditSongExistingCreditList song_id={song_id} />
+      </div>
+      <div className='title-container'>
+        <h1 className='title-text'>New Credit</h1>
+      </div>
+      <div className='list-container'>
+        <NewCredit song_id={song_id} />
+      </div>
     </div>
   )
 }

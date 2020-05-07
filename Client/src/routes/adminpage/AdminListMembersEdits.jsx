@@ -18,7 +18,7 @@ const AdminListMemberEdits = (props) => {
   return (
     edit_members.map((edit_member) => {
       return (
-        <div key={edit_member.id}>
+        <div className='index-list-item' key={edit_member.id}>
           <Link to={`/admin/edit/member/${edit_member.id}`}>{edit_member.name}</Link>
         </div>
       )

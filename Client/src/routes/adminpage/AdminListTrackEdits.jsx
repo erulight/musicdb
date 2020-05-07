@@ -18,7 +18,7 @@ const AdminListTrackEdits = (props) => {
   return (
     edit_tracks.map((edit_track) => {
       return (
-        <div key={edit_track.id}>
+        <div className='index-list-item' key={edit_track.id}>
           <Link to={`/admin/edit/track/${edit_track.id}`}>{edit_track.title}</Link>
         </div>
       )

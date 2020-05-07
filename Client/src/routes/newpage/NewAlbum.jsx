@@ -94,30 +94,36 @@ const NewAlbum = (props) => {
 
 
   return (
-    <form>
-      <p><Link to={`/new`}>Back</Link></p>
-      <h1>New Album</h1>
-      <div>
-        <label>Title</label>
-        <input name='title' value={formValues.title} onChange={handleChange} autoComplete='off' />
-      </div>
-      <div>
-        {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
-          <div className='artist-search-stuff'>
-            <label>Artist</label>
-            <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
-            <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
+    <div className='page-container'>
+      <form>
+        <p className='back'><Link to={`/new`}>Back</Link></p>
+        <div className='title-container'>
+          <h1 className='title-text'>New Album</h1>
+        </div>
+        <div className='list-container'>
+          <div className='input-container'>
+            <label className='input-label'>Title</label>
+            <input name='title' value={formValues.title} onChange={handleChange} autoComplete='off' />
           </div>
-        }
-      </div>
-      <div>
-        <label>Release Date</label>
-        <input type='date' name='release_date' value={formValues.release_date} onChange={handleChange} />
-      </div>
-      <div>
-        {isSubmitted.submitted ? <span>Submitted.</span> : <button type='button' onClick={handleSubmit}>Submit</button>}
-      </div>
-    </form>
+          <div className='input-container'>
+            {hasID.id ? <div>{artistValues.artist_name}<button type='button' onClick={handleClear}>Clear</button></div> :
+              <div className='artist-search-stuff'>
+                <label className='input-label'>Artist</label>
+                <div className='artist-search-bar'><input name='search' value={formValues.search} onChange={handleChange} autoComplete='off' ref={searchRef} /></div>
+                <DropDownArtist search={formValues.search} handleClick={handleClick}></DropDownArtist>
+              </div>
+            }
+          </div>
+          <div className='input-container'>
+            <label className='input-label'>Release Date</label>
+            <input type='date' name='release_date' value={formValues.release_date} onChange={handleChange} />
+          </div>
+          <div className='input-container'>
+            {isSubmitted.submitted ? <span>Submitted.</span> : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+          </div>
+        </div>
+      </form>
+    </div>
   )
 }
 
