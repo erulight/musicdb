@@ -5,32 +5,33 @@ import { useParams } from 'react-router-dom'
 import NewMember from './EditArtistAddNewMember'
 import EditArtistExistingMemberList from './EditArtistExistingMemberList'
 import NewTrack from './NewTrack'
+import NewCredit from './NewCredit'
 
-const EditTracks = () => {
+const EditCredits = () => {
 
   const params = useParams()
   console.log(params)
-  const album_id = params.id;
+  const song_id = params.id;
 
   //const members_array = new Array().fill(undefined)
 
-  const [album, setAlbum] = useState({})
+  const [song, setSong] = useState({})
   useEffect(() => {
-    axios.get('/api/edit/albums/:album_id', { params: { album_id: album_id } })
+    axios.get('/api/edit/songs/:song_id', { params: { song_id: song_id } })
       .then((res) => {
         console.log(res)
-        setAlbum(res.data[0])
+        setSong(res.data[0])
       })
-  }, [album_id]
+  }, [song_id]
   )
-  const [tracks, setTracks] = useState([])
+  const [songs_credits, setSongsCredits] = useState([])
   useEffect(() => {
-    axios.get('/api/edit/tracks/:album_id', { params: { album_id: album_id } })
+    axios.get('/api/edit/songs_credits/:song_id', { params: { song_id: song_id } })
       .then((res) => {
         console.log(res)
-        setTracks(res.data)
+        setSongsCredits(res.data)
       })
-  }, [album_id]
+  }, [song_id]
   )
 
   /*
@@ -48,14 +49,14 @@ const EditTracks = () => {
 
   return (
     <div>
-      <h1>Edit Tracks</h1>
-      <h2>{album.title}</h2>
-      <h1>Existing Tracks</h1>
-      <EditArtistExistingMemberList album_id={album_id}></EditArtistExistingMemberList>
-      <h1>New Track</h1>
-      <NewTrack album_id={album_id}/>
+      <h1>Edit Credits</h1>
+      <h2>{song.title}</h2>
+      <h1>Existing Credits</h1>
+      <EditArtistExistingMemberList song_id={song_id}></EditArtistExistingMemberList>
+      <h1>New Credit</h1>
+      <NewCredit song_id={song_id}/>
     </div>
   )
 }
 
-export default EditTracks
+export default EditCredits

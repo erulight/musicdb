@@ -24,15 +24,18 @@ import AdminNewSong from './routes/adminpage/AdminNewSong';
 import AdminNewMember from './routes/adminpage/AdminNewMember';
 import AdminEditMember from './routes/adminpage/AdminEditMember';
 import AdminEditAlbum from './routes/adminpage/AdminEditAlbum';
+import AdminEditSong from './routes/adminpage/AdminEditSong';
+import AdminNewTrack from './routes/adminpage/AdminNewTrack';
+import AdminNewCredit from './routes/adminpage/AdminNewCredit';
 //Edit Pages
 import EditArtist from './routes/editpage/EditArtist';
 import EditMembers from './routes/editpage/EditMembers';
 import EditAlbum from './routes/editpage/EditAlbum';
 import EditTracks from './routes/editpage/EditTracks';
 import EditSong from './routes/editpage/EditSong';
+import EditCredits from './routes/editpage/EditCredits';
 //CSS
 import './assets/scss/index.scss';
-import AdminEditSong from './routes/adminpage/AdminEditSong';
 
 function App() {
   return (
@@ -77,6 +80,9 @@ function App() {
       <Route exact path="/edit/song/:id">
         <EditSong />
       </Route>
+      <Route exact path="/edit/credits/:id">
+        <EditCredits />
+      </Route>
       <Route exact path="/admin">
         <Admin />
       </Route>
@@ -91,6 +97,12 @@ function App() {
       </Route>
       <Route exact path="/admin/new_member/:id">
         <AdminNewMember />
+      </Route>
+      <Route exact path="/admin/new_track/:id">
+        <AdminNewTrack />
+      </Route>
+      <Route exact path="/admin/new_credit/:id">
+        <AdminNewCredit />
       </Route>
       <Route exact path="/admin/edit/artist/:id">
         <AdminEditArtist />

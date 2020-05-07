@@ -4,70 +4,86 @@ import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
-import AdminNewArtistEdit from './AdminNewArtistEdit'
+//import AdminNewAlbumEdit from './AdminNewAlbumEdit'
 
 
-const AdminEditSong = () => {
+const AdminNewTrack = () => {
   const params = useParams()
   console.log(params)
-  const edit_song_id = params.id
+  const new_track_id = params.id
 
-  const [isediting, set_isediting] = useState({ editing: false })
+  const [isediting, set_isediting] = useState({
+    editing: false
+  })
 
-  const [isSubmitted, setIsSubmitted] = useState({ submitted: false })
+  const [isSubmitted, setIsSubmitted] = useState({
+    submitted: false
+  })
 
-  const [isDeleted, setIsDeleted] = useState({ deleted: false })
+  const [isDeleted, setIsDeleted] = useState({
+    deleted: false
+  })
 
-  const [edit_song, set_edit_song] = useState({})
+  const [new_track, set_new_track] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/edit_songs/:edit_song_id', { params: { edit_song_id: edit_song_id } })
+    axios.get('/api/admin/new_tracks/:new_track_id', { params: { new_track_id: new_track_id } })
       .then((res) => {
         console.log(res)
-        set_edit_song(res.data[0])
+        set_new_track(res.data[0])
       })
   }, []
   )
 
-  const [artists, set_artists] = useState([])
+  /*
+  const [artist, setArtist] = useState({})
   useEffect(() => {
-    axios.get('/api/admin/artists')
+    axios.get('/api/admin/artists/:artist_id', { params: { artist_id: new_track.member_of_id } })
       .then((res) => {
         console.log(res)
-        set_artists(res.data)
-        console.log(artists.length)
+        setArtist(res.data[0])
       })
   }, []
   )
+
+  const [members, setMembers] = useState([])
+  useEffect(() => {
+    axios.get('/api/admin/members/:artist_id', { params: { artist_id: new_track.member_of_id } })
+      .then((res) => {
+        console.log(res)
+        setMembers(res.data)
+      })
+  }, []
+  )
+  */
 
   const [formValues, setFormValues] = useState({
-    title: edit_song.title,
-    search: '',
-    release_date: edit_song.release_date,
+    title: '',
+    number: 'name',
   })
 
   const handleSubmit = React.useCallback(
     (event) => {
-      const id = edit_song.song_id
-      const title = edit_song.title
-      const artist_name = edit_song.artist_name
-      const artist_id = edit_song.artist_id
-      const release_date = edit_song.release_date
+      //const id = artists.length
+      const title = new_track.title
+      const number = new_track.number
+      const song_id = new_track.song_id
+      const album_id = new_track.album_id
 
       setIsSubmitted({ submitted: true })
 
       const params = {
-        id: id,
+        //id: id,
         title: title,
-        artist_name: artist_name,
-        artist_id: artist_id,
-        release_date: release_date,
+        number: number,
+        song_id: song_id,
+        album_id: album_id
       }
-      axios.put('/api/admin/songs/song_id', params)
+      axios.post('/api/admin/tracks', params)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
         })
-      axios.delete(`/api/admin/edit_songs/${edit_song_id}`)
+      axios.delete(`/api/admin/new_tracks/${new_track_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -78,9 +94,9 @@ const AdminEditSong = () => {
 
   const handleDelete = React.useCallback(
     (event) => {
-      console.log('clicked' + edit_song_id)
+      console.log('clicked' + new_track_id)
       setIsDeleted({ deleted: true })
-      axios.delete(`/api/admin/edit_songs/${edit_song_id}`)
+      axios.delete(`/api/admin/new_tracks/${new_track_id}`)
         .then(response => console.log(response))
         .catch(function (error) {
           console.log(error);
@@ -88,16 +104,6 @@ const AdminEditSong = () => {
     }
   )
 
-  React.useEffect(() => {
-    setFormValues({
-      title: edit_song.title,
-      search: '',
-      release_date: edit_song.release_date,
-    })
-  }, [edit_song.title, edit_song.release_date])
-
-
-  console.log(edit_song)
   const handleEdit = React.useCallback((event) => { set_isediting({ editing: true }) })
 
   const handleCancelEdit = React.useCallback((event) => { set_isediting({ editing: false }) })
@@ -113,23 +119,20 @@ const AdminEditSong = () => {
     }
   )
 
-  const isDisabled = edit_song.is_group === true
   return (
     <div>
       <p><Link to={`/admin`}>Back</Link></p>
       <h1>Admin</h1>
-      <h2>Edit Song</h2>
+      <h2>New Member</h2>
       <div>
         <label>Title:  </label>
-        <span>{edit_song.title}</span>
+        <span>{new_track.title}</span>
       </div>
       <div>
-        <label>Artist:  </label>
-        <span>{edit_song.artist_name}</span>
-      </div>
-      <div>
-        <label>Release Date: </label>
-        <span>{prettyDate(edit_song.release_date)}</span>
+        <span>
+          <label>Track Number:  </label>
+          <span> {new_track.number}</span>
+        </span>
       </div>
       <div>
         {isediting.editing
@@ -161,20 +164,22 @@ const AdminEditSong = () => {
           </span>
         }
       </div>
-      {/*
+      {
         isediting.editing
           ? <span>
+            {/*
             <AdminNewArtistEdit
-              is_group={edit_song.is_group}
-              name={edit_song.name}
-              real_name={edit_song.real_name}
-              birthdate={edit_song.birthdate}
-              active_status={edit_song.active_status}
+              is_group={new_track.is_group}
+              name={new_track.name}
+              real_name={new_track.real_name}
+              birthdate={new_track.birthdate}
+              active_status={new_track.active_status}
             >
             </AdminNewArtistEdit>
+            */}
           </span>
           : null
-      */}
+      }
       <div>
         {
           isediting.editing
@@ -213,4 +218,4 @@ const AdminEditSong = () => {
   )
 }
 
-export default AdminEditSong
+export default AdminNewTrack

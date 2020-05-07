@@ -61,6 +61,7 @@ const Song = () => {
             <p>Lyrics: <SongCredit song_id={song.id} type={'lyricist'}></SongCredit></p>
             <p>Composer: <SongCredit song_id={song.id} type={'composer'}></SongCredit></p>
             <p>Arrangement: <SongCredit song_id={song.id} type={'arranger'}></SongCredit></p>
+            <p><Link to={`/edit/credits/${song.id}`}>Edit</Link></p>
           </div>
         </div>
       </div>
