@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, Link } from 'react-router-dom'
 
+/**
+ * Renders the List of Albums a particular song appears on, on the Song Page
+ * @param {Object} props properties passed to component
+ * - song_id {Number} id of song
+ */
 const SongAlbum = (props) => {
   const song_id = props.song_id
 

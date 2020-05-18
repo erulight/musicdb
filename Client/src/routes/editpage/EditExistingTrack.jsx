@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import DropDownSong from '../../utils/DropDownSong'
 
+/**
+ * Renders the Edit section for an Existing Track on the Edit Album Tracks Page
+ * @param {Object} props properties passed to component
+ * - track {Object} the track object passed to component
+ */
 const EditExistingTrack = (props) => {
   const track = props.track
 

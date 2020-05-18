@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { prettyYear } from '../../utils/dateutils'
 import { Link } from 'react-router-dom'
 import AlbumSongCredit from './AlbumSongCredit'
 
+/**
+ * Renders each Song component on the Album Page
+ * @param {Object} props properties passed to component
+ * - album_id {Number} id of album
+ */
 const AlbumSongs = (props) => {
   const album_id = props.album_id
   const [songs, setSongs] = useState([])
@@ -43,13 +47,13 @@ const AlbumSongs = (props) => {
           <div className="song-cell1">{song.number}</div>
           <div className="song-cell2">
             <span>{<Link to={`/song/${song.song_id}`}>{song.title}</Link>} 
-            <AlbumSongCredit song_id={song.id} type={'featured'}></AlbumSongCredit>
+            <AlbumSongCredit song_id={song.song_id} type={'featured'}></AlbumSongCredit>
             </span>
           </div>
           <div className="song-cell3">
-            <span>Lyrics: {<AlbumSongCredit song_id={song.id} type={'lyricist'}></AlbumSongCredit>}</span>
-            <span> Composer: {<AlbumSongCredit song_id={song.id} type={'composer'}></AlbumSongCredit>}</span>
-            <span> Arrangement: {<AlbumSongCredit song_id={song.id} type={'arranger'}></AlbumSongCredit>}</span>
+            <span>Lyrics: {<AlbumSongCredit song_id={song.song_id} type={'lyricist'}></AlbumSongCredit>}</span>
+            <span> Composer: {<AlbumSongCredit song_id={song.song_id} type={'composer'}></AlbumSongCredit>}</span>
+            <span> Arrangement: {<AlbumSongCredit song_id={song.song_id} type={'arranger'}></AlbumSongCredit>}</span>
           </div>
         </div>
       )

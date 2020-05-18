@@ -3,6 +3,11 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import ArtistAlbumSongCredit from './ArtistAlbumSongCredit'
 
+/**
+ * Renders each Song component under the Album section on the Artist Page
+ * @param {Object} props properties passed to component
+ * - album_id {Number} id of album
+ */
 const ArtistAlbumSongs = (props) => {
   const album_id = props.album_id
   const [tracks, setTracks] = useState([])

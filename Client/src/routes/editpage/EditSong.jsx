@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import image from '../../assets/images/artist_profile_pic.jpg'
 import axios from 'axios'
-import { prettyDate, prettyYear, inputDate } from '../../utils/dateutils'
+import { prettyDate, inputDate } from '../../utils/dateutils'
 import { useParams } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
-
+/**
+ * Renders the Edit Song Page
+ */
 const EditSong = () => {
 
   const searchRef = React.useRef(null)

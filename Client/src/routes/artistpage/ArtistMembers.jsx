@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-
+/**
+ * Renders a list of Members on the Artist Page
+ * @param {Object} props properties passed to component
+ * - artist_id {Number} id of artist
+ */
 const ArtistMembers = (props) => {
   const artist_id = props.artist_id
   const [members, setMembers] = useState([])

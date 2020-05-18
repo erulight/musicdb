@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const AdminListNewCredits = (props) => {
+/**
+ * Renders a list of all New Credits pending in the Admin App
+ */
+const AdminListNewCredits = () => {
 
   const [new_credits, set_new_credits] = useState([])
   useEffect(() => {

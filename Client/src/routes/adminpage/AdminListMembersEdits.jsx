@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const AdminListMemberEdits = (props) => {
+/**
+ * Renders a list of all Member Edits pending in the Admin App
+ */
+const AdminListMemberEdits = () => {
 
   const [edit_members, set_edit_members] = useState([])
   useEffect(() => {

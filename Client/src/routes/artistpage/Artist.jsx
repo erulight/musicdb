@@ -11,6 +11,9 @@ import ArtistSongsArranger from './ArtistSongsArrangement'
 import ArtistMembers from './ArtistMembers'
 import { Link } from 'react-router-dom'
 
+/**
+ * Renders the Artist page
+ */
 const ArtistProfile = () => {
   let isGroup = false
   let hasReleases = false

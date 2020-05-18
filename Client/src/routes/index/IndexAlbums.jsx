@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const IndexAlbums = (props) => {
+/**
+ * Renders a list of all albums on the Index Page
+ */
+const IndexAlbums = () => {
 
   const [albums, setAlbums] = useState([])
   useEffect(() => {

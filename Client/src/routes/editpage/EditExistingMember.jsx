@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
 
+/**
+ * Renders the Edit section for an Existing Member on the Edit Artist Members Page
+ * @param {Object} props properties passed to component
+ * - member {Object} the member object passed to component
+ */
 const EditExistingMember = (props) => {
   const member = props.member
 

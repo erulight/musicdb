@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
 import AdminNewArtistEdit from './AdminNewArtistEdit'
 
-
+/**
+ * Renders the New Artist page in the Admin App
+ */
 const AdminNewArtist = () => {
   const params = useParams()
   console.log(params)

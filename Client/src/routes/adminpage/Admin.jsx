@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import PropTypes from 'prop-types'
 import AdminListNewArtist from './AdminListNewArtists'
-import { Link } from 'react-router-dom'
 import AdminListArtistEdits from './AdminListArtistEdits'
 import AdminListNewAlbum from './AdminListNewAlbum'
 import AdminListNewSong from './AdminListNewSong'
@@ -15,9 +12,11 @@ import AdminListNewCredits from './AdminListNewCredits'
 import AdminListCreditEdits from './AdminListCreditEdits'
 import AdminListTrackEdits from './AdminListTrackEdits'
 
-const Admin = (props) => {
 
-
+/**
+ * Renders the main page of the Admin App
+ */
+const Admin = () => {
   return (
     <div className='page-container'>
       <div className='title-container'>

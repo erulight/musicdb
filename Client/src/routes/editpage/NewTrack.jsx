@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes, { array } from 'prop-types'
 import DropDownSong from '../../utils/DropDownSong'
 
-
+/**
+ * Renders the New Track section on the Edit Album Tracks page
+ * @param {Object} props properties passed to component
+ * - album_id {Number} id of album
+ */
 const NewTrack = (props) => {
 
   const searchRef = React.useRef(null)

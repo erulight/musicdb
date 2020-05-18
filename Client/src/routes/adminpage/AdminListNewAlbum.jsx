@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const AdminListNewAlbum = (props) => {
+/**
+ * Renders a list of all New Albums pending in the Admin App
+ */
+const AdminListNewAlbum = () => {
 
   const [new_albums, set_new_albums] = useState([])
   useEffect(() => {

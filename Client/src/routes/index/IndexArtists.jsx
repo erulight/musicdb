@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const IndexArtists = (props) => {
+/**
+ * Renders a list of all Artists on the Index Page
+ */
+const IndexArtists = () => {
 
   const [artists, setArtists] = useState([])
   useEffect(() => {

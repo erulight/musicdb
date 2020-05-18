@@ -51,7 +51,8 @@ router.get('/albums/:album_id', (req, res, next) => {
 router.get('/tracks/:album_id', (req, res, next) => {
   const album_id = req.query.album_id
   pool.query(`SELECT * FROM tracks
-              WHERE id=$1`,
+              WHERE album_id=$1
+              ORDER BY id ASC`,
     [album_id], (q_err, q_res = {}) => {
       if (q_err) {
         console.log(q_err)
@@ -81,7 +82,8 @@ router.get('/songs/:song_id', (req, res, next) => {
 router.get('/songs_credits/:song_id', (req, res, next) => {
   const song_id = req.query.song_id
   pool.query(`SELECT * FROM songs_credits
-              WHERE id=$1`,
+              WHERE  song_id=$1
+              ORDER BY id ASC`,
     [song_id], (q_err, q_res = {}) => {
       if (q_err) {
         console.log(q_err)

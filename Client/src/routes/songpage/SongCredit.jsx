@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams, Link } from 'react-router-dom'
 
+/**
+ * Renders the Song Credits component on the Song page
+ * @param {Object} props properties passed to component
+ * - song_id {Number} id of song
+ * - type {String} Type of song credit (featured, composer, arranger, lyricist)
+ */
 const SongCredit = (props) => {
   const song_id = props.song_id
   const type = props.type

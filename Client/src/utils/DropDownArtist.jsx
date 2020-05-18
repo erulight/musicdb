@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 
+/**
+ * Creates a drop down component on an Artist Search field
+ * @param {Object} props properties passed to component
+ * - search {String} search value
+ */
 const DropDownArtist = (props) => {
   const search = props.search
 

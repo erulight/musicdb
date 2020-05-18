@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const NewArtist = (props) => {
+/**
+ * Renders the New Artist Page
+ */
+const NewArtist = () => {
 
   const [formValues, setFormValues] = useState({
     is_group: 'false',
@@ -16,8 +18,6 @@ const NewArtist = (props) => {
   const [isSubmitted, setIsSubmitted] = useState({
     submitted: false
   })
-
-  //const [amount_members, setAmountMembers] = useState(0)
 
   const handleSubmit = React.useCallback(
     (event) => {
@@ -42,22 +42,6 @@ const NewArtist = (props) => {
           console.log(error);
         })
       console.log(name + real_name + birthdate + is_group + active_status)
-      /*
-      if (is_group) {
-        const member_as_array = new Array(amount_members).fill(undefined)
-          .map((_, i) => ({
-            name: formValues[`membername-${i}`],
-            position: formValues[`memberpos-${i}`]
-          }))
-        const member_params = { members: member_as_array }
-        axios.post('/api/new/new_members', member_params)
-          .then(response => console.log(response))
-          .catch(function (error) {
-            console.log(error);
-          })
-
-      }
-      */
     }
   )
 
@@ -73,15 +57,6 @@ const NewArtist = (props) => {
   )
   console.log(formValues)
 
-  /*
-  const handleChangeMembers = React.useCallback(
-    (event) => {
-      const { name, value, type } = event.target
-
-      setAmountMembers(parseInt(value) || 1)
-    }
-  )
-  */
 
   const isDisabled = formValues.is_group === 'true'
   return (

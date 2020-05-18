@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
-//import AdminNewAlbumEdit from './AdminNewAlbumEdit'
 
-
+/**
+ * Renders the New Album page in the Admin App
+ */
 const AdminNewAlbum = () => {
   const params = useParams()
   console.log(params)
@@ -118,71 +118,25 @@ const AdminNewAlbum = () => {
       <div className='header-container'>
         <h2 className='header-text'>New Album</h2>
       </div>
-      <div className='input-container'>
-        <label className='input-label'>Title:  </label>
-        <span>{new_album.title}</span>
-      </div>
-      <div className='input-container'>
-        <span>
-          <label className='input-label'>Artist:  </label>
-          <span> {new_album.artist_name}</span>
-        </span>
-      </div>
-      <div className='input-container'>
-        <label className='input-label'>Release Date: </label>
-        <span>{prettyDate(new_album.release_date)}</span>
-      </div>
-      <div className='input-container'>
-        {isediting.editing
-          ? null
-          : <span>
-            {isSubmitted.submitted
-              ?
-              <span>Submitted.</span>
-              :
-              <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
-              </span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? <span>Deleted.</span>
-                  : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
-                }
-              </span>}
+      <div className='list-container'>
+        <div className='input-container'>
+          <label className='input-label'>Title:  </label>
+          <span>{new_album.title}</span>
+        </div>
+        <div className='input-container'>
+          <span>
+            <label className='input-label'>Artist:  </label>
+            <span> {new_album.artist_name}</span>
           </span>
-        }
-      </div>
-      {
-        isediting.editing
-          ? <span>
-            {/*
-            <AdminNewArtistEdit
-              is_group={new_album.is_group}
-              name={new_album.name}
-              real_name={new_album.real_name}
-              birthdate={new_album.birthdate}
-              active_status={new_album.active_status}
-            >
-            </AdminNewArtistEdit>
-            */}
-          </span>
-          : null
-      }
-      <div className='input-container'>
-        {
-          isediting.editing
-            ?
-            <span>
+        </div>
+        <div className='input-container'>
+          <label className='input-label'>Release Date: </label>
+          <span>{prettyDate(new_album.release_date)}</span>
+        </div>
+        <div className='input-container'>
+          {isediting.editing
+            ? null
+            : <span>
               {isSubmitted.submitted
                 ?
                 <span>Submitted.</span>
@@ -197,7 +151,7 @@ const AdminNewAlbum = () => {
                 : <span>
                   {isDeleted.deleted
                     ? null
-                    : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                    : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
@@ -207,12 +161,50 @@ const AdminNewAlbum = () => {
                   }
                 </span>}
             </span>
-            :
-            null
+          }
+        </div>
+        {
+          isediting.editing
+            ? <span>
+              {/*Editing*/}
+            </span>
+            : null
         }
+        <div className='input-container'>
+          {
+            isediting.editing
+              ?
+              <span>
+                {isSubmitted.submitted
+                  ?
+                  <span>Submitted.</span>
+                  :
+                  <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+                  </span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? <span>Deleted.</span>
+                      : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
+                    }
+                  </span>}
+              </span>
+              :
+              null
+          }
+        </div>
       </div>
     </div>
-
   )
 }
 

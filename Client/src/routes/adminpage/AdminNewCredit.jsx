@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import { prettyDate } from '../../utils/dateutils'
-//import AdminNewAlbumEdit from './AdminNewAlbumEdit'
 
-
+/**
+ * Renders the New Credit page in the Admin App
+ */
 const AdminNewCredit = () => {
   const params = useParams()
   console.log(params)
@@ -33,28 +32,6 @@ const AdminNewCredit = () => {
       })
   }, []
   )
-
-  /*
-  const [artist, setArtist] = useState({})
-  useEffect(() => {
-    axios.get('/api/admin/artists/:artist_id', { params: { artist_id: new_credit.member_of_id } })
-      .then((res) => {
-        console.log(res)
-        setArtist(res.data[0])
-      })
-  }, []
-  )
-
-  const [members, setMembers] = useState([])
-  useEffect(() => {
-    axios.get('/api/admin/members/:artist_id', { params: { artist_id: new_credit.member_of_id } })
-      .then((res) => {
-        console.log(res)
-        setMembers(res.data)
-      })
-  }, []
-  )
-  */
 
   const [formValues, setFormValues] = useState({
     name: '',
@@ -128,67 +105,21 @@ const AdminNewCredit = () => {
       <div className='header-container'>
         <h2 className='header-text'>New Credit</h2>
       </div>
-      <div className='input-container'>
-        <label className='input-label'>Name:  </label>
-        <span>{new_credit.name}</span>
-      </div>
-      <div className='input-container'>
-        <span>
-          <label className='input-label'>Type:  </label>
-          <span> {new_credit.type}</span>
-        </span>
-      </div>
-      <div className='input-container'>
-        {isediting.editing
-          ? null
-          : <span>
-            {isSubmitted.submitted
-              ?
-              <span>Submitted.</span>
-              :
-              <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
-              </span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? <span>Deleted.</span>
-                  : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
-                }
-              </span>}
+      <div className='list-container'>
+        <div className='input-container'>
+          <label className='input-label'>Name:  </label>
+          <span>{new_credit.name}</span>
+        </div>
+        <div className='input-container'>
+          <span>
+            <label className='input-label'>Type:  </label>
+            <span> {new_credit.type}</span>
           </span>
-        }
-      </div>
-      {
-        isediting.editing
-          ? <span>
-            {/*
-            <AdminNewArtistEdit
-              is_group={new_credit.is_group}
-              name={new_credit.name}
-              real_name={new_credit.real_name}
-              birthdate={new_credit.birthdate}
-              active_status={new_credit.active_status}
-            >
-            </AdminNewArtistEdit>
-            */}
-          </span>
-          : null
-      }
-      <div className='input-container'>
-        {
-          isediting.editing
-            ?
-            <span>
+        </div>
+        <div className='input-container'>
+          {isediting.editing
+            ? null
+            : <span>
               {isSubmitted.submitted
                 ?
                 <span>Submitted.</span>
@@ -203,7 +134,7 @@ const AdminNewCredit = () => {
                 : <span>
                   {isDeleted.deleted
                     ? null
-                    : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                    : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
@@ -213,12 +144,50 @@ const AdminNewCredit = () => {
                   }
                 </span>}
             </span>
-            :
-            null
+          }
+        </div>
+        {
+          isediting.editing
+            ? <span>
+              {/*Editing*/}
+            </span>
+            : null
         }
+        <div className='input-container'>
+          {
+            isediting.editing
+              ?
+              <span>
+                {isSubmitted.submitted
+                  ?
+                  <span>Submitted.</span>
+                  :
+                  <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+                  </span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? <span>Deleted.</span>
+                      : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
+                    }
+                  </span>}
+              </span>
+              :
+              null
+          }
+        </div>
       </div>
     </div>
-
   )
 }
 

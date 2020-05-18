@@ -5,6 +5,11 @@ import ArtistAlbumSongs from './ArtistAlbumSongs'
 import { prettyYear } from '../../utils/dateutils'
 import { Link } from 'react-router-dom'
 
+/**
+ * Renders the Album component on the Artist page
+ * @param {Object} props properties passed to component
+ * - artist_id {Number} id of artist
+ */
 const ArtistAlbum = (props) => {
   const artist_id = props.artist_id
   const [albums, setAlbums] = useState([])

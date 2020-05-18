@@ -3,6 +3,11 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
 
+/**
+ * Renders a list of Songs that this particular Artist worked on as the Lyricist on the Artist Page
+ * @param {Object} props properties passed to component
+ * - artist_id {Number} id of artist
+ */
 const ArtistSongsLyrics = (props) => {
   const artist_id = props.artist_id
   const [songs_c, setSongs_c] = useState([])

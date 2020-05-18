@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { prettyDate } from '../../utils/dateutils'
-import AdminNewArtistEdit from './AdminNewArtistEdit'
 
-
+/**
+ * Renders the Edit Artist page in the Admin App
+ */
 const AdminEditArtist = () => {
   const params = useParams()
   console.log(params)
@@ -129,82 +129,38 @@ const AdminEditArtist = () => {
       <div className='header-container'>
         <h2 className='header-text'>Edit Artist</h2>
       </div>
-      <div className='input-container'>
-        {edit_artist.active_status
-          ? <span>Active</span>
-          : <span>Inactive</span>}
-      </div>
-      <div className='input-container'>
-        <label className='input-label'>Name:  </label>
-        <span>{edit_artist.name}</span>
-      </div>
-      <div className='input-container'>
-        {!isDisabled
-          ? <span>
-            <label className='input-label'>Real Name:  </label>
-            <span>{edit_artist.real_name}</span>
-          </span>
-          : null
-        }
-      </div>
-      <div className='input-container'>
-        {!isDisabled
-          ? <span>
-            <label className='input-label'>Birthday: </label>
-            <span>{prettyDate(edit_artist.birthdate)}</span>
-          </span>
-          : null
-        }
-      </div>
-      <div className='input-container'>
-        {isediting.editing
-          ? null
-          : <span>
-            {isSubmitted.submitted
-              ?
-              <span>Submitted.</span>
-              :
-              <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
-              </span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? null
-                  : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
-            {isSubmitted.submitted
-              ? null
-              : <span>
-                {isDeleted.deleted
-                  ? <span>Deleted.</span>
-                  : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
-                }
-              </span>}
-          </span>
-        }
-      </div>
-      {/*
-        isediting.editing
-          ? <span>
-            <AdminNewArtistEdit
-              is_group={edit_artist.is_group}
-              name={edit_artist.name}
-              real_name={edit_artist.real_name}
-              birthdate={edit_artist.birthdate}
-              active_status={edit_artist.active_status}
-            >
-            </AdminNewArtistEdit>
-          </span>
-          : null
-      */}
-      <div className='input-container'>
-        {
-          isediting.editing
-            ?
-            <span>
+      <div className='list-container'>
+        <div className='input-container'>
+          {edit_artist.active_status
+            ? <span>Active</span>
+            : <span>Inactive</span>}
+        </div>
+        <div className='input-container'>
+          <label className='input-label'>Name:  </label>
+          <span>{edit_artist.name}</span>
+        </div>
+        <div className='input-container'>
+          {!isDisabled
+            ? <span>
+              <label className='input-label'>Real Name:  </label>
+              <span>{edit_artist.real_name}</span>
+            </span>
+            : null
+          }
+        </div>
+        <div className='input-container'>
+          {!isDisabled
+            ? <span>
+              <label className='input-label'>Birthday: </label>
+              <span>{prettyDate(edit_artist.birthdate)}</span>
+            </span>
+            : null
+          }
+        </div>
+        <div className='input-container'>
+          {isediting.editing
+            ? null
+            : <span>
               {isSubmitted.submitted
                 ?
                 <span>Submitted.</span>
@@ -219,7 +175,7 @@ const AdminEditArtist = () => {
                 : <span>
                   {isDeleted.deleted
                     ? null
-                    : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                    : <button className='button-edit' type='button' onClick={handleEdit} disabled>Edit</button>}</span>}
               {isSubmitted.submitted
                 ? null
                 : <span>
@@ -229,9 +185,42 @@ const AdminEditArtist = () => {
                   }
                 </span>}
             </span>
-            :
-            null
-        }
+          }
+        </div>
+        {/*Editing*/}
+        <div className='input-container'>
+          {
+            isediting.editing
+              ?
+              <span>
+                {isSubmitted.submitted
+                  ?
+                  <span>Submitted.</span>
+                  :
+                  <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button' type='button' onClick={handleSubmit}>Submit</button>}
+                  </span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? null
+                      : <button className='button-edit' type='button' onClick={handleCancelEdit}>Cancel Editing</button>}</span>}
+                {isSubmitted.submitted
+                  ? null
+                  : <span>
+                    {isDeleted.deleted
+                      ? <span>Deleted.</span>
+                      : <button className='button-delete' type='button' onClick={handleDelete}>Delete</button>
+                    }
+                  </span>}
+              </span>
+              :
+              null
+          }
+        </div>
       </div>
     </div>
 

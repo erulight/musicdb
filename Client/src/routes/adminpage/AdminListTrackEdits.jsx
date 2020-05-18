@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const AdminListTrackEdits = (props) => {
+/**
+ * Renders a list of all Track Edits pending in the Admin App
+ */
+const AdminListTrackEdits = () => {
 
   const [edit_tracks, set_edit_tracks] = useState([])
   useEffect(() => {

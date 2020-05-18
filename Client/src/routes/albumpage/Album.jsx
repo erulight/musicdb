@@ -5,6 +5,9 @@ import AlbumSongs from './AlbumSongs'
 import { prettyDate } from '../../utils/dateutils'
 import { useParams, Link } from 'react-router-dom'
 
+/**
+ * Renders the Album Page
+ */
 const Album = () => {
   const params = useParams()
   console.log(params)

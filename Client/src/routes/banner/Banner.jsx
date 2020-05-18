@@ -3,6 +3,9 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import SearchDropMenu from './SearchDropMenu'
 
+/**
+ * Renders the Site Banner
+ */
 const Banner = () => {
 
   const [formValues, setFormValues] = useState({

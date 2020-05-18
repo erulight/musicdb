@@ -5,6 +5,9 @@ import { prettyDate, prettyYear, inputDate } from '../../utils/dateutils'
 import { useParams } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
 
+/**
+ * Renders the Edit Album page
+ */
 const EditAlbum = () => {
 
   const searchRef = React.useRef(null)

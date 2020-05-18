@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+/**
+ * Renders a list of Search Results on the Website Banner search bar
+ * @param {Object} props properties passed to component
+ * - search {String} search value
+ * - type {String} category of search (Artist, Album, Song)
+ */
 const SearchDropMenu = (props) => {
   const search = props.search
   const type = props.type

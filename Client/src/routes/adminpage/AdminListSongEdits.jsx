@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-const AdminListSongEdits = (props) => {
+/**
+ * Renders a list of all Song Edits pending in the Admin App
+ */
+const AdminListSongEdits = () => {
 
   const [song_edits, set_song_edits] = useState([])
   useEffect(() => {

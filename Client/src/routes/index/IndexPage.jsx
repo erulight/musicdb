@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
 import IndexArtists from './IndexArtists'
 import IndexAlbums from './IndexAlbums'
 import IndexSongs from './IndexSongs'
 
+/**
+ * Renders the Index Page
+ */
 const IndexPage = () => {
 
   return (

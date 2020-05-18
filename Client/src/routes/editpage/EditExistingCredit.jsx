@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
 
+/**
+ * Renders the Edit section for an Existing Credit on the Edit Song Credits page
+ * @param {Object} props properties passed to component
+ * - credit {Object} the credit object passed to component
+ */
 const EditExistingCredit = (props) => {
   const credit = props.credit
 

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes, { array } from 'prop-types'
 import DropDownArtist from '../../utils/DropDownArtist'
 
-
+/**
+ * Renders the New Credit section on the Edit Song Credits Page
+ * @param {Object} props properties passed to component
+ * - song_id {Number} id of song
+ */
 const NewCredit = (props) => {
 
   const searchRef = React.useRef(null)

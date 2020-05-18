@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import DropDownArtist from '../../utils/DropDownArtist'
-import DropDownAlbum from '../../utils/DropDownAlbum'
 
-const NewSong = (props) => {
+/**
+ * Renders the New Song Page
+ */
+const NewSong = () => {
 
   const searchRef = React.useRef(null)
 

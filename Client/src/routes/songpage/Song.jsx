@@ -6,6 +6,9 @@ import { useParams, Link } from 'react-router-dom'
 import SongAlbum from './SongAlbum'
 import SongCredit from './SongCredit'
 
+/**
+ * Renders the Song Page
+ */
 const Song = () => {
   const params = useParams()
   console.log(params)
