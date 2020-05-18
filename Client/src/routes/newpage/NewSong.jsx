@@ -34,7 +34,7 @@ const NewSong = () => {
       const title = formValues.title
       const release_date = formValues.release_date
       let artist_name = artistValues.artist_name
-      const artist_id = formValues.artist_id
+      const artist_id = artistValues.artist_id
       if (hasID.id) {
         artist_name = artistValues.artist_name
       }

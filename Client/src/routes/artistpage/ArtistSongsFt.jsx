@@ -66,7 +66,7 @@ const ArtistSongsFt = (props) => {
         <div key={song_c.id} className="song-container-row">
           <div>
             <span>
-              <Link to={`/song/${song_c.id}`}>{song_c.title} </Link>
+              <Link to={`/song/${song_c.song_id}`}>{song_c.title} </Link>
               By: <Link to={`/artist/${findArtist(findSong(song_c.song_id).artist_id).id}`}>{findArtist(findSong(song_c.song_id).artist_id).name} </Link>
               Release Date: {prettyDate(findSong(song_c.song_id).release_date)}
             </span>
